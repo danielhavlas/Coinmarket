@@ -1,18 +1,51 @@
 body{
   margin: 0;
+  background-color: var(--white);
 }
 
 :root{
-  --black: #2C2C34
-  --grey: #494850
-  --white: #FFFFFF
-  --green: #C3FF42
-  --light: #FDF8FD
-  --red: #E71D36
+  --black: #2C2C34;
+  --grey: #494850;
+  --white: #FFFFFF;
+  --green: #C3FF42;
+  --light: #FDF8FD;
+  --red: #E71D36;
 }
 
-.bg-black{background-color:var(--black)}
-.bg-grey{background-color:var(--grey)}
-.bg-white{background-color:var(--white)}
-.bg-green{background-color:var(--green)}
-.bg-red{background-color:var(--red)}
+.bg-black{background-color:var(--black);}
+.bg-grey{background-color:var(--grey);}
+.bg-white{background-color:var(--white);}
+.bg-green{background-color:var(--green);}
+.bg-red{background-color:var(--red);}
+
+.grid{
+  display: grid;
+}
+
+.container {
+  padding: 2em;
+  margin-inline: auto;
+  max-width: 80rem;
+}
+
+.home-grid{
+  grid-template-columns: 1fr,1fr,1fr;
+}
+
+.watchlist-card{
+  /* width: 20em; */
+  height: 30em;
+}
+
+
+.assets-card{
+  /* width: 30em; */
+  height: 20em;
+}
+
+
+
+
+.header{
+  height: 12vh;
+}
