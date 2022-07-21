@@ -22,6 +22,11 @@ body{
   display: grid;
 }
 
+.flex{
+  display: flex;
+}
+
+
 .container {
   padding: 2em;
   margin-inline: auto;
@@ -29,17 +34,18 @@ body{
 }
 
 .home-grid{
-  grid-template-columns: 1fr,1fr,1fr;
+  margin-inline: 4em ;
+  justify-content: space-between;
 }
 
 .watchlist-card{
-  /* width: 20em; */
+  width: 20em;
   height: 30em;
 }
 
 
 .assets-card{
-  /* width: 30em; */
+  width: 30em;
   height: 20em;
 }
 
