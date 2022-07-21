@@ -1,5 +1,5 @@
 
-function Header(){
+export default function Header(){
     return(
         <div className="header bg-black"></div>
     )
