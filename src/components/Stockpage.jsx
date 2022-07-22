@@ -1,23 +1,43 @@
-import { useEffect, useState } from "react"
 import React, { useState, useEffect} from 'react';
-import Range from './range';
-import PriceChart from './PriceChart';
-
-export default function Stockpage(props){
+import Range from './components/range';
+import PriceChart from './components/PriceChart';
 
 
+export default function Stockpage() {
 
-    useEffect(() =>{
-        fetch(`https://api.coingecko.com/api/v3/coins/bitcoin`)
-    },[])
+const [selectedRange, setSelectedRange] = useState(0)
+const [selectedTab, setSelectedTab] = useState(1)
+const [coinData, setCoinData] = useState({})
+
+
+
+  const ranges = ['1d','3d','1w','1m','6m','1y','max']
+  const rangeButtons = ranges.map((range,index) => {
     return(
-        <div>
-
-        </div>
+      <Range selected={selectedRange} range={range} key={index} index={index} selectRange={selectRange} />
     )
-}
+  })
+
+  function selectRange(index){
+    setSelectedRange(index)
+  }
+  function selectTab(index){
+    setSelectedTab(index)
+  }
+
+  const tabs = ['Summary', 'Chart','Statistics', 'Analysis','Settings ']
+  const tabButtons = tabs.map((tab,index) => {
+    const style = {
+      borderBottom: selectedTab===index? 'solid 3px #4B40EE' : ''
+    }
+
+    return(
+      <button className='tab' style={style} onClick={() => selectTab(index)} key={index}>{tab}</button>
+    )
+  })
+
   const priceChangeStyle = {
-    color: coinData.priceChange >= 0? 'rgb(0, 231, 0)' : 'red'
+    color: change24 >= 0? 'rgb(0, 231, 0)' : 'red'
   }
 
   useEffect(() => {
@@ -39,26 +59,27 @@ export default function Stockpage(props){
 
 
   return (
-    <div className="coin-page">
-      <div className="heading">
-        <h1 class="price">{coinData.price}</h1>
-        <h4 class='currency'>USD</h4>
+    <div className="App">
+      <div id="bitcoin">
+        <h1 id="price">{coinData.price}</h1>
+        <h4 id='currency'>USD</h4>
       </div>
-      <h5 class='change' style={priceChangeStyle}>{`${coinData.priceChange} (${coinData.percentChange}%)`}</h5>
-      <div class="tabs">
+      <h5 id='change' style={priceChangeStyle}>{`${coinData.priceChange} (${coinData.percentChange}%)`}</h5>
+      <div id="tabs">
         {tabButtons}
       </div>
       <hr />
-      <div class="chart-container">
-        <div class="ranges">
+      <div id="chart-container">
+          <div id="ranges">
             {rangeButtons}
-        </div>
-        <div>
-          <PriceChart range={selectedRange}/>
+          </div>
+        <div >
+          <PriceChart range={selectedRange} btcPrice={btcPrice}/>
         </div>
       </div>
+
+      
     </div>
   );
 }
 
->>>>>>> Stashed changes
