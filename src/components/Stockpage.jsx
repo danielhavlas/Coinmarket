@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from 'react';
-import Range from './components/range';
-import PriceChart from './components/PriceChart';
+import Range from './Range';
+import PriceChart from './PriceChart';
 
 
 export default function Stockpage() {
@@ -37,19 +37,14 @@ const [coinData, setCoinData] = useState({})
   })
 
   const priceChangeStyle = {
-    color: change24 >= 0? 'rgb(0, 231, 0)' : 'red'
+    color: coinData.price_change_24h >= 0? 'rgb(0, 231, 0)' : 'red'
   }
 
   useEffect(() => {
     async function getCoinData(){
       const res = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin&order=market_cap_desc&per_page=100&page=1&sparkline=false')
       const data = await res.json()
-      const coinData = {
-        price: data[0].current_price,
-        priceChange: data[0].price_change_24h,
-        percentChange: data[0].price_change_percentage_24h,
-      }
-      setCoinData(coinData)
+      setCoinData(data[0])
     }
     
     getCoinData()
@@ -59,22 +54,22 @@ const [coinData, setCoinData] = useState({})
 
 
   return (
-    <div className="App">
-      <div id="bitcoin">
-        <h1 id="price">{coinData.price}</h1>
-        <h4 id='currency'>USD</h4>
+    <div className="coin-page">
+      <div className='heading'>
+        <h1 className="price">{coinData.price}</h1>
+        <h4 className='currency'>USD</h4>
       </div>
-      <h5 id='change' style={priceChangeStyle}>{`${coinData.priceChange} (${coinData.percentChange}%)`}</h5>
-      <div id="tabs">
+      <h5 className='change' style={priceChangeStyle}>{`${coinData.price_change_24h} (${coinData.price_change_percentage_24h}%)`}</h5>
+      <div className="tabs">
         {tabButtons}
       </div>
       <hr />
-      <div id="chart-container">
-          <div id="ranges">
+      <div className="chart-container">
+          <div className="ranges">
             {rangeButtons}
           </div>
         <div >
-          <PriceChart range={selectedRange} btcPrice={btcPrice}/>
+          <PriceChart range={selectedRange}/>
         </div>
       </div>
 

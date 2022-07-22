@@ -11,10 +11,11 @@ function App() {
 
   return (
     <div className="App">
-      <Routes>
+      <Stockpage/>
+      {/* <Routes>
         <Route path='/' element={<Home />}/>
         <Route path='/:ticker' element={<Stockpage/>} />
-      </Routes>
+      </Routes> */}
     </div>
   );
 }
