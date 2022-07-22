@@ -49,9 +49,58 @@ body{
   height: 20em;
 }
 
-
-
-
 .header{
   height: 12vh;
+}
+
+.coin-page{
+  max-width: 60rem;
+  margin-inline: auto;
+}
+
+.heading{
+  display: flex;
+  font-size: 25px;
+}
+
+
+
+.tabs { 
+  display: flex;
+  gap: 12px;
+}
+
+.tab {
+  height: 30px;
+}
+
+.tab:hover{
+  border-bottom: solid 3px #9ea1ff;
+}
+
+.change {
+  font-size: 16px;
+  font-weight: lighter;
+}
+.currency {
+  color: #bdbebf;
+  position: relative;
+  top: 10px;
+  font-weight: 100;
+}
+.ranges {
+  display: flex;
+  gap: 10px;
+}
+.range-button {
+  width: 40px;
+  height: 25px;
+  background: #4b40ee;
+  border-radius: 5px;
+}
+.chartContainer {
+  position: relative;
+}
+
+.chart{
 }

@@ -3,6 +3,11 @@ import { Routes, Route } from 'react-router-dom';
 import './App.css';
 import Home from './components/Home'
 import Stockpage from './components/Stockpage';
+<<<<<<< Updated upstream
+=======
+import Header from './components/Header'
+
+>>>>>>> Stashed changes
 
 function App() {
 
