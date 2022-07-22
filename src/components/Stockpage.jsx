@@ -1,10 +1,7 @@
-<<<<<<< Updated upstream
 import { useEffect, useState } from "react"
-=======
 import React, { useState, useEffect} from 'react';
 import Range from './range';
 import PriceChart from './PriceChart';
->>>>>>> Stashed changes
 
 export default function Stockpage(props){
 
@@ -16,11 +13,9 @@ export default function Stockpage(props){
     return(
         <div>
 
-<<<<<<< Updated upstream
         </div>
     )
 }
-=======
   const priceChangeStyle = {
     color: coinData.priceChange >= 0? 'rgb(0, 231, 0)' : 'red'
   }
