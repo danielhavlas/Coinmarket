@@ -56,15 +56,18 @@ const [coinData, setCoinData] = useState({})
   return (
     <div className="coin-page">
       <div className='heading'>
-        <h1 className="price">{coinData.price}</h1>
-        <h4 className='currency'>USD</h4>
+        <h1 className='name'>{coinData.name}</h1>
+        <div className="flex">
+          <h2 className="price">{coinData.current_price}</h2>
+          <h4 className='currency'>USD</h4>
+        </div>
       </div>
-      <h5 className='change' style={priceChangeStyle}>{`${coinData.price_change_24h} (${coinData.price_change_percentage_24h}%)`}</h5>
-      <div className="tabs">
+      <h5 className='change' style={priceChangeStyle}>{`${coinData.price_change_24h.toFixed(2)} (${coinData.price_change_percentage_24h.toFixed(2)}%)`}</h5>
+      {/* <div className="tabs">
         {tabButtons}
-      </div>
+      </div> */}
       <hr />
-      <div className="chart-container">
+      <div>
           <div className="ranges">
             {rangeButtons}
           </div>

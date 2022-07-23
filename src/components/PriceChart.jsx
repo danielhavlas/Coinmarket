@@ -34,14 +34,14 @@ function PriceChart (props){
         const ctx = canvas.ctx
         const gradient = ctx.createLinearGradient(0, 0, 0, 350);
         gradient.addColorStop(0, '#E8E7FF');
-        gradient.addColorStop(1, 'rgba(255,255,255,0.1)');
+        gradient.addColorStop(0.8, 'rgba(255,255,255,1)');
         setGradient(gradient)
     },[])
 
     return(
         <>
         
-        <div id="chartContainer">
+        <div className="chart-container">
             <Line 
             ref={chartRef}
             className="chart"
@@ -124,7 +124,7 @@ function PriceChart (props){
                     
                     x: {
                         grid: {
-                            display: true,
+                            display: false,
                             drawBorder: false,
                             
                           },

@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Familjen+Grotesk&display=swap");
 body{
   margin: 0;
   background-color: var(--white);
@@ -58,11 +59,9 @@ body{
   margin-inline: auto;
 }
 
-.heading{
-  display: flex;
-  font-size: 25px;
+.name{
+  margin: 0;
 }
-
 
 
 .tabs { 
@@ -81,6 +80,15 @@ body{
 .change {
   font-size: 16px;
   font-weight: lighter;
+  margin: 0;
+}
+
+button {
+  font-family: inherit;
+  border: none;
+  background: none;
+  font-size: 15px;
+  cursor: pointer;
 }
 .currency {
   color: #bdbebf;
@@ -98,9 +106,8 @@ body{
   background: #4b40ee;
   border-radius: 5px;
 }
-.chartContainer {
+.chart-container {
   position: relative;
-}
-
-.chart{
+  width: 40vw;
+  height: 40vh;
 }
