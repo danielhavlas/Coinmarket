@@ -1,16 +1,28 @@
 import React, { useState, useEffect} from 'react';
 import Range from './Range';
 import PriceChart from './PriceChart';
+import {useParams} from 'react-router-dom'
+
 
 
 export default function Stockpage() {
 
-const [selectedRange, setSelectedRange] = useState(0)
-const [selectedTab, setSelectedTab] = useState(1)
-const [coinData, setCoinData] = useState({})
+  const [selectedRange, setSelectedRange] = useState(0)
+  const [selectedTab, setSelectedTab] = useState(1)
+  const [coinData, setCoinData] = useState({})
+  const {id} = useParams()
 
-
-
+  
+  useEffect(() => {
+    async function getCoinData(){
+      const res = await fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${id}&order=market_cap_desc&per_page=100&page=1&sparkline=false`)
+      const data = await res.json()
+      setCoinData(data[0])
+    }
+    console.log('cp')
+    
+    getCoinData()
+  },[id])
   const ranges = ['1d','3d','1w','1m','6m','1y','max']
   const rangeButtons = ranges.map((range,index) => {
     return(
@@ -40,16 +52,11 @@ const [coinData, setCoinData] = useState({})
     color: coinData.price_change_24h >= 0? 'rgb(0, 231, 0)' : 'red'
   }
 
-  useEffect(() => {
-    async function getCoinData(){
-      const res = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin&order=market_cap_desc&per_page=100&page=1&sparkline=false')
-      const data = await res.json()
-      setCoinData(data[0])
-    }
-    
-    getCoinData()
-  },[])
 
+  console.log()
+  if(coinData.id === undefined){
+    return('')
+  }
 
 
 
@@ -72,7 +79,7 @@ const [coinData, setCoinData] = useState({})
             {rangeButtons}
           </div>
         <div >
-          <PriceChart range={selectedRange}/>
+          <PriceChart id={id} range={selectedRange}/>
         </div>
       </div>
 

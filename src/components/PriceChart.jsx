@@ -1,35 +1,28 @@
 import React,{useEffect, useState, useRef} from "react"
 import Chart from 'chart.js/auto'
-import {Line,Bar} from "react-chartjs-2"
+import {Line} from "react-chartjs-2"
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 Chart.register(ChartDataLabels);
 
 function PriceChart (props){
     const rangeInDays = ['1','3','7','30','180','365','max']
     const [chartData, setChartData] = useState([])
-    const [volumeData, setVolumeData] = useState([])
     const chartRef = useRef()
     const [gradient, setGradient] = useState()
 
 
     useEffect(()=>{
         async function getChartData(){
-            const res = await fetch(`https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=${rangeInDays[props.range]}`)
+            const res = await fetch(`https://api.coingecko.com/api/v3/coins/${props.id}/market_chart?vs_currency=usd&days=${rangeInDays[props.range]}`)
             const data = await res.json()
             const filter = props.range === 6 ? 20 : props.range === 3 ? 15 : props.range === 1? 2 : 4
             const prices = data.prices.filter((_, index) => index % filter === 0)
-            const volume = data.total_volumes.filter((volume, index) => index % filter === 0)
             setChartData(prices)
-            setVolumeData(volume)
-            
         }
         getChartData()
-
-
-    },[props.range])
+    },[props.range,props.id])
 
     useEffect(()=>{
-
         const canvas = chartRef.current
         const ctx = canvas.ctx
         const gradient = ctx.createLinearGradient(0, 0, 0, 350);
@@ -40,7 +33,6 @@ function PriceChart (props){
 
     return(
         <>
-        
         <div className="chart-container">
             <Line 
             ref={chartRef}
