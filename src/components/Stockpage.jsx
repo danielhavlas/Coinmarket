@@ -10,6 +10,7 @@ export default function Stockpage() {
   const [selectedRange, setSelectedRange] = useState(0)
   const [selectedTab, setSelectedTab] = useState(1)
   const [coinData, setCoinData] = useState({})
+  const [buyAmount, setBuyAmount] = useState(0)
   const {id} = useParams()
 
   
@@ -19,7 +20,6 @@ export default function Stockpage() {
       const data = await res.json()
       setCoinData(data[0])
     }
-    console.log('cp')
     
     getCoinData()
   },[id])
@@ -52,10 +52,24 @@ export default function Stockpage() {
     color: coinData.price_change_24h >= 0? 'rgb(0, 231, 0)' : 'red'
   }
 
+  function changeBuyAmount(action,e){
+    if(action==='minus' && buyAmount !== 0){
+      setBuyAmount(prevBuyAmount => prevBuyAmount - 1 )
+    }
+    else if(action==='plus'){
+      setBuyAmount(prevBuyAmount => prevBuyAmount + 1 )
+    }
+    else if(action==='set' && !isNaN(e)){
+      setBuyAmount(Number(e))
+    }
+  }
 
-  console.log()
   if(coinData.id === undefined){
-    return('')
+    return ''
+  }
+
+  function buy(){
+    console.log(`you bought ${buyAmount} ${coinData.name} for $${buyAmount * coinData.current_price} `)
   }
 
 
@@ -74,14 +88,25 @@ export default function Stockpage() {
         {tabButtons}
       </div> */}
       <hr />
-      <div>
+      <div className="flex">
+        <div>
           <div className="ranges">
             {rangeButtons}
           </div>
-        <div >
-          <PriceChart id={id} range={selectedRange}/>
+          <div >
+            <PriceChart id={id} range={selectedRange}/>
+          </div>
+        </div>
+        <div>
+          <div className="flex">
+            <button onClick={()=> changeBuyAmount('minus')}>-</button>
+            <input value={buyAmount} onChange={(e) => changeBuyAmount('set',e.target.value)} type='text'/>
+            <button onClick={()=> changeBuyAmount('plus')}>+</button>
+          </div>
+          <button onClick={buy}>Buy</button>
         </div>
       </div>
+
 
       
     </div>

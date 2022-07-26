@@ -8,7 +8,6 @@ export default function Searchbar(props){
     const [inputValue, setInputValue] = useState([])
     const [recentSearches, setRecentSearches] = useState([])
     const [searchData,setSearchData] = useState([])
-    const [hasSearched, setHasSearched] = useState()
     const [selectedOption, setSelectedOption] = useState()
     const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1&sparkline=false`
   
@@ -18,8 +17,7 @@ export default function Searchbar(props){
       fetch(url)
       .then(res => res.json())
       .then(data => {
-          setSearchData(data)
-          setHasSearched(false)
+        setSearchData(data)
       })
 
       if(inputValue.length===0){
@@ -29,6 +27,7 @@ export default function Searchbar(props){
 
     function handleChange(o){
         setSelectedOption(o)
+        setRecentSearches(prevRecentSearches => [o, ...prevRecentSearches] )
         navigate(`/coins/${o.value}`)
     }
 
@@ -59,7 +58,7 @@ export default function Searchbar(props){
     function searchInput(input){
         const tempInput = inputValue
         setInputValue(input)
-        if(input==='' && key !=='Backspace'){setInputValue(tempInput)}
+        // if(input==='' && key !=='Backspace'){setInputValue(tempInput)}
             
         const options = searchData.map(coin => {
             return{
@@ -68,7 +67,6 @@ export default function Searchbar(props){
             }
         })
         setOptions(options)
-
     }
 
     
@@ -85,7 +83,6 @@ export default function Searchbar(props){
         value={selectedOption}
         styles={searchStyles} 
         options={options} 
-        closeMenuOnSelect={false}
       />
     )
 }
