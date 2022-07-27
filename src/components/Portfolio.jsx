@@ -1,5 +1,5 @@
 
-export default function Assets(){
+export default function Portfolio(){
     return(
         <div className="assets-card bg-green">
             hfg

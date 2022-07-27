@@ -1,7 +1,10 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect, useContext} from 'react';
 import Range from './Range';
 import PriceChart from './PriceChart';
 import {useParams} from 'react-router-dom'
+import { PortfolioContext } from '../PortfolioContext'
+import { WatchlistContext } from '../WatchlistContext'
+
 
 
 
@@ -12,6 +15,8 @@ export default function Stockpage() {
   const [coinData, setCoinData] = useState({})
   const [buyAmount, setBuyAmount] = useState(0)
   const {id} = useParams()
+  const {order, balance} = useContext(PortfolioContext)
+  const { watchlist} = useContext(WatchlistContext)
 
   
   useEffect(() => {
@@ -64,19 +69,25 @@ export default function Stockpage() {
     }
   }
 
+  
+  function buy(){
+    if(balance >= buyAmount*coinData.current_price){
+      order('buy',id,coinData,buyAmount,buyAmount*coinData.current_price)
+    }
+    else{
+      alert('brokey')
+    }
+  }
+  
+  
   if(coinData.id === undefined){
     return ''
   }
 
-  function buy(){
-    console.log(`you bought ${buyAmount} ${coinData.name} for $${buyAmount * coinData.current_price} `)
-  }
-
-
-
   return (
     <div className="coin-page">
       <div className='heading'>
+        <img src={coinData.image} alt="" />
         <h1 className='name'>{coinData.name}</h1>
         <div className="flex">
           <h2 className="price">{coinData.current_price}</h2>
@@ -93,9 +104,7 @@ export default function Stockpage() {
           <div className="ranges">
             {rangeButtons}
           </div>
-          <div >
-            <PriceChart id={id} range={selectedRange}/>
-          </div>
+          <PriceChart id={id} range={selectedRange}/>
         </div>
         <div>
           <div className="flex">
@@ -104,6 +113,7 @@ export default function Stockpage() {
             <button onClick={()=> changeBuyAmount('plus')}>+</button>
           </div>
           <button onClick={buy}>Buy</button>
+          <button onClick={() => watchlist(coinData)}>Add to watchlist</button>
         </div>
       </div>
 

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Link } from 'react-router-dom';
 import './App.css';
 
 import Home from './components/Home'
@@ -13,6 +13,7 @@ function App() {
   return (
     <div className="App">
       <Searchbar/>
+      <Link to='/'>HOME</Link>
       <Routes>
         <Route path='/' element={<Home />}/>
         <Route path='/coins/:id' element={<Stockpage/>} />
