@@ -2,7 +2,7 @@ import Select from 'react-select'
 import { useState, useEffect } from 'react'
 import {useNavigate} from 'react-router-dom'
 
-export default function Searchbar(props){
+export default function Searchbar(){
 
     const [options, setOptions] = useState([])
     const [inputValue, setInputValue] = useState([])
@@ -34,7 +34,7 @@ export default function Searchbar(props){
     const searchStyles = {
         control: (provided) => ({
             ...provided,
-            backgroundColor: 'hsl(240 1% 18%)',
+            backgroundColor: 'hsl(255 255% 255%)',
             border:'none',
         }),
         input: (provided) =>({

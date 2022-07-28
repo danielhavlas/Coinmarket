@@ -13,10 +13,16 @@ body{
   --red: #E71D36;
 }
 
+a{
+  text-decoration: none;
+  color: inherit;
+}
+
 .bg-black{background-color:var(--black);}
 .bg-grey{background-color:var(--grey);}
 .bg-white{background-color:var(--white);}
 .bg-green{background-color:var(--green);}
+.bg-light{background-color: var(--light);}
 .bg-red{background-color:var(--red);}
 
 .uppercase{text-transform: uppercase;}
@@ -29,6 +35,13 @@ body{
   display: flex;
 }
 
+.gap-2{
+  gap: 2em;
+}
+.gap-1{
+  gap: 1em;
+}
+
 
 .container {
   padding: 2em;
@@ -36,24 +49,53 @@ body{
   max-width: 80rem;
 }
 
+.card{
+  box-shadow: 5px 10px 8px #d2d2d2;
+  border-radius: 8px;
+  padding-inline: 1em;
+  justify-content: space-between;
+  width: 20em;
+  
+}
+
 .home-grid{
   margin-inline: 4em ;
   justify-content: space-between;
+  align-self: flex-start;
 }
 
 .watchlist-card{
-  width: 20em;
-  height: 30em;
+  justify-content: space-between;
+  width: 15em;
 }
 
+.watchlist-card > *{
+  line-height: 0.5em;
+}
 
-.assets-card{
-  width: 30em;
-  height: 20em;
+.portfolio-card{
+  width: 20em;
+}
+.portfolio-card > *{
+  line-height: 0.5em;
 }
 
 .header{
   height: 12vh;
+  align-items: baseline;
+  color: var(--white);
+}
+.nav{
+  color: var(--white);
+  align-items: baseline;
+}
+
+.select{
+  width: 20rem;
+}
+
+.space-between{
+  justify-content: space-between;
 }
 
 .coin-page{
