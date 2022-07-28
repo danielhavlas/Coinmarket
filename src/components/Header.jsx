@@ -7,6 +7,7 @@ export default function Header(){
             <h1 className='uppercase fs-1'>Coinbase</h1>
             <div className="nav flex space-between gap-2 align-center">
                 <Link to='/'>HOME</Link>
+                <Link to='/assets'>ASSETS</Link>
                 <Searchbar/>
             </div>
         </div>

@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Familjen+Grotesk&display=swap");
 body{
   margin: 0;
-  background-color: var(--white);
+  background-color: #f4f4f4;
   font-family: 'Familjen Grotesk';
 }
 
@@ -81,6 +81,10 @@ hr{
   align-items: center;
 }
 
+.text-center{
+  text-align: center;
+}
+
 
 .container {
   padding: 2em;
@@ -89,9 +93,10 @@ hr{
 }
 
 .card{
+  background-color: var(--white);
   box-shadow: 5px 10px 8px #d2d2d2;
   border-radius: 8px;
-  padding-inline: 1em;
+  padding: 1em;
   justify-content: space-between;
   width: 20em;
 }
@@ -113,7 +118,7 @@ hr{
 .home-grid{
   margin-inline: 4em ;
   justify-content: space-between;
-  align-self: flex-start;
+  align-items: flex-start;
 }
 
 .watchlist-card{

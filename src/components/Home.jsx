@@ -1,15 +1,17 @@
 import Watchlist from './Watchlist'
 import Portfolio from './Portfolio'
 import { useRef, useContext, useEffect } from 'react'
-import Stockpage from './Stockpage'
+import Stockpage from './CoinPage'
 import { PortfolioContext } from '../PortfolioContext'
 import { WatchlistContext } from '../WatchlistContext'
 
 export default function Home(){
 
     const searchRef = useRef(null)
-    const {portfolioArray} =  useContext(PortfolioContext)
+    const {portfolioArray, balance} =  useContext(PortfolioContext)
     const {watchlistArray} =  useContext(WatchlistContext)
+    
+
     
 
     
@@ -51,13 +53,16 @@ export default function Home(){
         <div className="home">
             <div className="container">
                 <div className="flex home-grid">
+                    <h2>Balance: ${balance}</h2>
                     <div className='portfolio-card card'>
-                        <h2>Your portfolio</h2>
+                        <h2>Assets</h2>
+
                         {assets}
                     </div>
                     <div className="watchlist-card card">
-                        <h2>Your watchlist</h2>
+                        <h2>Watchlist</h2>
                         {watchlist}
+                        <h3 className="fs-4 text-blue text-center"><span className='fs-3'>+</span> Explore</h3>
                     </div>
                 </div>
             </div>

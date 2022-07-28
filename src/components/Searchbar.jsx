@@ -1,13 +1,12 @@
 import Select from 'react-select'
 import { useState, useEffect } from 'react'
-import {useNavigate} from 'react-router-dom'
+import {useNavigate, Link} from 'react-router-dom'
 
 export default function Searchbar(){
 
     const [options, setOptions] = useState([])
     const [inputValue, setInputValue] = useState('')
     const [value, setValue] = useState()
-    const [recentSearches, setRecentSearches] = useState([])
     const [searchData,setSearchData] = useState([])
     const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1&sparkline=false`
   
@@ -19,10 +18,6 @@ export default function Searchbar(){
       .then(data => {
         setSearchData(data)
       })
-
-      if(inputValue.length===0){
-        setOptions(recentSearches.map(v => ({label: v.name, value: v.id})))
-      }
     },[inputValue])
 
     function handleChange(o){
@@ -30,7 +25,6 @@ export default function Searchbar(){
     }
     
     function search(){
-      setRecentSearches(prevRecentSearches => [value, ...prevRecentSearches] )
       navigate(`/coins/${value.value}`)
       setValue(null)
     }
@@ -43,7 +37,7 @@ export default function Searchbar(){
         }),
         input: (provided) =>({
             ...provided,
-            color:'white',
+            color:'black',
     
         }),
         noOptionsMessage: (provided) =>({
@@ -59,17 +53,14 @@ export default function Searchbar(){
 
 
     function searchInput(input){
-        const tempInput = inputValue
         setInputValue(input)
-        // if(input==='' && key !=='Backspace'){setInputValue(tempInput)}
-            
         const options = searchData.map(coin => {
             return{
                 value: coin.id,
-                label: <div className="option flex gap-1">
+                label: <Link to={`/coins/${coin.id}`} className="option flex gap-1">
                         <img className='small-img' src={coin.image}/>
                         <p>{coin.name}</p>
-                       </div> ,
+                       </Link> ,
             }
         })
         setOptions(options)
@@ -85,11 +76,10 @@ export default function Searchbar(){
 
     
     
-    
 
     return(
       <Select 
-        onKeyDown={k=> setKey(k.code)} 
+        onKeyDown={e => setKey(e.code)} 
         onInputChange={searchInput} 
         placeholder='Search' 
         onChange={handleChange} 
