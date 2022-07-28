@@ -5,10 +5,10 @@ import {useNavigate} from 'react-router-dom'
 export default function Searchbar(){
 
     const [options, setOptions] = useState([])
-    const [inputValue, setInputValue] = useState([])
+    const [inputValue, setInputValue] = useState('')
+    const [value, setValue] = useState()
     const [recentSearches, setRecentSearches] = useState([])
     const [searchData,setSearchData] = useState([])
-    const [selectedOption, setSelectedOption] = useState()
     const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1&sparkline=false`
   
     const navigate = useNavigate()
@@ -26,9 +26,13 @@ export default function Searchbar(){
     },[inputValue])
 
     function handleChange(o){
-        setSelectedOption(o)
-        setRecentSearches(prevRecentSearches => [o, ...prevRecentSearches] )
-        navigate(`/coins/${o.value}`)
+      setValue(o)
+    }
+    
+    function search(){
+      setRecentSearches(prevRecentSearches => [value, ...prevRecentSearches] )
+      navigate(`/coins/${value.value}`)
+      setValue(null)
     }
 
     const searchStyles = {
@@ -53,7 +57,6 @@ export default function Searchbar(){
     
       }
 
-    const [key,setKey] = useState()
 
     function searchInput(input){
         const tempInput = inputValue
@@ -63,11 +66,22 @@ export default function Searchbar(){
         const options = searchData.map(coin => {
             return{
                 value: coin.id,
-                label: coin.name,
+                label: <div className="option flex gap-1">
+                        <img className='small-img' src={coin.image}/>
+                        <p>{coin.name}</p>
+                       </div> ,
             }
         })
         setOptions(options)
     }
+    const [key,setKey] = useState()
+    
+
+    useEffect(()=>{
+      if(key==='Enter'){
+        search()
+      }
+    },[key])
 
     
     
@@ -75,12 +89,12 @@ export default function Searchbar(){
 
     return(
       <Select 
-        onKeyDown={(k)=> setKey(k.code)} 
+        onKeyDown={k=> setKey(k.code)} 
         onInputChange={searchInput} 
         placeholder='Search' 
         onChange={handleChange} 
         className='select' 
-        value={selectedOption}
+        value={value}
         styles={searchStyles} 
         options={options} 
       />

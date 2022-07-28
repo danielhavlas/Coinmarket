@@ -86,34 +86,38 @@ export default function Stockpage() {
 
   return (
     <div className="coin-page">
-      <div className='heading'>
-        <img src={coinData.image} alt="" />
-        <h1 className='name'>{coinData.name}</h1>
-        <div className="flex">
-          <h2 className="price">{coinData.current_price}</h2>
-          <h4 className='currency'>USD</h4>
+      <div className='flex gap-1 align-center'>
+        <img className='large-img' src={coinData.image} alt="" />
+        <div className='flex align-baseline gap-1'>
+          <h1 className='name fs-1'>{coinData.name}</h1>
+          <div className="flex price ">
+            <h2 className='fs-2'>{coinData.current_price}</h2>
+            <h4 className='currency fs-5'>USD</h4>
+          </div>
+          <h5 className='change fs-4' style={priceChangeStyle}>{`${coinData.price_change_24h.toFixed(2)} (${coinData.price_change_percentage_24h.toFixed(2)}%)`}</h5>
+          <button className='fs-5 text-blue' onClick={() => watchlist(coinData)}>Add to watchlist</button>
         </div>
+
       </div>
-      <h5 className='change' style={priceChangeStyle}>{`${coinData.price_change_24h.toFixed(2)} (${coinData.price_change_percentage_24h.toFixed(2)}%)`}</h5>
       {/* <div className="tabs">
         {tabButtons}
       </div> */}
       <hr />
-      <div className="flex">
+      <div className="flex align-center">
         <div>
           <div className="ranges">
             {rangeButtons}
           </div>
           <PriceChart id={id} range={selectedRange}/>
         </div>
-        <div>
-          <div className="flex">
-            <button onClick={()=> changeBuyAmount('minus')}>-</button>
-            <input value={buyAmount} onChange={(e) => changeBuyAmount('set',e.target.value)} type='text'/>
-            <button onClick={()=> changeBuyAmount('plus')}>+</button>
+        <div className='flex-vert gap-0'>
+          <div className="flex gap-0">
+            <button className='count-button fs-3 text-white bg-blue' onClick={()=> changeBuyAmount('minus')}>-</button>
+            <input className='count-input fs-5' value={buyAmount} onChange={(e) => changeBuyAmount('set',e.target.value)} type='text'/>
+            <button className='count-button fs-3 text-white bg-blue' onClick={()=> changeBuyAmount('plus')}>+</button>
           </div>
-          <button onClick={buy}>Buy</button>
-          <button onClick={() => watchlist(coinData)}>Add to watchlist</button>
+          <p className='buy bg-blue text-white fs-3'>${buyAmount * coinData.current_price}</p>
+          <button className='buy bg-blue text-white fs-3' onClick={buy}>Buy</button>
         </div>
       </div>
 

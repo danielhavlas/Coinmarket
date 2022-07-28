@@ -2,6 +2,7 @@
 body{
   margin: 0;
   background-color: var(--white);
+  font-family: 'Familjen Grotesk';
 }
 
 :root{
@@ -9,8 +10,14 @@ body{
   --grey: #494850;
   --white: #FFFFFF;
   --green: #C3FF42;
-  --light: #FDF8FD;
+  --blue: #4B40EE;
   --red: #E71D36;
+
+  --fs-1: 2.4rem;
+  --fs-2: 1.8rem;
+  --fs-3: 1.6rem;
+  --fs-4: 1.2rem;
+  --fs-5: 1rem;
 }
 
 a{
@@ -18,12 +25,29 @@ a{
   color: inherit;
 }
 
+hr{
+  background-color: var(--grey);
+  border: 1px solid var(--grey);
+}
+
+.text-black{color:var(--black);}
+.text-blue{color: var(--blue);}
+.text-white{color:var(--white);}
+
 .bg-black{background-color:var(--black);}
+.bg-blue{background-color: var(--blue);}
 .bg-grey{background-color:var(--grey);}
 .bg-white{background-color:var(--white);}
 .bg-green{background-color:var(--green);}
-.bg-light{background-color: var(--light);}
 .bg-red{background-color:var(--red);}
+
+
+.fs-1{font-size: var(--fs-1);}
+.fs-2{font-size: var(--fs-2);}
+.fs-3{font-size: var(--fs-3);}
+.fs-4{font-size: var(--fs-4);}
+.fs-5{font-size: var(--fs-5);}
+
 
 .uppercase{text-transform: uppercase;}
 
@@ -35,11 +59,26 @@ a{
   display: flex;
 }
 
+.flex-vert{
+  display: flex;
+  flex-direction: column;
+}
+
 .gap-2{
   gap: 2em;
 }
 .gap-1{
   gap: 1em;
+}
+.gap-0{
+  gap:0.5em;
+}
+
+.align-baseline{
+  align-items: baseline;
+}
+.align-center{
+  align-items: center;
 }
 
 
@@ -55,7 +94,20 @@ a{
   padding-inline: 1em;
   justify-content: space-between;
   width: 20em;
-  
+}
+
+.option{
+  align-items: center;
+  color: var(--grey);
+}
+
+.small-img{
+  width: 30px;
+  height: 30px;
+}
+.large-img{
+  width: 100px;
+  height: 100px;
 }
 
 .home-grid{
@@ -82,12 +134,11 @@ a{
 
 .header{
   height: 12vh;
-  align-items: baseline;
   color: var(--white);
+  padding-inline: 2em;
 }
 .nav{
   color: var(--white);
-  align-items: baseline;
 }
 
 .select{
@@ -99,12 +150,38 @@ a{
 }
 
 .coin-page{
+  padding: 3em;
   max-width: 60rem;
   margin-inline: auto;
 }
 
 .name{
   margin: 0;
+}
+
+.count-button{
+  border-radius: 5px;
+  width: 1.5em;
+  height: 1.5em;
+  vertical-align: middle;
+}
+
+.buy{
+  margin-block: 0;
+  width: 100%;
+  padding-block: 0.2em;
+  border-radius: 5px;
+  text-align: center;
+}
+.count-input{
+  border: solid 3px var(--blue);
+  border-radius: 5px;
+}
+
+
+
+.price{
+  align-items: baseline;
 }
 
 
@@ -117,12 +194,12 @@ a{
   height: 30px;
 }
 
-.tab:hover{
-  border-bottom: solid 3px #9ea1ff;
+.range-button:hover{
+  background: #9ea1ff;
+  color: white;
 }
 
 .change {
-  font-size: 16px;
   font-weight: lighter;
   margin: 0;
 }
@@ -131,13 +208,10 @@ button {
   font-family: inherit;
   border: none;
   background: none;
-  font-size: 15px;
   cursor: pointer;
 }
 .currency {
   color: #bdbebf;
-  position: relative;
-  top: 10px;
   font-weight: 100;
 }
 .ranges {
@@ -147,7 +221,7 @@ button {
 .range-button {
   width: 40px;
   height: 25px;
-  background: #4b40ee;
+  background: white;
   border-radius: 5px;
 }
 .chart-container {

@@ -23,6 +23,7 @@ function PortfolioContextProvider(props){
                     return [...prevPortfolioArray, {id,coinData, amount, value: price}]
                 }
             })
+            setBalance(prevBalance => prevBalance - price)
             
         }
         else if(action === 'sell'){

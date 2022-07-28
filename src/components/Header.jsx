@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 
 export default function Header(){
     return(
-        <div className="header flex bg-black space-between">
-            <h1 className='uppercase'>Coinbase</h1>
-            <div className="nav flex space-between gap-2">
+        <div className="header flex bg-blue space-between align-center">
+            <h1 className='uppercase fs-1'>Coinbase</h1>
+            <div className="nav flex space-between gap-2 align-center">
                 <Link to='/'>HOME</Link>
                 <Searchbar/>
             </div>

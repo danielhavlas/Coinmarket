@@ -10,15 +10,7 @@ export default function Home(){
     const searchRef = useRef(null)
     const {portfolioArray} =  useContext(PortfolioContext)
     const {watchlistArray} =  useContext(WatchlistContext)
-    // const url = 'https://api.coingecko.com/api/v3/coins/'
-
-    // useEffect(()=>{
-    //     const data = await Promise.all([
-    //         portfolioArray.forEach(asset => {
-    //             fetch(url+asset.id).then(response => response.json())
-    //         })
-    //     ]);
-    // },[portfolioArray])
+    
 
     
     const assets = portfolioArray.map(asset => {
@@ -26,8 +18,14 @@ export default function Home(){
         return(
         <div className='flex space-between'>
             <div>
-                <h3>{asset.coinData.name}</h3>
-                <p className='uppercase'>{asset.coinData.symbol}</p>
+                <div className="flex align-center gap-1">
+                    <img className='small-img' src={asset.coinData.image}/>
+                    <div>
+                    <h3>{asset.coinData.name}</h3>
+                    <p className='uppercase'>{asset.coinData.symbol}</p>
+
+                    </div>
+                </div>
             </div>
             <div>
                 <h3>${asset.value}</h3>
@@ -40,7 +38,10 @@ export default function Home(){
     const watchlist = watchlistArray.map(coin => {
         return(
         <div className='flex space-between'>
-            <h3>{coin.name}</h3>
+            <div className="flex align-center gap-1">
+                    <img className='small-img' src={coin.image}/>
+                    <h3>{coin.name}</h3>
+            </div>
             <h3>${coin.current_price}</h3>
         </div>
     )})
