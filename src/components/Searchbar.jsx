@@ -57,7 +57,7 @@ export default function Searchbar(){
         const options = searchData.map(coin => {
             return{
                 value: coin.id,
-                label: <Link to={`/coins/${coin.id}`} className="option flex gap-1">
+                label: <Link to={`/currencies/${coin.id}`} className="option flex gap-1">
                         <img className='small-img' src={coin.image}/>
                         <p>{coin.name}</p>
                        </Link> ,

@@ -7,16 +7,13 @@ import { WatchlistContext } from '../WatchlistContext'
 
 export default function Home(){
 
-    const searchRef = useRef(null)
     const {portfolioArray, balance} =  useContext(PortfolioContext)
     const {watchlistArray} =  useContext(WatchlistContext)
     
 
     
-
     
     const assets = portfolioArray.map(asset => {
-        console.log(asset);
         return(
         <div className='flex space-between'>
             <div>
@@ -55,7 +52,7 @@ export default function Home(){
                 <div className="flex home-grid">
                     <h2>Balance: ${balance}</h2>
                     <div className='portfolio-card card'>
-                        <h2>Assets</h2>
+                        <h2>Portfolio</h2>
 
                         {assets}
                     </div>
