@@ -8,18 +8,23 @@ function PortfolioContextProvider(props){
 
     useEffect(()=> {
 
-        setPortfolioArray(prevPortfolioArray => localStorage.getItem('portfolio') === null? prevPortfolioArray : JSON.parse(localStorage.getItem('portfolio')))
+        const portArrStorage = JSON.parse(localStorage.getItem('portfolio'))
 
+        setPortfolioArray(prevPortfolioArray => portArrStorage === null? prevPortfolioArray : portArrStorage)
         async function updatePrices(){
-            
-            portfolioArray.forEach(v => {
+            console.log(portArrStorage)
+            for(let i = 0; i < portArrStorage.length; i++){
+                const v = portArrStorage[i]
+                console.log(v)
                 fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${v.id}&order=market_cap_desc&per_page=100&page=1&sparkline=false`)
                 .then(res => res.json())
                 .then(data => {
-                    setPortfolioArray(prevPortfolioArray => prevPortfolioArray.map(v => ({...v, value: data.current_price * v.amount})))
+                    setPortfolioArray(prevPortfolioArray => {
+                        console.log(data[0].current_price,data[0].current_price * v.amount)
+                        return prevPortfolioArray.map(v => ({...v, value: data[0].current_price * v.amount}))
+                    })
                 } )
-                // return 
-            })
+            }
           }
           
           updatePrices()

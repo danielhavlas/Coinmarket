@@ -13,9 +13,9 @@ export default function Home(){
 
     
     
-    const assets = portfolioArray.map(asset => {
+    const assets = portfolioArray.map((asset,index) => {
         return(
-        <div className='flex space-between'>
+        <div key={index} className='flex space-between'>
             <div>
                 <div className="flex align-center gap-1">
                     <img className='small-img' src={asset.coinData.image}/>
@@ -34,9 +34,9 @@ export default function Home(){
         </div>
     )})
 
-    const watchlist = watchlistArray.map(coin => {
+    const watchlist = watchlistArray.map((coin,index) => {
         return(
-        <div className='flex space-between'>
+        <div key={index} className='flex space-between'>
             <div className="flex align-center gap-1">
                     <img className='small-img' src={coin.image}/>
                     <h3>{coin.name}</h3>
