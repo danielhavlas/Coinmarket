@@ -20,7 +20,6 @@ function PortfolioContextProvider(props){
                 .then(res => res.json())
                 .then(data => {
                     setPortfolioArray(prevPortfolioArray => {
-                        console.log(data[0].current_price,data[0].current_price * v.amount)
                         return prevPortfolioArray.map(v => ({...v, value: data[0].current_price * v.amount}))
                     })
                 } )
