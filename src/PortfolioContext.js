@@ -20,7 +20,7 @@ function PortfolioContextProvider(props){
                     setPortfolioArray(prevPortfolioArray => {
                         return prevPortfolioArray.map(v => {
                             if(v.id === asset.id){
-                                return {...v,coinData: data [0], value: data[0].current_price * v.amount}
+                                return {...v,coinData: data [0], value: (data[0].current_price * v.amount).toFixed(2)}
                             }else {
                                 return {...v}
                             }
