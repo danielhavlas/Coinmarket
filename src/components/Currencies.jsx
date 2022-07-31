@@ -28,7 +28,7 @@ export default function Currencies(){
 
     return(
         <div>
-            <table className="container currencies-table flow">
+            <table className="container currencies-table">
                 <thead>
                     <tr>
                         <th>#</th>
