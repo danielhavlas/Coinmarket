@@ -1,4 +1,6 @@
 import React,{useState, useEffect} from "react";
+import {useNavigate} from 'react-router-dom'
+
 
 export default function Currencies(){
     const [coinsData, setCoinsData] = useState([])
@@ -9,16 +11,37 @@ export default function Currencies(){
         .then(data => setCoinsData(data))
     },[])
 
+    const navigate = useNavigate()
+
     const currencies = coinsData.map((coin,index) => (
-        <div key={index} className="flex">
-            <h3>{coin.name}</h3>
-            <h3>{coin.current_price}</h3>
-        </div>
+        <tr key={index} className='pointer' onClick={()=> navigate(`/currencies/${coin.id}`)} >
+            <td>{coin.market_cap_rank}</td>
+            <td className="flex gap-0 align-center">
+                <img src={coin.image} className='small-img'/>
+                <p>{coin.name}</p>
+            </td>
+            <td>{coin.current_price}</td>
+            <td>{coin.price_change_percentage_24h.toFixed(2)}</td>
+            <td>{coin.market_cap}</td>
+        </tr>
     ))
 
     return(
         <div>
-            {currencies}
+            <table className="container currencies-table flow">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>24%</th>
+                        <th>Market Cap</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {currencies}
+                </tbody>
+            </table>
         </div>
     )
 }

@@ -64,6 +64,10 @@ hr{
   flex-direction: column;
 }
 
+.flow > *:where(:not(:first-child)){
+  border-bottom: solid 1px var(--grey);
+}
+
 .gap-2{
   gap: 2em;
 }
@@ -84,6 +88,8 @@ hr{
 .text-center{
   text-align: center;
 }
+
+.pointer{ cursor: pointer}
 
 
 .container {
@@ -234,3 +240,17 @@ button {
   width: 40vw;
   height: 40vh;
 }
+
+.currencies-table{
+  text-align: left;
+  width: 60rem;
+}
+
+
+tr{
+  height: 4em;
+}
+
+
+
+

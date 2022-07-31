@@ -9,30 +9,38 @@ function PortfolioContextProvider(props){
     useEffect(()=> {
 
         const portArrStorage = JSON.parse(localStorage.getItem('portfolio'))
-
         setPortfolioArray(prevPortfolioArray => portArrStorage === null? prevPortfolioArray : portArrStorage)
+        const balanceStorage = localStorage.getItem('balance')
+        setBalance(prevBalance => balanceStorage === null? prevBalance : balanceStorage)
         async function updatePrices(){
-            console.log(portArrStorage)
-            for(let i = 0; i < portArrStorage.length; i++){
-                const v = portArrStorage[i]
-                console.log(v)
-                fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${v.id}&order=market_cap_desc&per_page=100&page=1&sparkline=false`)
+            portArrStorage.forEach(asset => {
+                fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${asset.id}&order=market_cap_desc&per_page=100&page=1&sparkline=false`)
                 .then(res => res.json())
                 .then(data => {
                     setPortfolioArray(prevPortfolioArray => {
-                        return prevPortfolioArray.map(v => ({...v, value: data[0].current_price * v.amount}))
+                        return prevPortfolioArray.map(v => {
+                            if(v.id === asset.id){
+                                return {...v,coinData: data [0], value: data[0].current_price * v.amount}
+                            }else {
+                                return {...v}
+                            }
+                        })
                     })
                 } )
-            }
+            })
+            
           }
           
           updatePrices()
-          console.log(portfolioArray)
     },[])
 
     useEffect(() => {
         localStorage.setItem('portfolio', JSON.stringify(portfolioArray))
     },[portfolioArray])
+
+    useEffect(() => {
+        localStorage.setItem('balance', balance)
+    },[balance])
     
     function order(action,id,coinData,amount, price){
         if(action==='buy'){

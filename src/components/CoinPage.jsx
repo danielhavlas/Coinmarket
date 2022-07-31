@@ -71,11 +71,14 @@ export default function Stockpage() {
 
   
   function buy(){
-    if(balance >= buyAmount*coinData.current_price){
-      order('buy',id,coinData,buyAmount,buyAmount*coinData.current_price)
-    }
-    else{
-      alert('brokey')
+    const minBuyAmount = 10
+    if(buyAmount*coinData.current_price > minBuyAmount){
+      if(balance >= buyAmount*coinData.current_price){
+        order('buy',id,coinData,buyAmount,(buyAmount*coinData.current_price).toFixed(2))
+      }
+      else{
+        alert('brokey')
+      }
     }
   }
   
@@ -116,7 +119,7 @@ export default function Stockpage() {
             <input className='count-input fs-5' value={buyAmount} onChange={(e) => changeBuyAmount('set',e.target.value)} type='text'/>
             <button className='count-button fs-3 text-white bg-blue' onClick={()=> changeBuyAmount('plus')}>+</button>
           </div>
-          <p className='buy bg-blue text-white fs-3'>${buyAmount * coinData.current_price}</p>
+          <p className='buy bg-blue text-white fs-3'>${(buyAmount * coinData.current_price).toFixed(2)}</p>
           <button className='buy bg-blue text-white fs-3' onClick={buy}>Buy</button>
         </div>
       </div>

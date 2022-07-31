@@ -4,6 +4,7 @@ import { useRef, useContext, useEffect } from 'react'
 import Stockpage from './CoinPage'
 import { PortfolioContext } from '../PortfolioContext'
 import { WatchlistContext } from '../WatchlistContext'
+import { Link } from 'react-router-dom'
 
 export default function Home(){
 
@@ -59,7 +60,7 @@ export default function Home(){
                     <div className="watchlist-card card">
                         <h2>Watchlist</h2>
                         {watchlist}
-                        <h3 className="fs-4 text-blue text-center"><span className='fs-3'>+</span> Explore</h3>
+                        <Link to='/currencies'><h3 className="fs-4 text-blue text-center"><span className='fs-3'>+</span> Explore</h3></Link>
                     </div>
                 </div>
             </div>
