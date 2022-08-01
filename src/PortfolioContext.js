@@ -3,15 +3,17 @@ const PortfolioContext = React.createContext()
 
 function PortfolioContextProvider(props){
     const [portfolioArray, setPortfolioArray] = useState([])
-    const [balance, setBalance] = useState(100000)
-    const [x,setX] = useState()
+    const [totalBalance, setTotalBalance] = useState()
+    const [usdBalance, setUsdBalance] = useState(100000)
 
     useEffect(()=> {
 
         const portArrStorage = JSON.parse(localStorage.getItem('portfolio'))
         setPortfolioArray(prevPortfolioArray => portArrStorage === null? prevPortfolioArray : portArrStorage)
-        const balanceStorage = localStorage.getItem('balance')
-        setBalance(prevBalance => balanceStorage === null? prevBalance : balanceStorage)
+        const usdBalanceStorage = localStorage.getItem('usdBalance')
+        setUsdBalance(prevUsdBalance => usdBalanceStorage === null? prevUsdBalance : usdBalanceStorage)
+        const totalBalanceStorage = localStorage.getItem('totalBalance')
+        setTotalBalance(prevTotalBalance => totalBalanceStorage === null? prevTotalBalance : totalBalanceStorage)
         async function updatePrices(){
             portArrStorage.forEach(asset => {
                 fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${asset.id}&order=market_cap_desc&per_page=100&page=1&sparkline=false`)
@@ -36,12 +38,20 @@ function PortfolioContextProvider(props){
 
     useEffect(() => {
         localStorage.setItem('portfolio', JSON.stringify(portfolioArray))
+        const portfolioValue = portfolioArray.map(v => parseInt(v.value)).reduce((t,v) => t + v, 0)
+        console.log(portfolioValue , usdBalance);
+        setTotalBalance(portfolioValue + parseInt(usdBalance))
     },[portfolioArray])
 
     useEffect(() => {
-        localStorage.setItem('balance', balance)
-    },[balance])
+        localStorage.setItem('usdBalance', usdBalance)
+    },[usdBalance])
+
     
+    useEffect(() => {
+        localStorage.setItem('totalBalance', totalBalance)
+    },[totalBalance])
+
     function order(action,id,coinData,amount, price){
         if(action==='buy'){
             const idArray = portfolioArray.map(v => v.id)
@@ -60,7 +70,7 @@ function PortfolioContextProvider(props){
                     return [...prevPortfolioArray, {id,coinData, amount, value: price}]
                 }
             })
-            setBalance(prevBalance => prevBalance - price)
+            setUsdBalance(prevBalance => prevBalance - price)
             
         }
         else if(action === 'sell'){
@@ -69,7 +79,7 @@ function PortfolioContextProvider(props){
     }
 
     return(
-        <PortfolioContext.Provider value={{portfolioArray,order,balance}}>
+        <PortfolioContext.Provider value={{portfolioArray,order,usdBalance, totalBalance}}>
             {props.children}
         </PortfolioContext.Provider>
     )

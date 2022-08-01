@@ -39,7 +39,7 @@ export default function Currencies(){
 
     return(
         <div>
-            <table className="container currencies-table">
+            <table className="container table">
                 <thead>
                     <tr className="fs-4">
                         <th></th>

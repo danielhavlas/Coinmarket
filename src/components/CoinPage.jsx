@@ -15,7 +15,7 @@ export default function Stockpage() {
   const [coinData, setCoinData] = useState({})
   const [buyAmount, setBuyAmount] = useState(0)
   const {id} = useParams()
-  const {order, balance} = useContext(PortfolioContext)
+  const {order, usdBalance} = useContext(PortfolioContext)
   const { watchlist} = useContext(WatchlistContext)
 
   
@@ -73,7 +73,7 @@ export default function Stockpage() {
   function buy(){
     const minBuyAmount = 10
     if(buyAmount*coinData.current_price > minBuyAmount){
-      if(balance >= buyAmount*coinData.current_price){
+      if(usdBalance >= buyAmount*coinData.current_price){
         order('buy',id,coinData,buyAmount,(buyAmount*coinData.current_price).toFixed(2))
       }
       else{
@@ -93,9 +93,9 @@ export default function Stockpage() {
         <img className='large-img' src={coinData.image} alt="" />
         <div className='flex align-baseline gap-1'>
           <h1 className='name fs-1'>{coinData.name}</h1>
-          <div className="flex price ">
+          <div className="flex align-baseline ">
             <h2 className='fs-2'>{coinData.current_price}</h2>
-            <h4 className='currency fs-5'>USD</h4>
+            <h4 className='text-grey fs-5'>USD</h4>
           </div>
           <h5 className='change fs-4' style={priceChangeStyle}>{`${coinData.price_change_24h.toFixed(2)} (${coinData.price_change_percentage_24h.toFixed(2)}%)`}</h5>
           <button className='fs-5 text-blue' onClick={() => watchlist(coinData)}>Add to watchlist</button>

@@ -7,7 +7,7 @@ body{
 
 :root{
   --black: #2C2C34;
-  --grey: #494850;
+  --grey: #a1a1a1;
   --white: #FFFFFF;
   --green: #C3FF42;
   --blue: #4B40EE;
@@ -33,6 +33,7 @@ hr{
 .text-black{color:var(--black);}
 .text-blue{color: var(--blue);}
 .text-white{color:var(--white);}
+.text-grey{color:var(--grey);}
 
 .bg-black{background-color:var(--black);}
 .bg-blue{background-color: var(--blue);}
@@ -191,11 +192,6 @@ hr{
 
 
 
-.price{
-  align-items: baseline;
-}
-
-
 .tabs { 
   display: flex;
   gap: 12px;
@@ -221,10 +217,7 @@ button {
   background: none;
   cursor: pointer;
 }
-.currency {
-  color: #bdbebf;
-  font-weight: 100;
-}
+
 .ranges {
   display: flex;
   gap: 10px;
@@ -241,7 +234,7 @@ button {
   height: 40vh;
 }
 
-.currencies-table{
+.table{
   text-align: left;
   width: 60rem;
 }
