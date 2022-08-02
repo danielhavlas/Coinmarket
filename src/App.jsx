@@ -11,7 +11,7 @@ import Portfolio from './components/Portfolio'
 
 
 function App() {
-  localStorage.clear()
+  // localStorage.clear()
   return (
     <div className="App">
       <Header />

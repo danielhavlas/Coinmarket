@@ -31,8 +31,12 @@ function WatchlistContextProvider(props){
             setWatchlistArray(prevArray => [...prevArray, coinData])
         }
     }
+
+    function isWatchlist(coinData){
+        return watchlistArray.map(v => v.id).includes(coinData.id)
+    }
     return(
-        <WatchlistContext.Provider value={{watchlistArray,watchlist}}>
+        <WatchlistContext.Provider value={{watchlistArray,watchlist, isWatchlist}}>
             {props.children}
         </WatchlistContext.Provider>
     )

@@ -16,9 +16,17 @@ export default function Portfolio(){
             <tr key={index} className='fs-4'>
                 <td className="flex gap-0 align-center">
                     <img src={asset.coinData.image} className='small-img'/>
-                    <p>{asset.coinData.name}</p>
+                    <div>
+                        <p>{asset.coinData.name}</p>
+                        <p className="text-grey uppercase">{asset.coinData.symbol}</p>
+                    </div>
                 </td>
-                <td className="text-blue">${asset.amount}</td>
+                <td>
+                    <div>
+                        <p className="text-blue">${asset.value}</p>
+                        <p className="text-grey uppercase">{asset.amount} {asset.coinData.symbol}</p>
+                    </div>
+                </td>
                 <td>${asset.coinData.current_price}</td>
                 <td>{allocation}%</td>
                 <td onClick={() => {setSellAsset(asset);setDisplaySell(true); setSellAmount(asset.amount) }}>Sell</td>
@@ -28,7 +36,7 @@ export default function Portfolio(){
 
 
     const sellField = (
-         <div className='flex-vert gap-0'>
+         <div className='flex-vert gap-0 order-container'>
           <div className="flex gap-0">
             <button className='count-button fs-3 text-white bg-blue' onClick={()=> changeSellAmount('minus')}>-</button>
             <input className='count-input fs-5' value={sellAmount} onChange={(e) => changeSellAmount('set',e.target.value)} type='text'/>
@@ -54,26 +62,29 @@ export default function Portfolio(){
       }
 
     return(
-        <div className="container flex gap-1">
-            <table className="card  table">
-                <thead>
-                    <tr className='fs-5 text-grey' >
-                        <th>Name</th>
-                        <th>Balance</th>
-                        <th>Price</th>
-                        <th>Allocation</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr className="fs-4 text-blue">
-                        <td>USD</td>
-                        <td>${usdBalance}</td>
-                    </tr>
-                    {assets}
-                </tbody>
-            </table>
-            {displaySell && sellField}
+        <div className="container ">
+            <h2>Total balance: ${totalBalance}</h2>
+            <div className="flex gap-1">
+                <table className="card  table">
+                    <thead>
+                        <tr className='fs-5 text-grey' >
+                            <th>Name</th>
+                            <th>Balance</th>
+                            <th>Price</th>
+                            <th>Allocation</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr className="fs-4 text-blue">
+                            <td>USD</td>
+                            <td>${usdBalance}</td>
+                        </tr>
+                        {assets}
+                    </tbody>
+                </table>
+                {displaySell && sellField}
+            </div>
         </div>
     )
 }

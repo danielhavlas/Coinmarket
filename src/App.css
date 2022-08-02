@@ -29,6 +29,9 @@ hr{
   background-color: var(--grey);
   border: 1px solid var(--grey);
 }
+p{
+  margin:0;
+}
 
 .text-black{color:var(--black);}
 .text-blue{color: var(--blue);}
@@ -115,6 +118,7 @@ hr{
 .small-img{
   width: 30px;
   height: 30px;
+  margin: 0;
 }
 .large-img{
   width: 100px;
@@ -141,6 +145,11 @@ hr{
 }
 .portfolio-card > *{
   line-height: 0.5em;
+}
+
+.star-icon{
+  font-size: 1.5rem;
+  color: var(--blue);
 }
 
 .header{
@@ -178,6 +187,10 @@ hr{
   vertical-align: middle;
 }
 
+.order-container{
+  width: 15em;
+}
+
 .order{
   margin-block: 0;
   width: 100%;
@@ -187,6 +200,7 @@ hr{
 }
 .count-input{
   border: solid 3px var(--blue);
+  width: 100%;
   border-radius: 5px;
 }
 

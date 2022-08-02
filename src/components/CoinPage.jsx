@@ -16,7 +16,7 @@ export default function Stockpage() {
   const [buyAmount, setBuyAmount] = useState(0)
   const {id} = useParams()
   const {order, usdBalance} = useContext(PortfolioContext)
-  const { watchlist} = useContext(WatchlistContext)
+  const { watchlist, isWatchlist} = useContext(WatchlistContext)
 
   
   useEffect(() => {
@@ -86,6 +86,7 @@ export default function Stockpage() {
   if(coinData.id === undefined){
     return ''
   }
+  const iconClass = isWatchlist(coinData)? "ri-star-fill" :"ri-star-line"
 
   return (
     <div className="coin-page card">
@@ -98,7 +99,7 @@ export default function Stockpage() {
             <h4 className='text-grey fs-5'>USD</h4>
           </div>
           <h5 className='change fs-4' style={priceChangeStyle}>{`${coinData.price_change_24h.toFixed(2)} (${coinData.price_change_percentage_24h.toFixed(2)}%)`}</h5>
-          <button className='fs-5 text-blue' onClick={() => watchlist(coinData)}>Add to watchlist</button>
+          <button className='fs-5 text-blue' onClick={() => watchlist(coinData)}><i className={`star-icon ${iconClass}`}></i></button>
         </div>
 
       </div>
@@ -113,7 +114,7 @@ export default function Stockpage() {
           </div>
           <PriceChart id={id} range={selectedRange} large={true}/>
         </div>
-        <div className='flex-vert gap-0'>
+        <div className='flex-vert gap-0 order-container'>
           <div className="flex gap-0">
             <button className='count-button fs-3 text-white bg-blue' onClick={()=> changeBuyAmount('minus')}>-</button>
             <input className='count-input fs-5' value={buyAmount} onChange={(e) => changeBuyAmount('set',e.target.value)} type='text'/>

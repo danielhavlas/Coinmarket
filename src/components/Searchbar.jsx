@@ -52,7 +52,7 @@ export default function Searchbar(){
       }
 
 
-    function searchInput(input){
+    function search(input){
         setInputValue(input)
         const options = searchData.map(coin => {
             return{
@@ -80,9 +80,10 @@ export default function Searchbar(){
     return(
       <Select 
         onKeyDown={e => setKey(e.code)} 
-        onInputChange={searchInput} 
+        onInputChange={search} 
         placeholder='Search' 
         onChange={handleChange} 
+        onFocus={search}
         className='select' 
         value={value}
         styles={searchStyles} 
