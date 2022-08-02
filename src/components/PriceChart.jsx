@@ -27,7 +27,7 @@ function PriceChart (props){
         const ctx = canvas.ctx
         const gradient = ctx.createLinearGradient(0, 0, 0, 350);
         gradient.addColorStop(0, '#E8E7FF');
-        gradient.addColorStop(0.8, 'rgba(255,255,255,1)');
+        gradient.addColorStop(0.65, 'rgba(255,255,255,1)');
         setGradient(gradient)
     },[])
 

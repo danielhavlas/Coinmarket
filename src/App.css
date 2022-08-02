@@ -204,7 +204,12 @@ p{
   border-radius: 5px;
 }
 
-
+.order-button{
+  display: inline-block;
+  padding: 0.5em;
+  text-align: center;
+  border-radius: 5px;
+}
 
 .tabs { 
   display: flex;

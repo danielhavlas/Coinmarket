@@ -29,7 +29,7 @@ export default function Portfolio(){
                 </td>
                 <td>${asset.coinData.current_price}</td>
                 <td>{allocation}%</td>
-                <td onClick={() => {setSellAsset(asset);setDisplaySell(true); setSellAmount(asset.amount) }}>Sell</td>
+                <td className="text-white bg-blue order-button" onClick={() => {setSellAsset(asset);setDisplaySell(true); setSellAmount(asset.amount) }}>Sell</td>
             </tr>
         )
     })
