@@ -23,10 +23,10 @@ export default function Currencies(){
         const marketCap = coin.market_cap.toString().split('').reverse().map((v,i,a) => i%3===0 && i !== 0 ?v+',': v).reverse().join('')
         console.log(marketCap)
         return(
-            <tr key={index} className='fs-5 pointer' onClick={()=>  navigate(`/currencies/${coin.id}`)}  >
-                <td onClick={(e)=>{e.stopPropagation(); watchlist(coin)}}>*</td>
+            <tr key={index} className='fs-4 pointer' onClick={()=>  navigate(`/currencies/${coin.id}`)}  >
+                <td className="fs-1" onClick={(e)=>{e.stopPropagation(); watchlist(coin)}}>*</td>
                 <td>{coin.market_cap_rank}</td>
-                <td className="flex gap-0 align-center">
+                <td className="flex fw-600 gap-0 align-center">
                     <img src={coin.image} className='small-img'/>
                     <p>{coin.name}</p>
                 </td>
@@ -38,10 +38,10 @@ export default function Currencies(){
     })
 
     return(
-        <div>
-            <table className="container table">
+        <div className="container">
+            <table className=" card table">
                 <thead>
-                    <tr className="fs-4">
+                    <tr className="fs-5 text-grey">
                         <th></th>
                         <th>#</th>
                         <th>Name</th>

@@ -2,6 +2,7 @@ import { useRef, useContext, useEffect } from 'react'
 import { PortfolioContext } from '../PortfolioContext'
 import { WatchlistContext } from '../WatchlistContext'
 import { Link } from 'react-router-dom'
+import PriceChart from './PriceChart'
 
 export default function Home(){
 
@@ -33,14 +34,16 @@ export default function Home(){
     )})
 
     const watchlist = watchlistArray.map((coin,index) => {
+        const green = coin.price_change_24h >= 0
         return(
-        <div key={index} className='flex space-between'>
+        <Link to={`/currencies/${coin.id}`} key={index} className='flex space-between'>
             <div className="flex align-center gap-1">
                     <img className='small-img' src={coin.image}/>
                     <h3>{coin.name}</h3>
             </div>
+            <PriceChart id={coin.id} range={0} large={false} green={green} />
             <h3>${coin.current_price}</h3>
-        </div>
+        </Link>
     )})
 
 

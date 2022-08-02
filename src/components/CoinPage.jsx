@@ -71,8 +71,8 @@ export default function Stockpage() {
 
   
   function buy(){
-    const minBuyAmount = 10
-    if(buyAmount*coinData.current_price > minBuyAmount){
+    const minBuyPrice = 10
+    if(buyAmount*coinData.current_price > minBuyPrice){
       if(usdBalance >= buyAmount*coinData.current_price){
         order('buy',id,coinData,buyAmount,(buyAmount*coinData.current_price).toFixed(2))
       }
@@ -88,7 +88,7 @@ export default function Stockpage() {
   }
 
   return (
-    <div className="coin-page">
+    <div className="coin-page card">
       <div className='flex gap-1 align-center'>
         <img className='large-img' src={coinData.image} alt="" />
         <div className='flex align-baseline gap-1'>
@@ -111,7 +111,7 @@ export default function Stockpage() {
           <div className="ranges">
             {rangeButtons}
           </div>
-          <PriceChart id={id} range={selectedRange}/>
+          <PriceChart id={id} range={selectedRange} large={true}/>
         </div>
         <div className='flex-vert gap-0'>
           <div className="flex gap-0">

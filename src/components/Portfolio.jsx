@@ -23,8 +23,8 @@ export default function Portfolio(){
         )
     })
     return(
-        <div className="">
-            <table className="container table">
+        <div className="container ">
+            <table className="card  table">
                 <thead>
                     <tr className='fs-5 text-grey' >
                         <th>Name</th>

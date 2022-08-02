@@ -49,6 +49,7 @@ hr{
 .fs-4{font-size: var(--fs-4);}
 .fs-5{font-size: var(--fs-5);}
 
+.fw-600{font-weight: 600}
 
 .uppercase{text-transform: uppercase;}
 
@@ -104,8 +105,6 @@ hr{
   box-shadow: 5px 10px 8px #d2d2d2;
   border-radius: 8px;
   padding: 1em;
-  justify-content: space-between;
-  width: 20em;
 }
 
 .option{
@@ -130,7 +129,7 @@ hr{
 
 .watchlist-card{
   justify-content: space-between;
-  width: 15em;
+  width: 25em;
 }
 
 .watchlist-card > *{
@@ -148,6 +147,7 @@ hr{
   height: 12vh;
   color: var(--white);
   padding-inline: 2em;
+  margin-bottom: 2rem;
 }
 .nav{
   color: var(--white);
@@ -232,6 +232,11 @@ button {
   position: relative;
   width: 40vw;
   height: 40vh;
+}
+
+.small-chart{
+  width: 8rem;
+  height: 4rem;
 }
 
 .table{

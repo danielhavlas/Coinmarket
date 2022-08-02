@@ -33,7 +33,7 @@ function PriceChart (props){
 
     return(
         <>
-        <div className="chart-container">
+        {props.large? <div className="chart-container">
             <Line 
             ref={chartRef}
             className="chart"
@@ -75,6 +75,9 @@ function PriceChart (props){
                         display: false,
                         
                     },
+                    tooltip: {
+                        enabled: false 
+                      },
                     
                     datalabels: {
                         anchor: 'end',
@@ -122,7 +125,6 @@ function PriceChart (props){
                           },
                       ticks: {
                         display: false,
-                        maxTicksLimit:6,
                         
                       }
                     },
@@ -141,7 +143,80 @@ function PriceChart (props){
             }}
             plugins={[ChartDataLabels]}
             />
-        </div>
+        </div> : <div className="small-chart">  <Line 
+            ref={chartRef}
+            
+            data={{
+                
+                labels: chartData.map((price)=> price[0]) ,
+    
+                datasets: [{
+                    data: chartData.map((price)=>price[1]),
+                },
+                ],
+                
+            
+            }}
+            options={{
+                maintainAspectRatio: false,
+                elements:{
+                    point:{
+                        radius:0,
+                    },
+                    line:{
+                        borderWidth:2,
+                        borderColor: props.green? 'rgb(0, 231, 0)' : 'red',
+                        pointRadius:0,
+                        hitPointRadius:0,
+                        hoverRadius:0,
+                    }
+                },
+                
+                plugins: {
+                    
+                    legend:{
+                        display: false,
+                        
+                    },
+                    tooltip: {
+                        enabled: false
+                      },
+                    
+                    datalabels: {
+                        display:false,
+                    },
+                   
+                },
+                scales: {
+                    
+                    
+                    x: {
+                        grid: {
+                            display: false,
+                            drawBorder: false,
+                            
+                          },
+                      ticks: {
+                        display: false,
+                        
+                      }
+                    },
+                    y: {
+                      grid: {
+                        display: false,
+                        drawBorder: false,
+
+                      },
+                      ticks:{
+                        display: false,
+                      }
+                    }
+                },
+                
+            }}
+             />
+             </div>
+        }
         </>
     )
 }
