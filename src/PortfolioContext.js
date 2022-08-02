@@ -39,7 +39,6 @@ function PortfolioContextProvider(props){
     useEffect(() => {
         localStorage.setItem('portfolio', JSON.stringify(portfolioArray))
         const portfolioValue = portfolioArray.map(v => parseInt(v.value)).reduce((t,v) => t + v, 0)
-        console.log(portfolioValue , usdBalance);
         setTotalBalance(portfolioValue + parseInt(usdBalance))
     },[portfolioArray])
 
@@ -74,7 +73,20 @@ function PortfolioContextProvider(props){
             
         }
         else if(action === 'sell'){
-
+            setPortfolioArray(prevPortfolioArray => {
+                return(
+                    prevPortfolioArray.map(asset => {
+                        if(asset.id === id){
+                            console.log(asset.amount,amount,asset.amount - amount)
+                            return {...asset,amount: asset.amount - amount, value: asset.value - price}
+                        }else{
+                            return asset
+                        }
+                    }).filter(v => v.amount > 0)
+                )
+                
+            })
+            setUsdBalance(prevBalance => prevBalance + price)
         }
     }
 

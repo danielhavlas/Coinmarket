@@ -21,7 +21,6 @@ export default function Currencies(){
             color: coin.price_change_24h >= 0? 'rgb(0, 231, 0)' : 'red'
         }
         const marketCap = coin.market_cap.toString().split('').reverse().map((v,i,a) => i%3===0 && i !== 0 ?v+',': v).reverse().join('')
-        console.log(marketCap)
         return(
             <tr key={index} className='fs-4 pointer' onClick={()=>  navigate(`/currencies/${coin.id}`)}  >
                 <td className="fs-1" onClick={(e)=>{e.stopPropagation(); watchlist(coin)}}>*</td>

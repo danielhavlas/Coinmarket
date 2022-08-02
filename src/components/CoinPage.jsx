@@ -119,8 +119,8 @@ export default function Stockpage() {
             <input className='count-input fs-5' value={buyAmount} onChange={(e) => changeBuyAmount('set',e.target.value)} type='text'/>
             <button className='count-button fs-3 text-white bg-blue' onClick={()=> changeBuyAmount('plus')}>+</button>
           </div>
-          <p className='buy bg-blue text-white fs-3'>${(buyAmount * coinData.current_price).toFixed(2)}</p>
-          <button className='buy bg-blue text-white fs-3' onClick={buy}>Buy</button>
+          <p className='order bg-blue text-white fs-3'>${(buyAmount * coinData.current_price).toFixed(2)}</p>
+          <button className='order bg-blue text-white fs-3' onClick={buy}>Buy</button>
         </div>
       </div>
 
