@@ -6,7 +6,7 @@ import { PortfolioContext } from "../PortfolioContext"
 export default function Portfolio(){
 
     const {portfolioArray, usdBalance, totalBalance, order} = useContext(PortfolioContext)
-    const [displaySell, setDisplaySell] = useState(false)
+    const [displayOrder, setDisplayOrder] = useState('closed')
     const [sellAmount, setSellAmount] = useState()
     const [sellAsset, setSellAsset] = useState()
 
@@ -29,22 +29,26 @@ export default function Portfolio(){
                 </td>
                 <td>${asset.coinData.current_price}</td>
                 <td>{allocation}%</td>
-                <td className="text-white bg-blue order-button" onClick={() => {setSellAsset(asset);setDisplaySell(true); setSellAmount(asset.amount) }}>Sell</td>
+                <td className="text-white bg-blue order-button" onClick={() => {setSellAsset(asset);setDisplayOrder('open'); setSellAmount(asset.amount) }}>Sell</td>
             </tr>
         )
     })
 
 
     const sellField = (
-         <div className='flex-vert gap-0 order-container'>
+         <div className={`flex-vert gap-0 order-container order-${displayOrder} card bg-black`}>
           <div className="flex gap-0">
             <button className='count-button fs-3 text-white bg-blue' onClick={()=> changeSellAmount('minus')}>-</button>
             <input className='count-input fs-5' value={sellAmount} onChange={(e) => changeSellAmount('set',e.target.value)} type='text'/>
             <button className='count-button fs-3 text-white bg-blue' onClick={()=> changeSellAmount('plus')}>+</button>
           </div>
           {/* <p className='order bg-blue text-white fs-3'>${(sellAmount * sellAsset.coinData.current_price).toFixed(2)}</p> */}
-          <button className='order bg-blue text-white fs-3' onClick={() => order('sell',sellAsset.id,sellAsset.coinData ,sellAmount , sellAsset.coinData.current_price * sellAmount)}>Sell</button>
+          <button className='order bg-blue text-white fs-3' onClick={() => {order('sell',sellAsset.id,sellAsset.coinData ,sellAmount , sellAsset.coinData.current_price * sellAmount); setDisplayOrder('closed')}}>Sell</button>
         </div>
+    )
+
+    const fog = (
+        <div className={`fog fog-${displayOrder}`} onClick={() => setDisplayOrder('closed')}></div>
     )
 
     function changeSellAmount(action,e){
@@ -62,10 +66,10 @@ export default function Portfolio(){
       }
 
     return(
-        <div className="container ">
+        <div className="container">
             <h2>Total balance: ${totalBalance}</h2>
-            <div className="flex gap-1">
-                <table className="card  table">
+            <div className="flex gap-1 portfolio-grid">
+                <table className="card table bg-white">
                     <thead>
                         <tr className='fs-5 text-grey' >
                             <th>Name</th>
@@ -83,8 +87,9 @@ export default function Portfolio(){
                         {assets}
                     </tbody>
                 </table>
-                {displaySell && sellField}
+                {sellField}
             </div>
+            {fog}
         </div>
     )
 }

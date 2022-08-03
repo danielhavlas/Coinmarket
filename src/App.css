@@ -104,7 +104,6 @@ p{
 }
 
 .card{
-  background-color: var(--white);
   box-shadow: 5px 10px 8px #d2d2d2;
   border-radius: 8px;
   padding: 1em;
@@ -171,13 +170,16 @@ p{
 }
 
 .coin-page{
-  padding: 3em;
-  max-width: 60rem;
-  margin-inline: auto;
+  padding: 2em 3em;
+  width: 50rem;
 }
 
 .name{
   margin: 0;
+}
+
+.portfolio-grid{
+  overflow: hidden;
 }
 
 .count-button{
@@ -187,8 +189,39 @@ p{
   vertical-align: middle;
 }
 
+
 .order-container{
   width: 15em;
+  height:20em;
+  z-index:3;
+  transition: transform 250ms cubic-bezier(.5, 0, .5, 1);
+}
+.order-open{
+  transform: translateX(0%);
+}
+.order-closed{
+  transform: translateX(120%);
+}
+
+.fog{
+  top: 0;
+  left: 0;
+  z-index:2;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  position: absolute;
+  transition: transform 250ms cubic-bezier(.5, 0, .5, 1);
+}
+
+.fog-open{
+  width: 100vw;
+  height: 100vh;
+}
+
+.fog-closed{
+  width: 0vw;
+  height: 0vh;
 }
 
 .order{
@@ -259,6 +292,7 @@ button {
 }
 
 .table{
+  align-self:flex-start ;
   text-align: left;
   width: 60rem;
 }
