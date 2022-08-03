@@ -103,9 +103,6 @@ export default function Stockpage() {
         </div>
 
       </div>
-      {/* <div className="tabs">
-        {tabButtons}
-      </div> */}
       <hr />
       <div className="flex align-center">
         <div>

@@ -31,7 +31,10 @@ export default function Currencies(){
                 <td>{coin.market_cap_rank}</td>
                 <td className="flex fw-600 gap-0 align-center">
                     <img src={coin.image} className='small-img'/>
-                    <p>{coin.name}</p>
+                    <div>
+                        <p>{coin.name}</p>
+                        <p className="fs-5 text-grey uppercase">{coin.symbol}</p>
+                    </div>
                 </td>
                 <td>${coin.current_price}</td>
                 <td style={priceChangeStyle}>{coin.price_change_percentage_24h.toFixed(2)}%</td>
