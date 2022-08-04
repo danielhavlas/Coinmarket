@@ -4,7 +4,6 @@ import animation from '../assets/check-icon.json'
 
 export default function OrderPopup(props){
     const iconRef = useRef(null)
-    console.log(props.classname);
     const x = props.status === 'finished'? 'open': 'closed'
     useEffect(() => {
         if (props.status === 'finished') {
