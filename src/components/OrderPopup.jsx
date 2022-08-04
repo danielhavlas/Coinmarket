@@ -8,7 +8,6 @@ export default function OrderPopup(props){
     useEffect(() => {
         if (props.status === 'finished') {
            lottie.loadAnimation({
-            
             container: iconRef.current, 
             animationData: animation, 
             renderer: 'svg', 
