@@ -13,7 +13,7 @@ export default function Portfolio(){
     const [tradeStatus, setTradeStatus] = useState('')
 
     const assets = portfolioArray.map((asset,index) => {
-        const allocation = (asset.value/totalBalance).toFixed(2) * 100
+        const allocation = ((asset.value/totalBalance) * 100).toFixed(2)
         return(
             <tr key={index} className='fs-4'>
                 <td className="flex gap-0 align-center">
@@ -25,7 +25,7 @@ export default function Portfolio(){
                 </td>
                 <td>
                     <div>
-                        <p className="text-blue">${asset.value}</p>
+                        <p className="text-blue">${asset.value.toFixed(2)}</p>
                         <p className="text-grey uppercase">{asset.amount} {asset.coinData.symbol}</p>
                     </div>
                 </td>
@@ -53,7 +53,7 @@ export default function Portfolio(){
             <input className='count-input fs-5' value={sellAmount} onChange={(e) => changeSellAmount('set',e.target.value)} type='text'/>
             <button className='count-button fs-3 text-white bg-blue' onClick={()=> changeSellAmount('plus')}>+</button>
           </div>
-          {/* <p className='order bg-blue text-white fs-3'>${(sellAmount * sellAsset.coinData.current_price).toFixed(2)}</p> */}
+          {/* <p className='order bg-blue text-white fs-3'>${(sellAmount * sellAsset.coinData.current_price)}</p> */}
           <button className='order bg-blue text-white fs-3' onClick={sell}>Sell</button>
         </div>
     )
@@ -93,7 +93,7 @@ export default function Portfolio(){
                     <tbody>
                         <tr className="fs-4 text-blue">
                             <td>USD</td>
-                            <td>${usdBalance}</td>
+                            <td>${usdBalance.toFixed(2)}</td>
                         </tr>
                         {assets}
                     </tbody>
@@ -101,7 +101,7 @@ export default function Portfolio(){
                 {sellField}
             </div>
             {fog}
-            {sellAsset &&<OrderPopup status={tradeStatus} traded={'sold'} amount={sellAmount} currency={sellAsset.coinData.symbol} price={(sellAsset.coinData.current_price * sellAmount).toFixed(2)}/>}
+            {sellAsset &&<OrderPopup status={tradeStatus} traded={'sold'} amount={sellAmount} currency={sellAsset.coinData.symbol} price={sellAsset.coinData.current_price * sellAmount}/>}
         </div>
     )
 }
