@@ -146,7 +146,12 @@ export default function Stockpage() {
       </div>
       {buyField}
       {fog}
-      <OrderPopup status={tradeStatus} traded={'bought'} amount={buyAmount} currency={coinData.symbol} price={(coinData.current_price * buyAmount).toFixed(2)}/>
+      <OrderPopup status={tradeStatus} 
+        traded={'bought'} 
+        amount={buyAmount} 
+        currency={coinData.symbol} 
+        price={(coinData.current_price * buyAmount).toFixed(2)
+      }/>
     </div>
   );
 }
