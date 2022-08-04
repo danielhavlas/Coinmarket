@@ -1,7 +1,7 @@
 import React,{useState, useEffect, useContext} from "react";
 import {useNavigate} from 'react-router-dom'
 
-import { WatchlistContext } from '../WatchlistContext'
+import { WatchlistContext } from '../context/WatchlistContext'
 
 import PriceChart from "./PriceChart";
 

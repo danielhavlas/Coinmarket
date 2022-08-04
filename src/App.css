@@ -3,6 +3,8 @@ body{
   margin: 0;
   background-color: #f4f4f4;
   font-family: 'Familjen Grotesk';
+  overflow: hidden;
+
 }
 
 :root{
@@ -179,7 +181,6 @@ p{
 }
 
 .portfolio-grid{
-  overflow: hidden;
 }
 
 .count-button{
@@ -211,7 +212,6 @@ p{
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.4);
   position: absolute;
-  transition: transform 250ms cubic-bezier(.5, 0, .5, 1);
 }
 
 .fog-open{
@@ -300,6 +300,44 @@ button {
 tr{
   height: 4em;
 }
+
+.order-popup{
+  z-index: 10;
+  position: absolute;
+  display: flex;
+  top: 0;
+  bottom:0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 25rem;
+  height: 15em;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  transition: transform 250ms cubic-bezier(.5, 0, .5, 1);
+}
+
+.order-popup-open{
+  visibility: visible;
+  transform: scale(1);
+}
+
+.order-popup-closed{
+  transform: scale(0);
+}
+
+
+.icon-container{
+  width: 3rem;
+  height: 3rem;
+  padding: 1rem;
+  border-radius: 50%;
+}
+
+
+
 
 
 

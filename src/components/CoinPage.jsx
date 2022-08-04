@@ -2,8 +2,9 @@ import React, { useState, useEffect, useContext} from 'react';
 import Range from './Range';
 import PriceChart from './PriceChart';
 import {useParams} from 'react-router-dom'
-import { PortfolioContext } from '../PortfolioContext'
-import { WatchlistContext } from '../WatchlistContext'
+import { PortfolioContext } from '../context/PortfolioContext'
+import { WatchlistContext } from '../context/WatchlistContext'
+import OrderPopup from './OrderPopup';
 
 
 
@@ -18,6 +19,7 @@ export default function Stockpage() {
   const {order, usdBalance} = useContext(PortfolioContext)
   const { watchlist, isWatchlist} = useContext(WatchlistContext)
   const [displayOrder, setDisplayOrder] = useState('closed')
+  const [tradeStatus, setTradeStatus] = useState('')
 
   
   useEffect(() => {
@@ -81,6 +83,11 @@ export default function Stockpage() {
     if(buyAmount*coinData.current_price > minBuyPrice){
       if(usdBalance >= buyAmount*coinData.current_price){
         order('buy',id,coinData,buyAmount,(buyAmount*coinData.current_price).toFixed(2))
+        setDisplayOrder('closed')
+        setTradeStatus('finished')
+        setTimeout(() => {
+          setTradeStatus('')
+        }, 2000);
       }
       else{
         alert('brokey')
@@ -102,7 +109,7 @@ export default function Stockpage() {
         <button className='count-button fs-3 text-white bg-blue' onClick={()=> changeBuyAmount('plus')}>+</button>
       </div>
       <p className='order bg-blue text-white fs-3'>${(buyAmount * coinData.current_price).toFixed(2)}</p>
-      <button className='order bg-blue text-white fs-3' onClick={() => {buy(); setDisplayOrder('closed')}}>Buy</button>
+      <button className='order bg-blue text-white fs-3' onClick={buy}>Buy</button>
     </div>
   )
 
@@ -139,6 +146,7 @@ export default function Stockpage() {
       </div>
       {buyField}
       {fog}
+      <OrderPopup status={tradeStatus} traded={'bought'} amount={buyAmount} currency={coinData.symbol} price={(coinData.current_price * buyAmount).toFixed(2)}/>
     </div>
   );
 }

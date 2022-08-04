@@ -1,5 +1,6 @@
 import { useState, useContext,useEffect } from "react"
-import { PortfolioContext } from "../PortfolioContext"
+import { PortfolioContext } from "../context/PortfolioContext"
+import OrderPopup from './OrderPopup';
 
 
 
@@ -9,6 +10,7 @@ export default function Portfolio(){
     const [displayOrder, setDisplayOrder] = useState('closed')
     const [sellAmount, setSellAmount] = useState()
     const [sellAsset, setSellAsset] = useState()
+    const [tradeStatus, setTradeStatus] = useState('')
 
     const assets = portfolioArray.map((asset,index) => {
         const allocation = (asset.value/totalBalance).toFixed(2) * 100
@@ -34,6 +36,15 @@ export default function Portfolio(){
         )
     })
 
+    function sell(){
+        order('sell',sellAsset.id,sellAsset.coinData ,sellAmount , sellAsset.coinData.current_price * sellAmount)
+        setDisplayOrder('closed')
+        setTradeStatus('finished')
+        setTimeout(() => {
+            setTradeStatus('')
+          }, 2000);
+    }
+
 
     const sellField = (
          <div className={`flex-vert gap-0 order-container order-${displayOrder} card bg-black`}>
@@ -43,7 +54,7 @@ export default function Portfolio(){
             <button className='count-button fs-3 text-white bg-blue' onClick={()=> changeSellAmount('plus')}>+</button>
           </div>
           {/* <p className='order bg-blue text-white fs-3'>${(sellAmount * sellAsset.coinData.current_price).toFixed(2)}</p> */}
-          <button className='order bg-blue text-white fs-3' onClick={() => {order('sell',sellAsset.id,sellAsset.coinData ,sellAmount , sellAsset.coinData.current_price * sellAmount); setDisplayOrder('closed')}}>Sell</button>
+          <button className='order bg-blue text-white fs-3' onClick={sell}>Sell</button>
         </div>
     )
 
@@ -90,6 +101,7 @@ export default function Portfolio(){
                 {sellField}
             </div>
             {fog}
+            {sellAsset &&<OrderPopup status={tradeStatus} traded={'sold'} amount={sellAmount} currency={sellAsset.coinData.symbol} price={(sellAsset.coinData.current_price * sellAmount).toFixed(2)}/>}
         </div>
     )
 }

@@ -1,6 +1,6 @@
 import { useRef, useContext, useEffect } from 'react'
-import { PortfolioContext } from '../PortfolioContext'
-import { WatchlistContext } from '../WatchlistContext'
+import { PortfolioContext } from '../context/PortfolioContext'
+import { WatchlistContext } from '../context/WatchlistContext'
 import { Link } from 'react-router-dom'
 import PriceChart from './PriceChart'
 
