@@ -4,7 +4,7 @@ import animation from '../assets/check-icon.json'
 
 export default function OrderPopup(props){
     const iconRef = useRef(null)
-    const x = props.status === 'finished'? 'open': 'closed'
+    const x = props.status === 'finished'? 'open' : 'closed'
     useEffect(() => {
         if (props.status === 'finished') {
            lottie.loadAnimation({
