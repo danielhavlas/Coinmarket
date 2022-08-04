@@ -11,9 +11,9 @@ function PortfolioContextProvider(props){
         const portArrStorage = JSON.parse(localStorage.getItem('portfolio'))
         setPortfolioArray(prevPortfolioArray => portArrStorage === null? prevPortfolioArray : portArrStorage)
         const usdBalanceStorage = localStorage.getItem('usdBalance')
-        setUsdBalance(prevUsdBalance => usdBalanceStorage === null? prevUsdBalance : usdBalanceStorage)
+        setUsdBalance(prevUsdBalance => usdBalanceStorage === null? prevUsdBalance : Number(usdBalanceStorage))
         const totalBalanceStorage = localStorage.getItem('totalBalance')
-        setTotalBalance(prevTotalBalance => totalBalanceStorage === null? prevTotalBalance : totalBalanceStorage)
+        setTotalBalance(prevTotalBalance => totalBalanceStorage === null? prevTotalBalance : Number(totalBalanceStorage))
         async function updatePrices(){
             portArrStorage.forEach(asset => {
                 fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${asset.id}&order=market_cap_desc&per_page=100&page=1&sparkline=false`)
@@ -22,7 +22,7 @@ function PortfolioContextProvider(props){
                     setPortfolioArray(prevPortfolioArray => {
                         return prevPortfolioArray.map(v => {
                             if(v.id === asset.id){
-                                return {...v,coinData: data [0], value: (data[0].current_price * v.amount).toFixed(2)}
+                                return {...v,coinData: data [0], value: data[0].current_price * v.amount}
                             }else {
                                 return {...v}
                             }

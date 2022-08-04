@@ -82,7 +82,9 @@ export default function Stockpage() {
     const minBuyPrice = 10
     if(buyAmount*coinData.current_price > minBuyPrice){
       if(usdBalance >= buyAmount*coinData.current_price){
-        order('buy',id,coinData,buyAmount,(buyAmount*coinData.current_price).toFixed(2))
+        order('buy',id,coinData,buyAmount,buyAmount*coinData.current_price)
+        console.log(typeof buyAmount*coinData.current_price)
+
         setDisplayOrder('closed')
         setTradeStatus('finished')
         setTimeout(() => {
@@ -108,7 +110,7 @@ export default function Stockpage() {
         <input className='count-input fs-5' value={buyAmount} onChange={(e) => changeBuyAmount('set',e.target.value)} type='text'/>
         <button className='count-button fs-3 text-white bg-blue' onClick={()=> changeBuyAmount('plus')}>+</button>
       </div>
-      <p className='order bg-blue text-white fs-3'>${(buyAmount * coinData.current_price).toFixed(2)}</p>
+      <p className='order bg-blue text-white fs-3'>${buyAmount * coinData.current_price}</p>
       <button className='order bg-blue text-white fs-3' onClick={buy}>Buy</button>
     </div>
   )
@@ -150,7 +152,7 @@ export default function Stockpage() {
         traded={'bought'} 
         amount={buyAmount} 
         currency={coinData.symbol} 
-        price={(coinData.current_price * buyAmount).toFixed(2)
+        price={(coinData.current_price * buyAmount)
       }/>
     </div>
   );
