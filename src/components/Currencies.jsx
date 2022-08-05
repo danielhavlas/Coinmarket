@@ -38,7 +38,8 @@ export default function Currencies(){
                 </td>
                 <td>${coin.current_price}</td>
                 <td style={priceChangeStyle}>{coin.price_change_percentage_24h.toFixed(2)}%</td>
-                <td><PriceChart id={coin.id} range={0} large={false} green={green} /></td>
+                <td></td>
+                {/* <td><PriceChart id={coin.id} range={0} large={false} green={green} /></td> */}
                 <td>${marketCap}</td>
             </tr>
         )

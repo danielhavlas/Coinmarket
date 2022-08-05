@@ -3,7 +3,7 @@ body{
   margin: 0;
   background-color: #f4f4f4;
   font-family: 'Familjen Grotesk';
-  overflow: hidden;
+  overflow-x: hidden;
 
 }
 
@@ -25,6 +25,22 @@ body{
 a{
   text-decoration: none;
   color: inherit;
+}
+.nav > a{
+  position: relative;
+}
+.nav > a::before{
+  top: 20px;
+  position: absolute;
+  content: '';
+  width: 100%;
+  border-bottom: 2px solid var(--white);
+  transform: scaleX(0);
+  transition: transform 250ms cubic-bezier(.5, 0, .5, 1);
+}
+.nav > a:hover::before{
+  border-bottom: 2px solid var(--white);
+  transform: scaleX(1);
 }
 
 hr{
@@ -94,6 +110,10 @@ p{
 
 .text-center{
   text-align: center;
+}
+
+.text-left{
+  text-align: end;
 }
 
 .pointer{ cursor: pointer}

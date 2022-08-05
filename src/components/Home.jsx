@@ -25,8 +25,8 @@ export default function Home(){
                     </div>
                 </div>
             </div>
-            <div>
-                <h3>${asset.value}</h3>
+            <div className='text-left'>
+                <h3>${asset.value.toFixed(2)}</h3>
                 <p className='uppercase'>{asset.amount} {asset.coinData.symbol}</p>
             </div>
 
@@ -56,7 +56,7 @@ export default function Home(){
                         <h2>Portfolio</h2>
                         <div className="flex space-between text-blue">
                             <h3>USD</h3>
-                            <h3>${usdBalance}</h3>
+                            <h3>${usdBalance.toFixed(2)}</h3>
                         </div>
                         {assets}
                     </div>

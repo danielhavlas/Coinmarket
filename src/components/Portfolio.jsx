@@ -53,7 +53,7 @@ export default function Portfolio(){
             <input className='count-input fs-5' value={sellAmount} onChange={(e) => changeSellAmount('set',e.target.value)} type='text'/>
             <button className='count-button fs-3 text-white bg-blue' onClick={()=> changeSellAmount('plus')}>+</button>
           </div>
-          {/* <p className='order bg-blue text-white fs-3'>${(sellAmount * sellAsset.coinData.current_price)}</p> */}
+          <p className='order bg-blue text-white fs-3'>${(sellAmount * sellAsset?.coinData.current_price).toFixed(2)}</p>
           <button className='order bg-blue text-white fs-3' onClick={sell}>Sell</button>
         </div>
     )
