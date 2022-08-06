@@ -26,11 +26,12 @@ body{
 a{
   text-decoration: none;
   color: inherit;
-  
+
 }
 .nav > a{
   position: relative;
 }
+
 .nav > a::before{
   top: 20px;
   position: absolute;
