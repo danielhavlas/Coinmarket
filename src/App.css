@@ -7,6 +7,10 @@ body{
 
 }
 
+@media max-width:25rem {
+  
+}
+
 :root{
   --black: #2C2C34;
   --grey: #a1a1a1;
