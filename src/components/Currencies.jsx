@@ -26,9 +26,9 @@ export default function Currencies(){
         const green = coin.price_change_24h >= 0
         const iconClass = isWatchlist(coin)? "ri-star-fill" :"ri-star-line"
         return(
-            <tr key={index} className='fs-4 pointer' onClick={()=>  navigate(`/currencies/${coin.id}`)}  >
-                <td className="fs-1" onClick={(e)=>{e.stopPropagation(); watchlist(coin)}}><i className={`star-icon ${iconClass}`}></i></td>
-                <td>{coin.market_cap_rank}</td>
+            <tr key={index} className='fs-5 pointer' onClick={()=>  navigate(`/currencies/${coin.id}`)}  >
+                <td className="large-only fs-1" onClick={(e)=>{e.stopPropagation(); watchlist(coin)}}><i className={`star-icon ${iconClass}`}></i></td>
+                <td className="large-only">{coin.market_cap_rank}</td>
                 <td className="flex fw-600 gap-0 align-center">
                     <img src={coin.image} className='small-img'/>
                     <div>
@@ -36,11 +36,14 @@ export default function Currencies(){
                         <p className="fs-5 text-grey uppercase">{coin.symbol}</p>
                     </div>
                 </td>
-                <td>${coin.current_price}</td>
-                <td style={priceChangeStyle}>{coin.price_change_percentage_24h.toFixed(2)}%</td>
-                <td></td>
-                {/* <td><PriceChart id={coin.id} range={0} large={false} green={green} /></td> */}
-                <td>${marketCap}</td>
+                <td><PriceChart id={coin.id} range={0} large={false} green={green} /></td>
+                <td className="text-left">
+                    <div>
+                        <p>${coin.current_price}</p>
+                        <p style={priceChangeStyle}>{coin.price_change_percentage_24h.toFixed(2)}%</p>
+                    </div>
+                </td>
+                <td className="large-only">${marketCap}</td>
             </tr>
         )
     })
@@ -48,15 +51,15 @@ export default function Currencies(){
     return(
         <div className="container">
             <table className=" card bg-white table">
-                <thead>
+                <thead className="">
                     <tr className="fs-5 text-grey">
-                        <th></th>
-                        <th>#</th>
+                        <th className="large-only"></th>
+                        <th className="large-only">#</th>
                         <th>Name</th>
-                        <th>Price</th>
-                        <th>24%</th>
                         <th></th>
-                        <th>Market Cap</th>
+                        <th className="text-left">Price</th>
+                        <th className="large-only">24%</th>
+                        <th className="large-only">Market Cap</th>
                     </tr>
                 </thead>
                 <tbody>

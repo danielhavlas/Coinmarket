@@ -3,7 +3,7 @@ body{
   margin: 0;
   background-color: #f4f4f4;
   font-family: 'Familjen Grotesk';
-  padding-bottom: 6em;
+  overflow-x: hidden;
 }
 
 
@@ -46,11 +46,11 @@ body{
 
 .container {
     position: relative;
-    padding: 1em;
     margin-inline: auto;
     width: 100vw;
     min-height: 100vh;
-
+    overflow-x: hidden;
+    padding-bottom: 6em;
 }
 
 .order{
@@ -118,8 +118,8 @@ body{
 }
 
 .small-img{
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
     margin: 0;
 }
 .large-img{
@@ -143,13 +143,27 @@ body{
 .ranges {
     display: flex;
     gap: 10px;
-  }
-  .range-button {
+}
+.range-button {
     width: 40px;
     height: 25px;
     background: white;
     border-radius: 5px;
-  }
+}
+
+.portfolio-page{
+    margin: 2em;
+}
+
+.portfolio-page table{
+    width: 25em;
+}
+
+.order{
+    margin-inline: auto;
+    height: 2em;
+    width: 75%;
+}
 
 
 .order-container{
@@ -160,6 +174,7 @@ body{
     position: fixed;
     top: 0;
     left: 0;
+    padding-block: 3em;
   }
   .order-button{
     display: inline-block;
@@ -179,11 +194,28 @@ body{
     height: 1.5em;
     vertical-align: middle;
   }
-  .table{
+
+.number-grid{
+    /* grid-template-columns: repeat(3,1fr); */
+    flex-wrap: wrap;
+    gap: 2em;
+    padding-inline: 5em;
+    justify-content: center;
+    margin-block: 3em;
+}
+
+.number-grid > button{
+    width: 25%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    color: var(--black);
+}
+
+.table{
     align-self:flex-start ;
     text-align: left;
-    width: 60rem;
-  }
+    margin-inline: auto;
+}
 
   .order-popup{
     text-align: center;
@@ -213,6 +245,7 @@ body{
   }
   
   
+  
   .icon-container{
     margin-block:0;
     margin-inline: auto;
@@ -224,6 +257,14 @@ body{
   
   tr{
     height: 4em;
+  }
+  th{
+    width: 0;
+  }
+  
+  td{
+    width: min-content;
+    margin: 0;
   }
 
 /* resets */

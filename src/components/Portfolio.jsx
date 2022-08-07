@@ -48,12 +48,30 @@ export default function Portfolio(){
 
     const sellField = (
          <div className={`flex-vert gap-0 order-container order-${displayOrder} bg-black`}>
-          <div className="flex gap-0">
+          <div className="flex gap-0 large-only">
             <button className='count-button fs-3 text-white bg-blue' onClick={()=> changeSellAmount('minus')}>-</button>
             <input className='count-input fs-5' value={sellAmount} onChange={(e) => changeSellAmount('set',e.target.value)} type='text'/>
             <button className='count-button fs-3 text-white bg-blue' onClick={()=> changeSellAmount('plus')}>+</button>
           </div>
           <p className='order bg-blue text-white fs-3'>${(sellAmount * sellAsset?.coinData.current_price).toFixed(2)}</p>
+          <div className="mobile-only">
+            <p className='order bg-blue text-white fs-3'>{sellAmount}</p>
+            <div className="flex number-grid">
+                <button className="text-black fs-1" onClick={() => changeSellAmount('type',1,'1')}>1</button>
+                <button className="text-black fs-1" onClick={() => changeSellAmount('type',1,'2')}>2</button>
+                <button className="text-black fs-1" onClick={() => changeSellAmount('type',1,'3')}>3</button>
+                <button className="text-black fs-1" onClick={() => changeSellAmount('type',1,'4')}>4</button>
+                <button className="text-black fs-1" onClick={() => changeSellAmount('type',1,'5')}>5</button>
+                <button className="text-black fs-1" onClick={() => changeSellAmount('type',1,'6')}>6</button>
+                <button className="text-black fs-1" onClick={() => changeSellAmount('type',1,'7')}>7</button>
+                <button className="text-black fs-1" onClick={() => changeSellAmount('type',1,'8')}>8</button>
+                <button className="text-black fs-1" onClick={() => changeSellAmount('type',1,'9')}>9</button>
+                <button className="bg-black"></button>
+                <button className="text-black fs-1" onClick={() => changeSellAmount('type',1,'0')}>0</button>
+                <button className="text-black fs-1" onClick={() => changeSellAmount('backspace')}>{'<-'}</button>
+
+            </div>
+          </div>
           <button className='order bg-blue text-white fs-3' onClick={sell}>Sell</button>
         </div>
     )
@@ -62,13 +80,31 @@ export default function Portfolio(){
         <div className={`large-only fog fog-${displayOrder}`} onClick={() => setDisplayOrder('closed')}></div>
     )
 
-    function changeSellAmount(action,e){
-        console.log(sellAsset.amount);
+    function changeSellAmount(action,e,i){
         if(action==='minus' && sellAmount !== 0){
             setSellAmount(prevSellAmount => prevSellAmount - 1 )
         }
         else if(action==='plus' && sellAmount !== sellAsset.amount){
             setSellAmount(prevSellAmount => prevSellAmount + 1 )
+        }
+        else if(action ==='type'){
+            setSellAmount(prevSellAmount =>{
+                if(Number(String(prevSellAmount) + i) > sellAsset.amount){
+                    return prevSellAmount
+                }else{
+                    return Number(String(prevSellAmount) + i) 
+                    console.log(String(prevSellAmount) + i);
+                }
+            } )
+        }else if(action === 'backspace'){
+            setSellAmount(prevSellAmount =>{
+                if(String(prevSellAmount).slice(0,-1).length === 0){
+                    return 0
+                }else{
+                    console.log(String(prevSellAmount).slice(0,-1))
+                    return Number(String(prevSellAmount).slice(0,-1)) 
+                }
+            } )
         }
         else if(action==='set' && !isNaN(e)){
             setSellAmount(Number(e) > sellAsset.amount? sellAsset.amount : Number(e))
@@ -78,30 +114,32 @@ export default function Portfolio(){
 
     return(
         <div className="container">
-            <h2>Total balance: ${totalBalance}</h2>
-            <div className="flex gap-1 portfolio-grid">
-                <table className="card table bg-white">
-                    <thead>
-                        <tr className='fs-5 text-grey' >
-                            <th>Name</th>
-                            <th>Balance</th>
-                            <th>Price</th>
-                            <th className="large-only">Allocation</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr className="fs-4 text-blue">
-                            <td>USD</td>
-                            <td>${usdBalance.toFixed(2)}</td>
-                        </tr>
-                        {assets}
-                    </tbody>
-                </table>
+            <div className="portfolio-page">
+                <h2>Total balance: ${totalBalance}</h2>
+                <div className="flex gap-1 portfolio-grid">
+                    <table className="card table bg-white">
+                        <thead>
+                            <tr className='fs-5 text-grey' >
+                                <th>Name</th>
+                                <th>Balance</th>
+                                <th>Price</th>
+                                <th className="large-only">Allocation</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr className="fs-4 text-blue">
+                                <td>USD</td>
+                                <td>${usdBalance.toFixed(2)}</td>
+                            </tr>
+                            {assets}
+                        </tbody>
+                    </table>
+                </div>
+                {sellField}
+                {fog}
+                {sellAsset &&<OrderPopup status={tradeStatus} traded={'sold'} amount={sellAmount} currency={sellAsset.coinData.symbol} price={sellAsset.coinData.current_price * sellAmount}/>}
             </div>
-            {sellField}
-            {fog}
-            {sellAsset &&<OrderPopup status={tradeStatus} traded={'sold'} amount={sellAmount} currency={sellAsset.coinData.symbol} price={sellAsset.coinData.current_price * sellAmount}/>}
         </div>
     )
 }
