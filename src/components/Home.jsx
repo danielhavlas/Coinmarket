@@ -52,7 +52,7 @@ export default function Home(){
             <div className="container">
                 <div className="home-grid">
                     <h2 className='balance'>Balance: ${totalBalance}</h2>
-                    <div className='portfolio-card card bg-white large-only'>
+                    <div className='portfolio-card card bg-white'>
                         <h2>Portfolio</h2>
                         <div className="flex space-between text-blue">
                             <h3>USD</h3>

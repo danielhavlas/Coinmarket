@@ -7,6 +7,7 @@ import CoinPage from './components/CoinPage';
 import Header from './components/Header'
 import Currencies from './components/Currencies';
 import Portfolio from './components/Portfolio'
+import MobileFooter from './components/MobileFooter'
 
 
 
@@ -21,6 +22,7 @@ function App() {
         <Route path='/portfolio' element={<Portfolio/>}/>
         <Route path='/currencies/:id' element={<CoinPage/>} />
       </Routes>
+      <MobileFooter />
     </div>
   );
 }

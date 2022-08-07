@@ -44,6 +44,12 @@ body{
 
 .uppercase{text-transform: uppercase;}
 
+.container {
+    padding: 1em;
+    margin-inline: auto;
+    max-width: 80rem;
+}
+
 .grid{
     display: grid;
 }
@@ -56,6 +62,17 @@ body{
     display: flex;
     flex-direction: column;
 }
+
+.gap-2{
+    gap: 2em;
+}
+.gap-1{
+    gap: 1em;
+}
+.gap-0{
+    gap:0.5em;
+}
+
 .space-between{
     justify-content: space-between;
 }
@@ -85,4 +102,19 @@ body{
 .small-chart{
     width: 6rem;
     height: 4rem;
-  }
+}
+
+.mobile-footer{
+    border-radius: 5px 5px 0 0;
+    position: fixed;
+    bottom: 0;
+    padding-block: 2em;
+    width: 100%;
+    justify-content: space-evenly;
+}
+
+/* resets */
+a{
+    text-decoration: none;
+    color: inherit;
+}
