@@ -6,6 +6,7 @@ export default function Header(){
                 <Link to='/'>HOME</Link>
                 <Link to='/portfolio'>ASSETS</Link>
                 <Link to='/currencies'>CURRENCIES</Link>
+                <Link to='/search'>SEARCH</Link>
             </div>
     )
 }

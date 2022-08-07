@@ -21,7 +21,7 @@ export default function OrderPopup(props){
         
     },[props.status])
     return(
-        <div className={`card order-popup order-popup-${x} gap-2 bg-blue`}>
+        <div className={`card order-popup order-popup-${x} bg-blue`}>
             <div ref={iconRef} className="icon-container bg-white"></div>
             <p className="fs-2 text-white">You {props.traded} {props.amount} <span className='uppercase'>{props.currency}</span> for {props.price}</p>
         </div>

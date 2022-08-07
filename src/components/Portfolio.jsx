@@ -29,8 +29,8 @@ export default function Portfolio(){
                         <p className="text-grey uppercase">{asset.amount} {asset.coinData.symbol}</p>
                     </div>
                 </td>
-                <td>${asset.coinData.current_price}</td>
-                <td>{allocation}%</td>
+                <td className="large-only">${asset.coinData.current_price}</td>
+                <td className="large-only">{allocation}%</td>
                 <td className="text-white bg-blue order-button" onClick={() => {setSellAsset(asset);setDisplayOrder('open'); setSellAmount(asset.amount) }}>Sell</td>
             </tr>
         )
@@ -47,7 +47,7 @@ export default function Portfolio(){
 
 
     const sellField = (
-         <div className={`flex-vert gap-0 order-container order-${displayOrder} card bg-black`}>
+         <div className={`flex-vert gap-0 order-container order-${displayOrder} bg-black`}>
           <div className="flex gap-0">
             <button className='count-button fs-3 text-white bg-blue' onClick={()=> changeSellAmount('minus')}>-</button>
             <input className='count-input fs-5' value={sellAmount} onChange={(e) => changeSellAmount('set',e.target.value)} type='text'/>
@@ -59,7 +59,7 @@ export default function Portfolio(){
     )
 
     const fog = (
-        <div className={`fog fog-${displayOrder}`} onClick={() => setDisplayOrder('closed')}></div>
+        <div className={`large-only fog fog-${displayOrder}`} onClick={() => setDisplayOrder('closed')}></div>
     )
 
     function changeSellAmount(action,e){
@@ -86,7 +86,7 @@ export default function Portfolio(){
                             <th>Name</th>
                             <th>Balance</th>
                             <th>Price</th>
-                            <th>Allocation</th>
+                            <th className="large-only">Allocation</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -98,8 +98,8 @@ export default function Portfolio(){
                         {assets}
                     </tbody>
                 </table>
-                {sellField}
             </div>
+            {sellField}
             {fog}
             {sellAsset &&<OrderPopup status={tradeStatus} traded={'sold'} amount={sellAmount} currency={sellAsset.coinData.symbol} price={sellAsset.coinData.current_price * sellAmount}/>}
         </div>

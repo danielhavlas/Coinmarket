@@ -52,6 +52,11 @@ export default function Home(){
             <div className="container">
                 <div className="home-grid">
                     <h2 className='balance'>Balance: ${totalBalance}</h2>
+                    <div className="watchlist-card card bg-white">
+                        <h2>Watchlist</h2>
+                        {watchlist}
+                        <Link to='/currencies'><h3 className="fs-4 text-blue text-center"><span className='fs-3'>+</span> Explore</h3></Link>
+                    </div>
                     <div className='portfolio-card card bg-white'>
                         <h2>Portfolio</h2>
                         <div className="flex space-between text-blue">
@@ -59,11 +64,6 @@ export default function Home(){
                             <h3>${usdBalance.toFixed(2)}</h3>
                         </div>
                         {assets}
-                    </div>
-                    <div className="watchlist-card card bg-white">
-                        <h2>Watchlist</h2>
-                        {watchlist}
-                        <Link to='/currencies'><h3 className="fs-4 text-blue text-center"><span className='fs-3'>+</span> Explore</h3></Link>
                     </div>
                 </div>
             </div>
