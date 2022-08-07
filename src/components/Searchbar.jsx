@@ -2,7 +2,7 @@ import Select from 'react-select'
 import { useState, useEffect } from 'react'
 import {useNavigate, Link} from 'react-router-dom'
 
-export default function Searchbar(){
+export default function Searchbar(props){
 
     const [options, setOptions] = useState([])
     const [inputValue, setInputValue] = useState('')
@@ -47,6 +47,16 @@ export default function Searchbar(){
         indicatorsContainer: (provided) =>({
             ...provided,
             display:'none',
+            
+        }),
+        menu: (provided) =>({
+            ...provided,
+            backgroundColor:'#2C2C34',
+            height:'1000px'
+        }),
+        menuList: (provided) =>({
+            ...provided,
+            height:'100%'
         }),
     
       }
@@ -57,7 +67,7 @@ export default function Searchbar(){
         const options = searchData.map(coin => {
             return{
                 value: coin.id,
-                label: <Link to={`/currencies/${coin.id}`} className="option flex gap-1">
+                label: <Link to={`/currencies/${coin.id}`} onClick={() => props.closeSearch('closed')} className="option align-center bg-black text-white flex gap-1">
                         <img className='small-img' src={coin.image}/>
                         <p>{coin.name}</p>
                        </Link> ,
