@@ -50,9 +50,9 @@ export default function Home(){
     return(
         <div className="home">
             <div className="container">
-                <div className="flex home-grid">
-                    <h2>Balance: ${totalBalance}</h2>
-                    <div className='portfolio-card card bg-white'>
+                <div className="home-grid">
+                    <h2 className='balance'>Balance: ${totalBalance}</h2>
+                    <div className='portfolio-card card bg-white large-only'>
                         <h2>Portfolio</h2>
                         <div className="flex space-between text-blue">
                             <h3>USD</h3>
