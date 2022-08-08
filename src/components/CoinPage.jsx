@@ -122,9 +122,9 @@ export default function Stockpage() {
   return (
     <div className="">
       <div className="card bg-white coin-page">
-        <div className='flex gap-1 align-center'>
+        <div className='flex gap-1 coin-page-header'>
           <img className='large-img' src={coinData.image} alt="" />
-          <div className='coin-page-header align-baseline gap-1'>
+          <div className=''>
             <h1 className='name fs-1'>{coinData.name}</h1>
             <div className="flex gap-1">
               <div className="flex align-baseline ">
@@ -139,14 +139,14 @@ export default function Stockpage() {
         </div>
         <hr />
         <div className="align-center">
-          <div className='flex-vert' >
+          <div className='chart-ranges flex-vert' >
             <div className="ranges">
               {rangeButtons}
             </div>
             <PriceChart className='coin-page-chart' id={id} range={selectedRange} large={true}/>
           </div>
-          <td className="text-white bg-blue order-button" onClick={() => setDisplayOrder('open')}>Buy</td>
         </div>
+        <button className="text-white bg-blue buy-button" onClick={() => setDisplayOrder('open')}>Buy</button>
       </div>
       {buyField}
       {fog}

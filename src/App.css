@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Familjen+Grotesk&display=swap");
 body{
   margin: 0;
+  min-height: 100vh;
   background-color: #f4f4f4;
   font-family: 'Familjen Grotesk';
   overflow-x: hidden;
@@ -133,6 +134,11 @@ body{
     height: 4rem;
 }
 
+.coin-page-header{
+  align-items:center;
+  line-height: 1;
+}
+
 .coin-page-chart{
   margin-inline: auto;
 }
@@ -143,42 +149,57 @@ body{
   height: 40vh;
 }
 
+
+
 .coin-page{
   width: 100%;
 }
 
 .mobile-footer{
-    border-radius: 5px 5px 0 0;
-    position: fixed;
-    bottom: 0;
-    padding-block: 2em;
-    width: 100%;
-    justify-content: space-evenly;
+  border-radius: 5px 5px 0 0;
+  position: fixed;
+  bottom: 0;
+  padding-block: 2em;
+  width: 100%;
+  justify-content: space-evenly;
 }
 
 .ranges {
-    display: flex;
-    gap: 10px;
+  margin-inline: auto;
+  display: flex;
+  gap: 10px;
 }
 .range-button {
-    width: 40px;
-    height: 25px;
-    background: white;
-    border-radius: 5px;
+  width: 40px;
+  height: 25px;
+  background: white;
+  border-radius: 5px;
 }
 
-.portfolio-page{
-    margin: 2em;
+.chart-ranges{
+  flex-direction: column-reverse;
 }
+
+
 
 .portfolio-page table{
-    width: 25em;
+  width: 25em;
 }
 
 .order{
-    margin-inline: auto;
-    height: 2em;
-    width: 75%;
+  margin-inline: auto;
+  height: 2em;
+  width: 75%;
+}
+
+.buy-button{
+  display: block;
+    margin-top: 3em;
+    text-align: center;
+    border-radius: 5px;
+    width: 10em;
+    padding: 1em;
+    margin-inline:auto;
 }
 
 
@@ -342,6 +363,14 @@ a{
     width: 50rem;
   }
 
+  .portfolio-page{
+    max-width: 80rem;
+  }
+  
+  .portfolio-page table{
+      width: 100%;
+  }
+
 
   .home-grid{
     display: flex;
@@ -355,6 +384,7 @@ a{
     display: initial;
   }
   .header{
+    width: 100%;
     height: 12vh;
     color: var(--white);
     padding-inline: 2em;
@@ -395,7 +425,14 @@ a{
   .portfolio-card > *{
     line-height: 0.5em;
   }
+
+  .ranges{
+    margin-inline: initial;
+  }
   
+  .chart-ranges{
+    flex-direction: column;
+  }
   
   .select{
     width: 20rem;
