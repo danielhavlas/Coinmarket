@@ -4,7 +4,10 @@ body{
   background-color: #f4f4f4;
   font-family: 'Familjen Grotesk';
   overflow-x: hidden;
+}
 
+html{
+  padding: 0;
 }
 
 

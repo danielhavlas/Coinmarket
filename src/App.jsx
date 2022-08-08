@@ -10,12 +10,15 @@ import Portfolio from './components/Portfolio'
 import MobileFooter from './components/MobileFooter'
 import Searchbar from './components/Searchbar';
 
+import {useMobileOnly} from './hooks/useMobileOnly'
+
 
 
 
 function App() {
   // localStorage.clear()
   const [searchDisplay, setSearchDisplay] = useState('closed')
+  const {mobileOnly} = useMobileOnly()
   const search = (
     <div className={`search search-${searchDisplay} flex`}>
       <button onClick={()=> setSearchDisplay('closed')}>{'<-'}</button>
@@ -26,7 +29,7 @@ function App() {
 )
   return (
     <div className="App">
-      <Header />
+      {!mobileOnly && <Header className='large-only' />}
       {search}
       <Routes>
         <Route path='/' element={<Home />}/>
@@ -34,7 +37,7 @@ function App() {
         <Route path='/portfolio' element={<Portfolio/>}/>
         <Route path='/currencies/:id' element={<CoinPage/>} />
       </Routes>
-      <MobileFooter openSearch={setSearchDisplay} />
+      {mobileOnly && <MobileFooter openSearch={setSearchDisplay} className='mobile-only' />}
     </div>
   );
 }

@@ -120,28 +120,30 @@ export default function Stockpage() {
 )
 
   return (
-    <div className="container flex gap-2">
+    <div className="">
       <div className="card bg-white coin-page">
         <div className='flex gap-1 align-center'>
           <img className='large-img' src={coinData.image} alt="" />
-          <div className='flex align-baseline gap-1'>
+          <div className='coin-page-header align-baseline gap-1'>
             <h1 className='name fs-1'>{coinData.name}</h1>
-            <div className="flex align-baseline ">
-              <h2 className='fs-2'>{coinData.current_price}</h2>
-              <h4 className='text-grey fs-5'>USD</h4>
+            <div className="flex gap-1">
+              <div className="flex align-baseline ">
+                <h2 className='fs-2'>{coinData.current_price}</h2>
+                <h4 className='text-grey fs-5'>USD</h4>
+              </div>
+              <h5 className='change fs-4' style={priceChangeStyle}>{`${coinData.price_change_24h.toFixed(2)} (${coinData.price_change_percentage_24h.toFixed(2)}%)`}</h5>
+              <button className='fs-5 text-blue' onClick={() => watchlist(coinData)}><i className={`star-icon ${iconClass}`}></i></button>
             </div>
-            <h5 className='change fs-4' style={priceChangeStyle}>{`${coinData.price_change_24h.toFixed(2)} (${coinData.price_change_percentage_24h.toFixed(2)}%)`}</h5>
-            <button className='fs-5 text-blue' onClick={() => watchlist(coinData)}><i className={`star-icon ${iconClass}`}></i></button>
           </div>
 
         </div>
         <hr />
-        <div className="flex align-center">
-          <div>
+        <div className="align-center">
+          <div className='flex-vert' >
             <div className="ranges">
               {rangeButtons}
             </div>
-            <PriceChart id={id} range={selectedRange} large={true}/>
+            <PriceChart className='coin-page-chart' id={id} range={selectedRange} large={true}/>
           </div>
           <td className="text-white bg-blue order-button" onClick={() => setDisplayOrder('open')}>Buy</td>
         </div>

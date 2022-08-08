@@ -51,6 +51,8 @@ body{
     min-height: 100vh;
     overflow-x: hidden;
     padding-bottom: 6em;
+    padding: 1em;
+    max-width: 80rem;
 }
 
 .order{
@@ -123,12 +125,26 @@ body{
     margin: 0;
 }
 .large-img{
-    width: 100px;
-    height: 100px;
+    width: 60px;
+    height: 60px;
 }
 .small-chart{
     width: 6rem;
     height: 4rem;
+}
+
+.coin-page-chart{
+  margin-inline: auto;
+}
+
+.chart-container {
+  position: relative;
+  width: 100%;
+  height: 40vh;
+}
+
+.coin-page{
+  width: 100%;
 }
 
 .mobile-footer{
@@ -256,15 +272,17 @@ body{
   }
   
 tr{
-height: 4em;
+  height: 4em;
 }
 th{ 
-width: 0;
+  width: 0;
 }
 
-td{
-width: min-content;
-margin: 0;
+button {
+  font-family: inherit;
+  border: none;
+  background: none;
+  cursor: pointer;
 }
 
 a{
@@ -299,4 +317,87 @@ a{
 
 .option{
   align-items: center;
+}
+
+.star-icon{
+  font-size: 1.5rem;
+  color: var(--blue);
+}
+
+.mobile-only{
+  display: none;
+}
+@media (min-width:45rem) {
+ 
+  .container{
+    padding: 3em;
+  }
+
+  .table{
+    width: 60rem;
+  }
+
+  .coin-page{
+    padding: 2em 3em;
+    width: 50rem;
+  }
+
+
+  .home-grid{
+    display: flex;
+    flex-direction: row-reverse;
+    margin-inline: 4em ;
+    justify-content: center;
+    gap: 8em;
+    align-items: flex-start;
+  }
+  .large-only{
+    display: initial;
+  }
+  .header{
+    height: 12vh;
+    color: var(--white);
+    padding-inline: 2em;
+  }
+  .nav{
+    color: var(--white);
+  }
+  .nav > a{
+    position: relative;
+  }
+  
+  .nav > a::before{
+    top: 20px;
+    position: absolute;
+    content: '';
+    width: 100%;
+    border-bottom: 2px solid var(--white);
+    transform: scaleX(0);
+    transition: transform 250ms cubic-bezier(.5, 0, .5, 1);
+  }
+  .nav > a:hover::before{
+    border-bottom: 2px solid var(--white);
+    transform: scaleX(1);
+  }
+
+  .watchlist-card{
+    justify-content: space-between;
+    width: 25em;
+  }
+  
+  .watchlist-card > *{
+    line-height: 0.5em;
+  }
+  
+  .portfolio-card{
+    width: 20em;
+  }
+  .portfolio-card > *{
+    line-height: 0.5em;
+  }
+  
+  
+  .select{
+    width: 20rem;
+  }
 }
