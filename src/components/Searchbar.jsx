@@ -1,6 +1,7 @@
 import Select from 'react-select'
 import { useState, useEffect } from 'react'
 import {useNavigate, Link} from 'react-router-dom'
+import { useMobileOnly } from '../hooks/useMobileOnly'
 
 export default function Searchbar(props){
 
@@ -8,6 +9,7 @@ export default function Searchbar(props){
     const [inputValue, setInputValue] = useState('')
     const [value, setValue] = useState()
     const [searchData,setSearchData] = useState([])
+    const {mobileOnly} = useMobileOnly()
     const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1&sparkline=false`
   
     const navigate = useNavigate()
@@ -51,13 +53,17 @@ export default function Searchbar(props){
         }),
         menu: (provided) =>({
             ...provided,
-            backgroundColor:'#2C2C34',
-            height:'1000px'
+            backgroundColor: mobileOnly? '#2C2C34' : 'white',
+            height:mobileOnly?'1000px':'300px'
         }),
         menuList: (provided) =>({
             ...provided,
             height:'100%'
         }),
+        indicatorsContainer: (provided) =>({
+            ...provided,
+            display:'none'
+        })
     
       }
 
@@ -67,7 +73,7 @@ export default function Searchbar(props){
         const options = searchData.map(coin => {
             return{
                 value: coin.id,
-                label: <Link to={`/currencies/${coin.id}`} onClick={() => props.closeSearch('closed')} className="option align-center bg-black text-white flex gap-1">
+                label: <Link to={`/currencies/${coin.id}`} onClick={() => props.closeSearch('closed')} className={`option align-center ${mobileOnly? 'bg-black text-white' : 'bg-white text-black'} flex gap-1`}>
                         <img className='small-img' src={coin.image}/>
                         <p>{coin.name}</p>
                        </Link> ,

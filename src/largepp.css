@@ -214,10 +214,12 @@ p{
   width: 1.5em;
   height: 1.5em;
   vertical-align: middle;
+  border-radius: 5px;
 }
 
 
 .order-container{
+  position: relative;
   width: 15em;
   height:20em;
   z-index:3;
@@ -231,13 +233,11 @@ p{
 }
 
 .fog{
-  top: 0;
-  left: 0;
+  position: relative;
   z-index:2;
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.4);
-  position: absolute;
 }
 
 .fog-open{

@@ -1,10 +1,13 @@
 import { useState, useContext,useEffect } from "react"
 import { PortfolioContext } from "../context/PortfolioContext"
+import { useMobileOnly } from "../hooks/useMobileOnly";
 import OrderPopup from './OrderPopup';
 
 
 
 export default function Portfolio(){
+
+    const {mobileOnly} = useMobileOnly()
 
     const {portfolioArray, usdBalance, totalBalance, order} = useContext(PortfolioContext)
     const [displayOrder, setDisplayOrder] = useState('closed')
@@ -48,30 +51,30 @@ export default function Portfolio(){
 
     const sellField = (
          <div className={`flex-vert gap-0 order-container order-${displayOrder} bg-black`}>
-          <div className="flex gap-0 large-only">
+          {!mobileOnly && <div className="flex gap-0">
             <button className='count-button fs-3 text-white bg-blue' onClick={()=> changeSellAmount('minus')}>-</button>
             <input className='count-input fs-5' value={sellAmount} onChange={(e) => changeSellAmount('set',e.target.value)} type='text'/>
             <button className='count-button fs-3 text-white bg-blue' onClick={()=> changeSellAmount('plus')}>+</button>
-          </div>
+          </div>}
           <p className='order bg-blue text-white fs-3'>${(sellAmount * sellAsset?.coinData.current_price).toFixed(2)}</p>
-          <div className="mobile-only">
+          {mobileOnly && <div>
             <p className='order bg-blue text-white fs-3'>{sellAmount}</p>
-            <div className="flex number-grid">
-                <button className="text-black fs-1" onClick={() => changeSellAmount('type',1,'1')}>1</button>
-                <button className="text-black fs-1" onClick={() => changeSellAmount('type',1,'2')}>2</button>
-                <button className="text-black fs-1" onClick={() => changeSellAmount('type',1,'3')}>3</button>
-                <button className="text-black fs-1" onClick={() => changeSellAmount('type',1,'4')}>4</button>
-                <button className="text-black fs-1" onClick={() => changeSellAmount('type',1,'5')}>5</button>
-                <button className="text-black fs-1" onClick={() => changeSellAmount('type',1,'6')}>6</button>
-                <button className="text-black fs-1" onClick={() => changeSellAmount('type',1,'7')}>7</button>
-                <button className="text-black fs-1" onClick={() => changeSellAmount('type',1,'8')}>8</button>
-                <button className="text-black fs-1" onClick={() => changeSellAmount('type',1,'9')}>9</button>
+            <div className="grid number-grid">
+                <button className="text-white fs-1" onClick={() => changeSellAmount('type',1,'1')}>1</button>
+                <button className="text-white fs-1" onClick={() => changeSellAmount('type',1,'2')}>2</button>
+                <button className="text-white fs-1" onClick={() => changeSellAmount('type',1,'3')}>3</button>
+                <button className="text-white fs-1" onClick={() => changeSellAmount('type',1,'4')}>4</button>
+                <button className="text-white fs-1" onClick={() => changeSellAmount('type',1,'5')}>5</button>
+                <button className="text-white fs-1" onClick={() => changeSellAmount('type',1,'6')}>6</button>
+                <button className="text-white fs-1" onClick={() => changeSellAmount('type',1,'7')}>7</button>
+                <button className="text-white fs-1" onClick={() => changeSellAmount('type',1,'8')}>8</button>
+                <button className="text-white fs-1" onClick={() => changeSellAmount('type',1,'9')}>9</button>
                 <button className="bg-black"></button>
-                <button className="text-black fs-1" onClick={() => changeSellAmount('type',1,'0')}>0</button>
-                <button className="text-black fs-1" onClick={() => changeSellAmount('backspace')}>{'<-'}</button>
+                <button className="text-white fs-1" onClick={() => changeSellAmount('type',1,'0')}>0</button>
+                <button className="text-white fs-1" onClick={() => changeSellAmount('backspace')}>{'<-'}</button>
 
             </div>
-          </div>
+          </div>}
           <button className='order bg-blue text-white fs-3' onClick={sell}>Sell</button>
         </div>
     )
@@ -93,7 +96,6 @@ export default function Portfolio(){
                     return prevSellAmount
                 }else{
                     return Number(String(prevSellAmount) + i) 
-                    console.log(String(prevSellAmount) + i);
                 }
             } )
         }else if(action === 'backspace'){
@@ -101,7 +103,6 @@ export default function Portfolio(){
                 if(String(prevSellAmount).slice(0,-1).length === 0){
                     return 0
                 }else{
-                    console.log(String(prevSellAmount).slice(0,-1))
                     return Number(String(prevSellAmount).slice(0,-1)) 
                 }
             } )
@@ -113,7 +114,7 @@ export default function Portfolio(){
       }
 
     return(
-        <div className="container">
+        <div className="container flex gap-2">
             <div className="portfolio-page">
                 <h2>Total balance: ${totalBalance}</h2>
                 <div className="flex gap-1 portfolio-grid">
@@ -136,10 +137,10 @@ export default function Portfolio(){
                         </tbody>
                     </table>
                 </div>
-                {sellField}
-                {fog}
-                {sellAsset &&<OrderPopup status={tradeStatus} traded={'sold'} amount={sellAmount} currency={sellAsset.coinData.symbol} price={sellAsset.coinData.current_price * sellAmount}/>}
             </div>
+            {sellField}
+            {fog}
+            {sellAsset &&<OrderPopup status={tradeStatus} traded={'sold'} amount={sellAmount} currency={sellAsset.coinData.symbol} price={sellAsset.coinData.current_price * sellAmount}/>}
         </div>
     )
 }

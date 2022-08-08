@@ -50,20 +50,23 @@ export default function Currencies(){
     })
 
     return(
-        <table className=" card bg-white table">
-            <thead className="">
-                <tr className="fs-5 text-grey">
-                    {!mobileOnly &&  <th className=""></th>}
-                    {!mobileOnly &&  <th className="">#</th>}
-                    <th>Name</th>
-                    <th></th>
-                    <th className="text-left">Price</th>
-                    {!mobileOnly &&  <th className="text-left">Market Cap</th>}
-                </tr>
-            </thead>
-            <tbody>
-                {currencies}
-            </tbody>
-        </table>
+        <div className="container">
+            <h2>Top currencies</h2>
+            <table className=" card bg-white table">
+                <thead className="">
+                    <tr className="fs-5 text-grey">
+                        {!mobileOnly &&  <th className=""></th>}
+                        {!mobileOnly &&  <th className="">#</th>}
+                        <th>Name</th>
+                        <th></th>
+                        <th className="text-left">Price</th>
+                        {!mobileOnly &&  <th className="text-left">Market Cap</th>}
+                    </tr>
+                </thead>
+                <tbody>
+                    {currencies}
+                </tbody>
+            </table>
+        </div>
     )
 }

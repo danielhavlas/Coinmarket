@@ -30,7 +30,7 @@ function App() {
   return (
     <div className="App">
       {!mobileOnly && <Header className='large-only' />}
-      {search}
+      {mobileOnly && search}
       <Routes>
         <Route path='/' element={<Home />}/>
         <Route path='/currencies' element={<Currencies/>} />

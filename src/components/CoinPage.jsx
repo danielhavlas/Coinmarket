@@ -5,6 +5,7 @@ import {useParams} from 'react-router-dom'
 import { PortfolioContext } from '../context/PortfolioContext'
 import { WatchlistContext } from '../context/WatchlistContext'
 import OrderPopup from './OrderPopup';
+import { useMobileOnly } from '../hooks/useMobileOnly';
 
 
 
@@ -20,6 +21,7 @@ export default function Stockpage() {
   const { watchlist, isWatchlist} = useContext(WatchlistContext)
   const [displayOrder, setDisplayOrder] = useState('closed')
   const [tradeStatus, setTradeStatus] = useState('')
+  const {mobileOnly} = useMobileOnly()
 
   
   useEffect(() => {
@@ -110,7 +112,7 @@ export default function Stockpage() {
         <input className='count-input fs-5' value={buyAmount} onChange={(e) => changeBuyAmount('set',e.target.value)} type='text'/>
         <button className='count-button fs-3 text-white bg-blue' onClick={()=> changeBuyAmount('plus')}>+</button>
       </div>
-      <p className='order bg-blue text-white fs-3'>${buyAmount * coinData.current_price}</p>
+      <p className='order bg-blue text-white fs-3'>${(buyAmount * coinData.current_price).toFixed(2)}</p>
       <button className='order bg-blue text-white fs-3' onClick={buy}>Buy</button>
     </div>
   )
@@ -120,7 +122,7 @@ export default function Stockpage() {
 )
 
   return (
-    <div className="container">
+    <div className="container flex gap-2">
       <div className="card bg-white coin-page">
         <div className='flex gap-1 coin-page-header'>
           <img className='large-img' src={coinData.image} alt="" />
@@ -133,6 +135,7 @@ export default function Stockpage() {
               </div>
               <h5 className='change fs-4' style={priceChangeStyle}>{`${coinData.price_change_24h.toFixed(2)} (${coinData.price_change_percentage_24h.toFixed(2)}%)`}</h5>
               <button className='fs-5 text-blue' onClick={() => watchlist(coinData)}><i className={`star-icon ${iconClass}`}></i></button>
+              {!mobileOnly && <button className="text-white bg-blue buy-button" onClick={() => setDisplayOrder('open')}>Buy</button>}
             </div>
           </div>
 
@@ -146,7 +149,7 @@ export default function Stockpage() {
             <PriceChart className='coin-page-chart' id={id} range={selectedRange} large={true}/>
           </div>
         </div>
-        <button className="text-white bg-blue buy-button" onClick={() => setDisplayOrder('open')}>Buy</button>
+        {mobileOnly && <button className="text-white bg-blue buy-button" onClick={() => setDisplayOrder('open')}>Buy</button>}
       </div>
       {buyField}
       {fog}
