@@ -1,4 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Familjen+Grotesk&display=swap");
+
+html{
+  width: 100vw;
+}
 body{
   margin: 0;
   min-height: 100vh;
@@ -48,7 +52,7 @@ body{
 .container {
     position: relative;
     margin-inline: auto;
-    width: 100vw;
+    width: 100%;
     min-height: 100vh;
     overflow-x: hidden;
     padding-bottom: 6em;
@@ -152,7 +156,7 @@ body{
 
 
 .coin-page{
-  width: 100%;
+  max-width: 80rem;
 }
 
 .mobile-footer{
@@ -436,5 +440,25 @@ a{
   
   .select{
     width: 20rem;
+  }
+
+  .fog{
+    top: 0;
+    left: 0;
+    z-index:2;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4);
+    position: absolute;
+  }
+  
+  .fog-open{
+    width: 100vw;
+    height: 100vh;
+  }
+  
+  .fog-closed{
+    width: 0vw;
+    height: 0vh;
   }
 }

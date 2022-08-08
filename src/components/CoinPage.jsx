@@ -120,7 +120,7 @@ export default function Stockpage() {
 )
 
   return (
-    <div className="">
+    <div className="container">
       <div className="card bg-white coin-page">
         <div className='flex gap-1 coin-page-header'>
           <img className='large-img' src={coinData.image} alt="" />
