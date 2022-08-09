@@ -67,12 +67,26 @@ export default function Stockpage() {
     color: coinData.price_change_24h >= 0? 'rgb(0, 231, 0)' : 'red'
   }
 
-  function changeBuyAmount(action,e){
+  function changeBuyAmount(action,e,i){
     if(action==='minus' && buyAmount !== 0){
       setBuyAmount(prevBuyAmount => prevBuyAmount - 1 )
     }
     else if(action==='plus'){
       setBuyAmount(prevBuyAmount => prevBuyAmount + 1 )
+    }
+    else if(action ==='type'){
+      setBuyAmount(prevBuyAmount =>{
+          return Number(String(prevBuyAmount) + i) 
+      } )
+    }
+    else if(action === 'backspace'){
+      setBuyAmount(prevBuyAmount =>{
+          if(String(prevBuyAmount).slice(0,-1).length === 0){
+              return 0
+          }else{
+              return Number(String(prevBuyAmount).slice(0,-1)) 
+          }
+      })
     }
     else if(action==='set' && !isNaN(e)){
       setBuyAmount(Number(e))
@@ -107,13 +121,33 @@ export default function Stockpage() {
 
   const buyField = (
     <div className={`flex-vert gap-0 order-container order-${displayOrder} card bg-black`}>
-      <div className="flex gap-0">
+      {!mobileOnly &&<div className="flex gap-0">
         <button className='count-button fs-3 text-white bg-blue' onClick={()=> changeBuyAmount('minus')}>-</button>
         <input className='count-input fs-5' value={buyAmount} onChange={(e) => changeBuyAmount('set',e.target.value)} type='text'/>
         <button className='count-button fs-3 text-white bg-blue' onClick={()=> changeBuyAmount('plus')}>+</button>
-      </div>
+      </div>}
       <p className='order bg-blue text-white fs-3'>${(buyAmount * coinData.current_price).toFixed(2)}</p>
+      {mobileOnly && <div>
+            <p className='order bg-blue text-white fs-3'>{buyAmount}</p>
+            <div className="grid number-grid">
+                <button className="text-white fs-1" onClick={() => changeBuyAmount('type',1,'1')}>1</button>
+                <button className="text-white fs-1" onClick={() => changeBuyAmount('type',1,'2')}>2</button>
+                <button className="text-white fs-1" onClick={() => changeBuyAmount('type',1,'3')}>3</button>
+                <button className="text-white fs-1" onClick={() => changeBuyAmount('type',1,'4')}>4</button>
+                <button className="text-white fs-1" onClick={() => changeBuyAmount('type',1,'5')}>5</button>
+                <button className="text-white fs-1" onClick={() => changeBuyAmount('type',1,'6')}>6</button>
+                <button className="text-white fs-1" onClick={() => changeBuyAmount('type',1,'7')}>7</button>
+                <button className="text-white fs-1" onClick={() => changeBuyAmount('type',1,'8')}>8</button>
+                <button className="text-white fs-1" onClick={() => changeBuyAmount('type',1,'9')}>9</button>
+                <button className="bg-black"></button>
+                <button className="text-white fs-1" onClick={() => changeBuyAmount('type',1,'0')}>0</button>
+                <button className="text-white fs-1" onClick={() => changeBuyAmount('backspace')}><i class="ri-arrow-left-fill"></i></button>
+
+            </div>
+          </div>}
       <button className='order bg-blue text-white fs-3' onClick={buy}>Buy</button>
+      {mobileOnly && <button onClick={() => setDisplayOrder('closed')} className="text-white fs-3 go-back"><i class="ri-arrow-left-fill"></i>Go back</button>}
+
     </div>
   )
 
@@ -152,7 +186,7 @@ export default function Stockpage() {
         {mobileOnly && <button className="text-white bg-blue buy-button" onClick={() => setDisplayOrder('open')}>Buy</button>}
       </div>
       {buyField}
-      {fog}
+      {!mobileOnly && fog}
       <OrderPopup status={tradeStatus} 
         traded={'bought'} 
         amount={buyAmount} 

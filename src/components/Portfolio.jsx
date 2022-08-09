@@ -71,11 +71,12 @@ export default function Portfolio(){
                 <button className="text-white fs-1" onClick={() => changeSellAmount('type',1,'9')}>9</button>
                 <button className="bg-black"></button>
                 <button className="text-white fs-1" onClick={() => changeSellAmount('type',1,'0')}>0</button>
-                <button className="text-white fs-1" onClick={() => changeSellAmount('backspace')}>{'<-'}</button>
+                <button className="text-white fs-1" onClick={() => changeSellAmount('backspace')}><i class="ri-arrow-left-fill"></i></button>
 
             </div>
           </div>}
           <button className='order bg-blue text-white fs-3' onClick={sell}>Sell</button>
+          {mobileOnly && <button onClick={() => setDisplayOrder('closed')} className="text-white fs-3 go-back"><i class="ri-arrow-left-fill"></i>Go back</button>}
         </div>
     )
 
