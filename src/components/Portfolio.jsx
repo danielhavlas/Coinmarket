@@ -139,7 +139,9 @@ export default function Portfolio(){
                     </table>
                 </div>
             </div>
-            {sellField}
+            <div className="overflow-wrapper">
+                {sellField}
+            </div>
             {fog}
             {sellAsset &&<OrderPopup status={tradeStatus} traded={'sold'} amount={sellAmount} currency={sellAsset.coinData.symbol} price={sellAsset.coinData.current_price * sellAmount}/>}
         </div>

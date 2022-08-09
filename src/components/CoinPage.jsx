@@ -183,16 +183,16 @@ export default function Stockpage() {
         <div className="align-center">
           <div className='chart-ranges flex-vert' >
             <div className="flex space-between align-center">
-              <div className='flex gap-1'>
+              {!mobileOnly && <div className='flex gap-1'>
                 <div className=' fs-4flex align-center' > 
-                  <i class="text-black ri-fullscreen-line"></i>
+                  <i className="text-black ri-fullscreen-line"></i>
                   <button className='function'>Fullscreen</button>
                 </div>
                 <div className='fs-4 flex align-center'>
-                  <i class="text-black ri-add-circle-line"></i>
+                  <i className="text-black ri-add-circle-line"></i>
                   <button className='function'>Compare</button>
                 </div>
-              </div>
+              </div>}
               <div className="ranges">
                 {rangeButtons}
               </div>
@@ -201,9 +201,10 @@ export default function Stockpage() {
           </div>
         </div>
         {mobileOnly && <button className="text-white bg-blue buy-button" onClick={() => setDisplayOrder('open')}>Buy</button>}
+        <div className="overflow-wrapper">
+          {buyField}
+        </div>
       </div>
-      
-      {buyField}
       {!mobileOnly && fog}
       <OrderPopup status={tradeStatus} 
         traded={'bought'} 
