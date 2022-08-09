@@ -20,12 +20,12 @@ export default function Currencies(){
     const navigate = useNavigate()
 
     const currencies = coinsData.map((coin,index) =>{ 
+        const iconClass = isWatchlist(coin)? "ri-star-fill" :"ri-star-line"
         const priceChangeStyle = {
             color: coin.price_change_24h >= 0? 'rgb(0, 231, 0)' : 'red'
         }
         const marketCap = coin.market_cap.toString().split('').reverse().map((v,i,a) => i%3===0 && i !== 0 ?v+',': v).reverse().join('')
         const green = coin.price_change_24h >= 0
-        const iconClass = isWatchlist(coin)? "ri-star-fill" :"ri-star-line"
         return(
             <tr key={index} className='fs-5 pointer' onClick={()=>  navigate(`/currencies/${coin.id}`)}  >
                 {!mobileOnly &&  <td className=" fs-1" onClick={(e)=>{e.stopPropagation(); watchlist(coin)}}><i className={`star-icon ${iconClass}`}></i></td>}

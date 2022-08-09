@@ -130,18 +130,18 @@ export default function Stockpage() {
       {mobileOnly && <div>
             <p className='order bg-blue text-white fs-3'>{buyAmount}</p>
             <div className="grid number-grid">
-                <button className="text-white fs-1" onClick={() => changeBuyAmount('type',1,'1')}>1</button>
-                <button className="text-white fs-1" onClick={() => changeBuyAmount('type',1,'2')}>2</button>
-                <button className="text-white fs-1" onClick={() => changeBuyAmount('type',1,'3')}>3</button>
-                <button className="text-white fs-1" onClick={() => changeBuyAmount('type',1,'4')}>4</button>
-                <button className="text-white fs-1" onClick={() => changeBuyAmount('type',1,'5')}>5</button>
-                <button className="text-white fs-1" onClick={() => changeBuyAmount('type',1,'6')}>6</button>
-                <button className="text-white fs-1" onClick={() => changeBuyAmount('type',1,'7')}>7</button>
-                <button className="text-white fs-1" onClick={() => changeBuyAmount('type',1,'8')}>8</button>
-                <button className="text-white fs-1" onClick={() => changeBuyAmount('type',1,'9')}>9</button>
+                <button className="text-white fs-2" onClick={() => changeBuyAmount('type',1,'1')}>1</button>
+                <button className="text-white fs-2" onClick={() => changeBuyAmount('type',1,'2')}>2</button>
+                <button className="text-white fs-2" onClick={() => changeBuyAmount('type',1,'3')}>3</button>
+                <button className="text-white fs-2" onClick={() => changeBuyAmount('type',1,'4')}>4</button>
+                <button className="text-white fs-2" onClick={() => changeBuyAmount('type',1,'5')}>5</button>
+                <button className="text-white fs-2" onClick={() => changeBuyAmount('type',1,'6')}>6</button>
+                <button className="text-white fs-2" onClick={() => changeBuyAmount('type',1,'7')}>7</button>
+                <button className="text-white fs-2" onClick={() => changeBuyAmount('type',1,'8')}>8</button>
+                <button className="text-white fs-2" onClick={() => changeBuyAmount('type',1,'9')}>9</button>
                 <button className="bg-black"></button>
-                <button className="text-white fs-1" onClick={() => changeBuyAmount('type',1,'0')}>0</button>
-                <button className="text-white fs-1" onClick={() => changeBuyAmount('backspace')}><i class="ri-arrow-left-fill"></i></button>
+                <button className="text-white fs-2" onClick={() => changeBuyAmount('type',1,'0')}>0</button>
+                <button className="text-white fs-2" onClick={() => changeBuyAmount('backspace')}><i class="ri-arrow-left-fill"></i></button>
 
             </div>
           </div>}
