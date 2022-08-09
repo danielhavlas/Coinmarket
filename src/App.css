@@ -8,7 +8,7 @@ body{
   margin: 0;
   min-height: 100vh;
   min-width: 100vw;
-  background-color: #f4f4f4;
+  background-color: #ededed;
   font-family: 'Familjen Grotesk';
   overflow-x: hidden;
 }
@@ -175,6 +175,7 @@ body{
 }
 
 .ranges {
+  margin-block: 2em;
   margin-inline: auto;
   display: flex;
   gap: 10px;
@@ -500,6 +501,16 @@ a{
   }
   .balance{
     max-width: max-content;
+}
+
+.tabs { 
+  margin-top: 1.5em;
+  display: flex;
+  gap: 12px;
+}
+
+.tab {
+  height: 30px;
 }
   
   .fog-closed{

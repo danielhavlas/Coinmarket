@@ -59,7 +59,7 @@ export default function Stockpage() {
     }
 
     return(
-      <button className='tab' style={style} onClick={() => selectTab(index)} key={index}>{tab}</button>
+      <button className='tab fs-4' style={style} onClick={() => selectTab(index)} key={index}>{tab}</button>
     )
   })
 
@@ -151,9 +151,11 @@ export default function Stockpage() {
     </div>
   )
 
+  
+
   const fog = (
     <div className={`fog fog-${displayOrder}`} onClick={() => setDisplayOrder('closed')}></div>
-)
+  )
 
   return (
     <div className="container flex gap-2">
@@ -174,17 +176,33 @@ export default function Stockpage() {
           </div>
 
         </div>
+       {!mobileOnly && <div className="tabs">
+          {tabButtons}
+        </div>}
         <hr />
         <div className="align-center">
           <div className='chart-ranges flex-vert' >
-            <div className="ranges">
-              {rangeButtons}
+            <div className="flex space-between align-center">
+              <div className='flex gap-1'>
+                <div className=' fs-4flex align-center' > 
+                  <i class="text-black ri-fullscreen-line"></i>
+                  <button className='function'>Fullscreen</button>
+                </div>
+                <div className='fs-4 flex align-center'>
+                  <i class="text-black ri-add-circle-line"></i>
+                  <button className='function'>Compare</button>
+                </div>
+              </div>
+              <div className="ranges">
+                {rangeButtons}
+              </div>
             </div>
             <PriceChart className='coin-page-chart' id={id} range={selectedRange} large={true}/>
           </div>
         </div>
         {mobileOnly && <button className="text-white bg-blue buy-button" onClick={() => setDisplayOrder('open')}>Buy</button>}
       </div>
+      
       {buyField}
       {!mobileOnly && fog}
       <OrderPopup status={tradeStatus} 
