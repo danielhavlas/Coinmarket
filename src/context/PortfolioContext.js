@@ -77,7 +77,6 @@ function PortfolioContextProvider(props){
                 return(
                     prevPortfolioArray.map(asset => {
                         if(asset.id === id){
-                            console.log(asset.amount,amount,asset.amount - amount)
                             return {...asset,amount: asset.amount - amount, value: (asset.amount - amount)*asset.coinData.current_price}
                         }else{
                             return asset

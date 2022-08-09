@@ -99,8 +99,6 @@ export default function Stockpage() {
     if(buyAmount*coinData.current_price > minBuyPrice){
       if(usdBalance >= buyAmount*coinData.current_price){
         order('buy',id,coinData,buyAmount,buyAmount*coinData.current_price)
-        console.log(typeof buyAmount*coinData.current_price)
-
         setDisplayOrder('closed')
         setTradeStatus('finished')
         setTimeout(() => {
@@ -128,7 +126,7 @@ export default function Stockpage() {
       </div>}
       <p className='order bg-blue text-white fs-3'>${(buyAmount * coinData.current_price).toFixed(2)}</p>
       {mobileOnly && <div>
-            <p className='order bg-blue text-white fs-3'>{buyAmount}</p>
+            <p className='order bg-blue text-white fs-3 uppercase'>{buyAmount} {coinData.symbol}</p>
             <div className="grid number-grid">
                 <button className="text-white fs-2" onClick={() => changeBuyAmount('type',1,'1')}>1</button>
                 <button className="text-white fs-2" onClick={() => changeBuyAmount('type',1,'2')}>2</button>
@@ -206,7 +204,8 @@ export default function Stockpage() {
         </div>
       </div>
       {!mobileOnly && fog}
-      <OrderPopup status={tradeStatus} 
+      <OrderPopup 
+        status={tradeStatus} 
         traded={'bought'} 
         amount={buyAmount} 
         currency={coinData.symbol} 

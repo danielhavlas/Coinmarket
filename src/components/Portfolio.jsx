@@ -58,7 +58,7 @@ export default function Portfolio(){
           </div>}
           <p className='order bg-blue text-white fs-3'>${(sellAmount * sellAsset?.coinData.current_price).toFixed(2)}</p>
           {mobileOnly && <div>
-            <p className='order bg-blue text-white fs-3'>{sellAmount}</p>
+            <p className='order bg-blue text-white fs-3 uppercase'>{sellAmount} {sellAsset?.symbol}</p>
             <div className="grid number-grid">
                 <button className="text-white fs-2" onClick={() => changeSellAmount('type',1,'1')}>1</button>
                 <button className="text-white fs-2" onClick={() => changeSellAmount('type',1,'2')}>2</button>
@@ -143,7 +143,7 @@ export default function Portfolio(){
                 {sellField}
             </div>
             {fog}
-            {sellAsset &&<OrderPopup status={tradeStatus} traded={'sold'} amount={sellAmount} currency={sellAsset.coinData.symbol} price={sellAsset.coinData.current_price * sellAmount}/>}
+            {sellAsset && <OrderPopup status={tradeStatus} traded={'sold'} amount={sellAmount} currency={sellAsset.coinData.symbol} price={sellAsset.coinData.current_price * sellAmount}/>}
         </div>
     )
 }
