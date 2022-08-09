@@ -119,7 +119,7 @@ export default function Stockpage() {
 
   const buyField = (
     <div className={`flex-vert gap-0 order-container order-${displayOrder} card bg-black`}>
-      {!mobileOnly &&<div className="flex gap-0">
+      {!mobileOnly &&<div className="input-container flex gap-0">
         <button className='count-button fs-3 text-white bg-blue' onClick={()=> changeBuyAmount('minus')}>-</button>
         <input className='count-input fs-5' value={buyAmount} onChange={(e) => changeBuyAmount('set',e.target.value)} type='text'/>
         <button className='count-button fs-3 text-white bg-blue' onClick={()=> changeBuyAmount('plus')}>+</button>
@@ -144,7 +144,7 @@ export default function Stockpage() {
             </div>
           </div>}
       <button className='order bg-blue text-white fs-3' onClick={buy}>Buy</button>
-      {mobileOnly && <button onClick={() => setDisplayOrder('closed')} className="text-white fs-3 go-back"><i class="ri-arrow-left-fill"></i>Go back</button>}
+      {mobileOnly && <button onClick={() => setDisplayOrder('closed')} className="text-white fs-3 go-back"><i class="ri-arrow-left-fill"></i>back</button>}
 
     </div>
   )

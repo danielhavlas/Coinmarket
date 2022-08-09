@@ -22,7 +22,6 @@ function PriceChart (props){
             } catch (error) {
                 console.log(error);
             }
-            
         }
         getChartData()
     },[props.range,props.id])

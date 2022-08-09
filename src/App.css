@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Familjen+Grotesk&display=swap");
 html{
+  overflow-x: hidden;
 }
 body{
   margin: 0;
@@ -17,11 +18,11 @@ body{
   --blue: #4B40EE;
   --red: #E71D36;
 
-  --fs-1: 2.4rem;
-  --fs-2: 1.8rem;
-  --fs-3: 1.6rem;
-  --fs-4: 1.2rem;
-  --fs-5: 1rem;
+  --fs-1: 2.2rem;
+  --fs-2: 1.6rem;
+  --fs-3: 1.4rem;
+  --fs-4: 1rem;
+  --fs-5: 0.8rem;
 }
 .text-black{color:var(--black);}
 .text-blue{color: var(--blue);}
@@ -192,6 +193,7 @@ body{
   margin-inline: auto;
 }
 .portfolio-page table{
+  margin-inline: auto;
   width: 25em;
 }
 
@@ -213,12 +215,9 @@ body{
 
 
 .order-container{
-    width: 100%;
-    height:100%;
     z-index:3;
     transition: transform 250ms cubic-bezier(.5, 0, .5, 1);
     position: fixed;
-    border-radius: 5px;
     top: 0;
     left: 0;
     bottom: 0;
@@ -238,27 +237,29 @@ body{
     transform: translateX(0%);
   }
   .order-closed{
-    transform: translateX(100%);
+    transform: translateX(102%);
   }
   .count-button{
     border-radius: 5px;
-    width: 1.5em;
-    height: 1.5em;
+    width: 20%;
     vertical-align: middle;
   }
   .count-input{
     border: solid 3px var(--blue);
-    width: 100%;
+    width: 60%;
     border-radius: 5px;
   }
+
+.input-container{
+  width: 100%;
+  margin-inline:auto;
+}
 
 .number-grid{
   margin-inline: auto;
   max-width: 50%;
   grid-template-columns: repeat(3,1fr);
-  gap: 1em;
-  padding-inline: 5em;
-  margin-block: 3em;
+  margin-block: 1.5em;
 }
 
 .number-grid > button{
@@ -375,6 +376,14 @@ a{
   margin-left:0.5em;
 }
 @media (min-width:45rem) {
+
+  :root{
+    --fs-1: 2.4rem;
+    --fs-2: 1.8rem;
+    --fs-3: 1.6rem;
+    --fs-4: 1.2rem;
+    --fs-5: 1rem;
+  }
  
   .container{
     padding-inline: 3em;
@@ -382,7 +391,7 @@ a{
   }
 
   .table{
-    width: 60rem;
+    max-width: 80%;
   }
 
   .coin-page{
@@ -399,11 +408,17 @@ a{
   }
 
   .order-container{
+    box-shadow: 5px 10px 8px #d2d2d2;
+    border-radius: 8px;
+    padding: 2em;
     position: relative;
-    width: 15em;
+    width: 11em;
     height:20em;
     z-index:3;
     transition: transform 250ms cubic-bezier(.5, 0, .5, 1);
+  }
+  .order{
+    width: 100%;
   }
 
 
@@ -427,13 +442,14 @@ a{
     display: initial;
   }
   .header{
-    width: 100%;
     height: 12vh;
     color: var(--white);
     padding-inline: 2em;
+    
   }
   .nav{
     color: var(--white);
+    margin-left: 4em;
   }
   .nav > a{
     position: relative;
@@ -478,7 +494,7 @@ a{
   }
   
   .select{
-    width: 20rem;
+    width: 15vw;
   }
 
   .buy-button{
@@ -534,5 +550,13 @@ a{
     align-items: center;
     justify-content: center;
     transition: transform 250ms cubic-bezier(.5, 0, .5, 1);
+  }
+}
+
+
+
+@media(max-width:24rem){
+  .portfolio-page table{
+    width: auto;
   }
 }

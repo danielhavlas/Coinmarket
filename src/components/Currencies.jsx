@@ -11,10 +11,14 @@ export default function Currencies(){
     const [coinsData, setCoinsData] = useState([])
     const { watchlist, isWatchlist} = useContext(WatchlistContext)
     const  {mobileOnly} = useMobileOnly()
+    const [lastFetch, setLastFetch] = useState(Date.now())
     useEffect(()=> {
-        fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false`)
-        .then(res => res.json())
-        .then(data => setCoinsData(data))
+        if(Date.now() - lastFetch + 60000 > 0){
+            fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1&sparkline=false`)
+            .then(res => res.json())
+            .then(data => setCoinsData(data))
+            setLastFetch(Date.now())
+        }
     },[])
 
     const navigate = useNavigate()

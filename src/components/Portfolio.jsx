@@ -51,7 +51,7 @@ export default function Portfolio(){
 
     const sellField = (
          <div className={`flex-vert gap-0 order-container order-${displayOrder} bg-black`}>
-          {!mobileOnly && <div className="flex gap-0">
+          {!mobileOnly && <div className="input-container flex gap-0">
             <button className='count-button fs-3 text-white bg-blue' onClick={()=> changeSellAmount('minus')}>-</button>
             <input className='count-input fs-5' value={sellAmount} onChange={(e) => changeSellAmount('set',e.target.value)} type='text'/>
             <button className='count-button fs-3 text-white bg-blue' onClick={()=> changeSellAmount('plus')}>+</button>
@@ -76,7 +76,7 @@ export default function Portfolio(){
             </div>
           </div>}
           <button className='order bg-blue text-white fs-3' onClick={sell}>Sell</button>
-          {mobileOnly && <button onClick={() => setDisplayOrder('closed')} className="text-white fs-3 go-back"><i class="ri-arrow-left-fill"></i>Go back</button>}
+          {mobileOnly && <button onClick={() => setDisplayOrder('closed')} className="text-white fs-3 go-back"><i class="ri-arrow-left-fill"></i>back</button>}
         </div>
     )
 
@@ -115,10 +115,10 @@ export default function Portfolio(){
       }
 
     return(
-        <div className="container flex gap-2">
+        <div className='container'>
             <div className="portfolio-page">
                 <h2>Total balance: ${totalBalance}</h2>
-                <div className="flex gap-1 portfolio-grid">
+                <div className={` flex ${mobileOnly? '':'gap-2'} `}>
                     <table className="card table bg-white">
                         <thead>
                             <tr className='fs-5 text-grey' >
@@ -137,10 +137,10 @@ export default function Portfolio(){
                             {assets}
                         </tbody>
                     </table>
+                    <div className="overflow-wrapper">
+                        {sellField}
+                    </div>
                 </div>
-            </div>
-            <div className="overflow-wrapper">
-                {sellField}
             </div>
             {fog}
             {sellAsset && <OrderPopup status={tradeStatus} traded={'sold'} amount={sellAmount} currency={sellAsset.coinData.symbol} price={sellAsset.coinData.current_price * sellAmount}/>}
