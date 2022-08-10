@@ -27,7 +27,7 @@ export default function Stockpage() {
   useEffect(() => {
     async function getCoinData(){
       try{
-        const res = await fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${id}&order=market_cap_desc&per_page=100&page=1&sparkline=false`)
+        const res = await fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${id}&order=market_cap_desc&per_page=1&page=1&sparkline=false`)
         const data = await res.json()
         setCoinData(data[0])
       }
@@ -59,7 +59,7 @@ export default function Stockpage() {
     }
 
     return(
-      <button className='tab fs-4' style={style} onClick={() => selectTab(index)} key={index}>{tab}</button>
+      <button className='tab fs-5' style={style} onClick={() => selectTab(index)} key={index}>{tab}</button>
     )
   })
 
@@ -118,45 +118,41 @@ export default function Stockpage() {
   const iconClass = isWatchlist(coinData)? "ri-star-fill" :"ri-star-line"
 
   const buyField = (
-    <div className={`flex-vert gap-0 order-container order-${displayOrder} card bg-black`}>
-      {!mobileOnly &&<div className="input-container flex gap-0">
-        <button className='count-button fs-3 text-white bg-blue' onClick={()=> changeBuyAmount('minus')}>-</button>
-        <input className='count-input fs-5' value={buyAmount} onChange={(e) => changeBuyAmount('set',e.target.value)} type='text'/>
-        <button className='count-button fs-3 text-white bg-blue' onClick={()=> changeBuyAmount('plus')}>+</button>
-      </div>}
-      <p className='order bg-blue text-white fs-3'>${(buyAmount * coinData.current_price).toFixed(2)}</p>
-      {mobileOnly && <div>
-            <p className='order bg-blue text-white fs-3 uppercase'>{buyAmount} {coinData.symbol}</p>
-            <div className="grid number-grid">
-                <button className="text-white fs-2" onClick={() => changeBuyAmount('type',1,'1')}>1</button>
-                <button className="text-white fs-2" onClick={() => changeBuyAmount('type',1,'2')}>2</button>
-                <button className="text-white fs-2" onClick={() => changeBuyAmount('type',1,'3')}>3</button>
-                <button className="text-white fs-2" onClick={() => changeBuyAmount('type',1,'4')}>4</button>
-                <button className="text-white fs-2" onClick={() => changeBuyAmount('type',1,'5')}>5</button>
-                <button className="text-white fs-2" onClick={() => changeBuyAmount('type',1,'6')}>6</button>
-                <button className="text-white fs-2" onClick={() => changeBuyAmount('type',1,'7')}>7</button>
-                <button className="text-white fs-2" onClick={() => changeBuyAmount('type',1,'8')}>8</button>
-                <button className="text-white fs-2" onClick={() => changeBuyAmount('type',1,'9')}>9</button>
-                <button className="bg-black"></button>
-                <button className="text-white fs-2" onClick={() => changeBuyAmount('type',1,'0')}>0</button>
-                <button className="text-white fs-2" onClick={() => changeBuyAmount('backspace')}><i class="ri-arrow-left-fill"></i></button>
+    <div className={`order-container order-${displayOrder} card bg-black`}>
+          <button onClick={() => setDisplayOrder('closed')} className="text-white fs-3"><i class="fs-1 ri-close-line"></i></button>
+      <div className="flex-vert gap-0">
+        {!mobileOnly &&<div className="input-container flex gap-0">
+          <button className='count-button fs-3 text-white bg-blue' onClick={()=> changeBuyAmount('minus')}>-</button>
+          <input className='count-input fs-5' value={buyAmount} onChange={(e) => changeBuyAmount('set',e.target.value)} type='text'/>
+          <button className='count-button fs-3 text-white bg-blue' onClick={()=> changeBuyAmount('plus')}>+</button>
+        </div>}
+        <p className='order bg-blue text-white fs-3'>${(buyAmount * coinData.current_price).toFixed(2)}</p>
+        {mobileOnly && <div>
+              <p className='order bg-blue text-white fs-3 uppercase'>{buyAmount} {coinData.symbol}</p>
+              <div className="grid number-grid">
+                  <button className="text-white fs-2" onClick={() => changeBuyAmount('type',1,'1')}>1</button>
+                  <button className="text-white fs-2" onClick={() => changeBuyAmount('type',1,'2')}>2</button>
+                  <button className="text-white fs-2" onClick={() => changeBuyAmount('type',1,'3')}>3</button>
+                  <button className="text-white fs-2" onClick={() => changeBuyAmount('type',1,'4')}>4</button>
+                  <button className="text-white fs-2" onClick={() => changeBuyAmount('type',1,'5')}>5</button>
+                  <button className="text-white fs-2" onClick={() => changeBuyAmount('type',1,'6')}>6</button>
+                  <button className="text-white fs-2" onClick={() => changeBuyAmount('type',1,'7')}>7</button>
+                  <button className="text-white fs-2" onClick={() => changeBuyAmount('type',1,'8')}>8</button>
+                  <button className="text-white fs-2" onClick={() => changeBuyAmount('type',1,'9')}>9</button>
+                  <button className="bg-black"></button>
+                  <button className="text-white fs-2" onClick={() => changeBuyAmount('type',1,'0')}>0</button>
+                  <button className="text-white fs-2" onClick={() => changeBuyAmount('backspace')}><i class="ri-arrow-left-fill"></i></button>
 
-            </div>
-          </div>}
-      <button className='order bg-blue text-white fs-3' onClick={buy}>Buy</button>
-      {mobileOnly && <button onClick={() => setDisplayOrder('closed')} className="text-white fs-3 go-back"><i class="ri-arrow-left-fill"></i>back</button>}
+              </div>
+            </div>}
+        <button className='order bg-blue text-white fs-3' onClick={buy}>Buy</button>
+      </div>
 
     </div>
   )
 
-  
-
-  const fog = (
-    <div className={`fog fog-${displayOrder}`} onClick={() => setDisplayOrder('closed')}></div>
-  )
-
   return (
-    <div className="container flex gap-2">
+    <div className={`container flex ${mobileOnly? '':'gap-2'} `}>
       <div className="card bg-white coin-page">
         <div className='flex gap-1 coin-page-header'>
           <img className='large-img' src={coinData.image} alt="" />
@@ -199,11 +195,10 @@ export default function Stockpage() {
           </div>
         </div>
         {mobileOnly && <button className="text-white bg-blue buy-button" onClick={() => setDisplayOrder('open')}>Buy</button>}
-        <div className="overflow-wrapper">
-          {buyField}
-        </div>
       </div>
-      {!mobileOnly && fog}
+      <div className="overflow-wrapper">
+        {buyField}
+      </div>
       <OrderPopup 
         status={tradeStatus} 
         traded={'bought'} 

@@ -92,9 +92,6 @@ body{
     justify-content: space-between;
 }
 
-.go-back{
-  margin-top: 1em;
-}
 
 .align-baseline{
     align-items: baseline;
@@ -158,7 +155,7 @@ body{
 
 .coin-page{
   margin-inline: auto;
-  max-width: 80rem;
+  width: 100%;
 }
 
 .mobile-footer{
@@ -222,7 +219,7 @@ body{
     left: 0;
     bottom: 0;
     right: 0;
-    padding: 3em 0;
+    padding: 1em;
   }
   .overflow-wrapper{
     overflow: hidden;
@@ -371,9 +368,7 @@ a{
 
 .arrow{
   color: var(--white);
-  font-size: 3em;
-  margin-top:0.5em;
-  margin-left:0.5em;
+  font-size: 2rem;
 }
 @media (min-width:45rem) {
 
@@ -386,8 +381,8 @@ a{
   }
  
   .container{
+    min-height:88vh;
     padding-inline: 3em;
-    width: fit-content;
   }
 
   .table{
@@ -395,8 +390,9 @@ a{
   }
 
   .coin-page{
-    padding: 2em 3em;
-    width: 50rem;
+    
+    padding: 0 2em 3em;
+    width: 70%;
   }
 
   .portfolio-page{
@@ -410,7 +406,7 @@ a{
   .order-container{
     box-shadow: 5px 10px 8px #d2d2d2;
     border-radius: 8px;
-    padding: 2em;
+    padding: 1em;
     position: relative;
     width: 11em;
     height:20em;
@@ -502,22 +498,12 @@ a{
     align-self: center;
   }
 
-  .fog{
-    top: 0;
-    left: 0;
-    z-index:2;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0);
-    position: fixed;
-  }
-  
-  .fog-open{
-    width: 100vw;
-    height: 100vh;
-  }
   .balance{
     max-width: max-content;
+}
+
+.chart-container {
+  max-width: 100%;
 }
 
 .tabs { 
@@ -530,27 +516,22 @@ a{
   height: 30px;
 }
   
-  .fog-closed{
-    width: 0vw;
-    height: 0vh;
-  }
-
-  .order-popup{
-    z-index: 10;
-    position: absolute;
-    display: flex;
-    top: 0;
-    bottom:0;
-    left: 0;
-    right: 0;
-    margin: auto;
-    width: 30em;
-    height: 20em;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    transition: transform 250ms cubic-bezier(.5, 0, .5, 1);
-  }
+.order-popup{
+  z-index: 10;
+  position: absolute;
+  display: flex;
+  top: 0;
+  bottom:0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 30em;
+  height: 20em;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: transform 250ms cubic-bezier(.5, 0, .5, 1);
+}
 }
 
 

@@ -8,22 +8,30 @@ import PriceChart from "./PriceChart";
 
 
 export default function Currencies(){
-    const [coinsData, setCoinsData] = useState([])
+    const [coinsData, setCoinsData] = useState(localStorage.getItem('coinsData')? JSON.parse(localStorage.getItem('coinsData')) : [])
+    // const [coinsData, setCoinsData] = useState([])
     const { watchlist, isWatchlist} = useContext(WatchlistContext)
     const  {mobileOnly} = useMobileOnly()
-    const [lastFetch, setLastFetch] = useState(Date.now())
+    const lastFetch = Number(localStorage.getItem('lastFetch'))
+    if(!lastFetch){
+        localStorage.setItem('lastFetch', Date.now()+60000)
+    }
     useEffect(()=> {
-        if(Date.now() - lastFetch + 60000 > 0){
-            fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1&sparkline=false`)
+        if(Date.now() - lastFetch - 60000 > 0){
+            console.log(Date.now()-  lastFetch+60000)
+            fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=30&page=1&sparkline=false`)
             .then(res => res.json())
-            .then(data => setCoinsData(data))
-            setLastFetch(Date.now())
+            .then(data => {
+                setCoinsData(data)
+                localStorage.setItem('coinsData',JSON.stringify(data))
+                localStorage.setItem('lastFetch', Date.now())
+            })
         }
     },[])
 
     const navigate = useNavigate()
 
-    const currencies = coinsData.map((coin,index) =>{ 
+    const currencies = coinsData?.map((coin,index) =>{ 
         const iconClass = isWatchlist(coin)? "ri-star-fill" :"ri-star-line"
         const priceChangeStyle = {
             color: coin.price_change_24h >= 0? 'rgb(0, 231, 0)' : 'red'

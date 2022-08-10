@@ -50,39 +50,39 @@ export default function Portfolio(){
 
 
     const sellField = (
-         <div className={`flex-vert gap-0 order-container order-${displayOrder} bg-black`}>
-          {!mobileOnly && <div className="input-container flex gap-0">
-            <button className='count-button fs-3 text-white bg-blue' onClick={()=> changeSellAmount('minus')}>-</button>
-            <input className='count-input fs-5' value={sellAmount} onChange={(e) => changeSellAmount('set',e.target.value)} type='text'/>
-            <button className='count-button fs-3 text-white bg-blue' onClick={()=> changeSellAmount('plus')}>+</button>
-          </div>}
-          <p className='order bg-blue text-white fs-3'>${(sellAmount * sellAsset?.coinData.current_price).toFixed(2)}</p>
-          {mobileOnly && <div>
-            <p className='order bg-blue text-white fs-3 uppercase'>{sellAmount} {sellAsset?.symbol}</p>
-            <div className="grid number-grid">
-                <button className="text-white fs-2" onClick={() => changeSellAmount('type',1,'1')}>1</button>
-                <button className="text-white fs-2" onClick={() => changeSellAmount('type',1,'2')}>2</button>
-                <button className="text-white fs-2" onClick={() => changeSellAmount('type',1,'3')}>3</button>
-                <button className="text-white fs-2" onClick={() => changeSellAmount('type',1,'4')}>4</button>
-                <button className="text-white fs-2" onClick={() => changeSellAmount('type',1,'5')}>5</button>
-                <button className="text-white fs-2" onClick={() => changeSellAmount('type',1,'6')}>6</button>
-                <button className="text-white fs-2" onClick={() => changeSellAmount('type',1,'7')}>7</button>
-                <button className="text-white fs-2" onClick={() => changeSellAmount('type',1,'8')}>8</button>
-                <button className="text-white fs-2" onClick={() => changeSellAmount('type',1,'9')}>9</button>
-                <button className="bg-black"></button>
-                <button className="text-white fs-2" onClick={() => changeSellAmount('type',1,'0')}>0</button>
-                <button className="text-white fs-2" onClick={() => changeSellAmount('backspace')}><i class="ri-arrow-left-fill"></i></button>
+         <div className={`order-container order-${displayOrder} bg-black`}>
+          <button onClick={() => setDisplayOrder('closed')} className="text-white fs-3"><i class="fs-1 ri-close-line"></i></button>
+          <div className="flex-vert gap-0 ">
+            {!mobileOnly && <div className="input-container flex gap-0">
+                <button className='count-button fs-3 text-white bg-blue' onClick={()=> changeSellAmount('minus')}>-</button>
+                <input className='count-input fs-5' value={sellAmount} onChange={(e) => changeSellAmount('set',e.target.value)} type='text'/>
+                <button className='count-button fs-3 text-white bg-blue' onClick={()=> changeSellAmount('plus')}>+</button>
+            </div>}
+            <p className='order bg-blue text-white fs-3'>${(sellAmount * sellAsset?.coinData.current_price).toFixed(2)}</p>
+            {mobileOnly && <div>
+                <p className='order bg-blue text-white fs-3 uppercase'>{sellAmount} {sellAsset?.symbol}</p>
+                <div className="grid number-grid">
+                    <button className="text-white fs-2" onClick={() => changeSellAmount('type',1,'1')}>1</button>
+                    <button className="text-white fs-2" onClick={() => changeSellAmount('type',1,'2')}>2</button>
+                    <button className="text-white fs-2" onClick={() => changeSellAmount('type',1,'3')}>3</button>
+                    <button className="text-white fs-2" onClick={() => changeSellAmount('type',1,'4')}>4</button>
+                    <button className="text-white fs-2" onClick={() => changeSellAmount('type',1,'5')}>5</button>
+                    <button className="text-white fs-2" onClick={() => changeSellAmount('type',1,'6')}>6</button>
+                    <button className="text-white fs-2" onClick={() => changeSellAmount('type',1,'7')}>7</button>
+                    <button className="text-white fs-2" onClick={() => changeSellAmount('type',1,'8')}>8</button>
+                    <button className="text-white fs-2" onClick={() => changeSellAmount('type',1,'9')}>9</button>
+                    <button className="bg-black"></button>
+                    <button className="text-white fs-2" onClick={() => changeSellAmount('type',1,'0')}>0</button>
+                    <button className="text-white fs-2" onClick={() => changeSellAmount('backspace')}><i class="ri-arrow-left-fill"></i></button>
 
-            </div>
-          </div>}
-          <button className='order bg-blue text-white fs-3' onClick={sell}>Sell</button>
-          {mobileOnly && <button onClick={() => setDisplayOrder('closed')} className="text-white fs-3 go-back"><i class="ri-arrow-left-fill"></i>back</button>}
+                </div>
+            </div>}
+            <button className='order bg-blue text-white fs-3' onClick={sell}>Sell</button>
+          </div>
         </div>
     )
 
-    const fog = (
-        <div className={`large-only fog fog-${displayOrder}`} onClick={() => setDisplayOrder('closed')}></div>
-    )
+  
 
     function changeSellAmount(action,e,i){
         if(action==='minus' && sellAmount !== 0){
@@ -142,7 +142,6 @@ export default function Portfolio(){
                     </div>
                 </div>
             </div>
-            {fog}
             {sellAsset && <OrderPopup status={tradeStatus} traded={'sold'} amount={sellAmount} currency={sellAsset.coinData.symbol} price={sellAsset.coinData.current_price * sellAmount}/>}
         </div>
     )
