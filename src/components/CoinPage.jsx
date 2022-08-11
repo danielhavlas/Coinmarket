@@ -55,7 +55,7 @@ export default function Stockpage() {
   const tabs = ['Summary', 'Chart','Statistics', 'Analysis','Settings ']
   const tabButtons = tabs.map((tab,index) => {
     const style = {
-      borderBottom: selectedTab===index? 'solid 3px #4B40EE' : ''
+      borderBottom: selectedTab===index? 'solid 3px #4B40EE' : 'solid 3px transparent'
     }
 
     return(
