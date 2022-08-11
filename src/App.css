@@ -382,11 +382,15 @@ a{
  
   .container{
     min-height:88vh;
-    padding-inline: 3em;
   }
 
   .table{
     max-width: 80%;
+  }
+
+  .currency--table{
+    width: 70rem;
+    margin: 0;
   }
 
   .coin-page{
@@ -415,6 +419,11 @@ a{
   }
   .order{
     width: 100%;
+  }
+
+  .home{
+    width: fit-content;
+    margin-inline: auto;
   }
 
 

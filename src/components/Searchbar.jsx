@@ -20,7 +20,7 @@ export default function Searchbar(props){
       .then(data => {
         setSearchData(data)
       })
-    },[inputValue])
+    },[])
 
     function handleChange(o){
       setValue(o)

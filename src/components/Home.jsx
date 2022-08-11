@@ -48,8 +48,8 @@ export default function Home(){
 
 
     return(
-        <div className="home">
-            <div className="container">
+        <div className="container">
+            <div className="home">
                 <h2 className='balance'>Balance: ${totalBalance}</h2>
                 <div className="home-grid">
                     <div className="watchlist-card card bg-white">

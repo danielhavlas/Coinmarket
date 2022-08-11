@@ -64,7 +64,7 @@ export default function Currencies(){
     return(
         <div className="container">
             <h2>Top currencies</h2>
-            <table className=" card bg-white table">
+            <table className=" card bg-white table currency--table">
                 <thead className="">
                     <tr className="fs-5 text-grey">
                         {!mobileOnly &&  <th className=""></th>}
