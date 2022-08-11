@@ -21,7 +21,7 @@ function App() {
   const {mobileOnly} = useMobileOnly()
   const search = (
     <div className={`search search-${searchDisplay} flex`}>
-      <button onClick={()=> setSearchDisplay('closed')}><i class="arrow ri-arrow-left-fill"></i></button>
+      <button onClick={()=> setSearchDisplay('closed')}><i className="arrow ri-arrow-left-fill"></i></button>
       <div className="search-bar">
         <Searchbar  closeSearch={setSearchDisplay}/>
       </div>
