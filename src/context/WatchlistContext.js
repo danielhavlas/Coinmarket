@@ -9,13 +9,15 @@ function WatchlistContextProvider(props){
         setWatchlistArray(prevWatchlistArray => localStorage.getItem('watchlist') === null? prevWatchlistArray : JSON.parse(localStorage.getItem('watchlist')))
 
         async function updatePrices(){
-            
-            watchlistArray.forEach(v => {
+            JSON.parse(localStorage.getItem('watchlist')).forEach(v => {
                 fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${v.id}&order=market_cap_desc&per_page=100&page=1&sparkline=false`)
                 .then(res => res.json())
-                .then(data => console.log(data[0]))
+                .then(data => setWatchlistArray(prevWatchlistArray => prevWatchlistArray.map(i => {
+                    console.log(i);
+                    return i.id === v.id? data[0] : i
+                })))
             })
-          }
+        }
           
           updatePrices()
     },[])
