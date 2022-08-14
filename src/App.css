@@ -249,10 +249,9 @@ body{
 }
 
 .number-grid{
-  margin-inline: auto;
-  max-width: 50%;
+  margin: 1.5em auto;
   grid-template-columns: repeat(3,1fr);
-  margin-block: 1.5em;
+  width: 70%;
 }
 
 .number-grid > button{
