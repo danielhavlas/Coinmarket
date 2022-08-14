@@ -10,7 +10,7 @@ import PriceChart from "./PriceChart";
 export default function Currencies(){
     const [coinsData, setCoinsData] = useState(localStorage.getItem('coinsData')? JSON.parse(localStorage.getItem('coinsData')) : [])
     const { watchlist, isWatchlist} = useContext(WatchlistContext)
-    const  {mobileOnly} = useMobileOnly()
+    const {mobileOnly} = useMobileOnly()
     const lastFetch = Number(localStorage.getItem('lastFetch'))
     if(!lastFetch){
         localStorage.setItem('lastFetch', Date.now()+60000)
