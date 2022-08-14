@@ -9,7 +9,6 @@ import PriceChart from "./PriceChart";
 
 export default function Currencies(){
     const [coinsData, setCoinsData] = useState(localStorage.getItem('coinsData')? JSON.parse(localStorage.getItem('coinsData')) : [])
-    // const [coinsData, setCoinsData] = useState([])
     const { watchlist, isWatchlist} = useContext(WatchlistContext)
     const  {mobileOnly} = useMobileOnly()
     const lastFetch = Number(localStorage.getItem('lastFetch'))
@@ -25,6 +24,7 @@ export default function Currencies(){
                 localStorage.setItem('coinsData',JSON.stringify(data))
                 localStorage.setItem('lastFetch', Date.now())
             })
+            console.log('fetched all currencies');
         }
     },[])
 
@@ -48,7 +48,7 @@ export default function Currencies(){
                         <p className="fs-5 text-grey uppercase">{coin.symbol}</p>
                     </div>
                 </td>
-                <td><PriceChart id={coin.id} range={0} large={false} green={green} /></td>
+                <td>{index < 10 ? <PriceChart id={coin.id} range={0} large={false} green={green} /> : '-'}</td>
                 <td className="text-left">
                     <div>
                         <p>${coin.current_price}</p>

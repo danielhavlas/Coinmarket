@@ -29,6 +29,7 @@ export default function Stockpage() {
       try{
         const res = await fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${id}&order=market_cap_desc&per_page=1&page=1&sparkline=false`)
         const data = await res.json()
+        console.log('fetched coinpage');
         setCoinData(data[0])
       }
       catch(err){
