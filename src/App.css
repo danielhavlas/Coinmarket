@@ -18,11 +18,11 @@ body{
   --blue: #4B40EE;
   --red: #E71D36;
 
-  --fs-1: 2.2rem;
-  --fs-2: 1.6rem;
-  --fs-3: 1.4rem;
-  --fs-4: 1rem;
-  --fs-5: 0.8rem;
+  --fs-1: 2rem;
+  --fs-2: 1.4rem;
+  --fs-3: 1.2rem;
+  --fs-4: 0.8rem;
+  --fs-5: 0.6rem;
 }
 .text-black{color:var(--black);}
 .text-blue{color: var(--blue);}
@@ -215,6 +215,7 @@ body{
     z-index:3;
     transition: transform 250ms cubic-bezier(.5, 0, .5, 1);
     position: fixed;
+    height: 100%;
     top: 0;
     left: 0;
     bottom: 0;
@@ -260,8 +261,7 @@ body{
 }
 
 .number-grid > button{
-    aspect-ratio: 1;
-    border-radius: 50%;
+  aspect-ratio: 1;
 }
 
 .table{
