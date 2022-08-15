@@ -2,7 +2,7 @@
   "name": "stocktrading",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://DanielHavlas.github.io/Crypto-currency-exchange",
+  "homepage": "https://Snarcy.github.io/Crypto-currency-exchange",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
