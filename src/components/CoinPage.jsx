@@ -166,7 +166,7 @@ export default function Stockpage() {
               </div>
               <h5 className='change fs-4' style={priceChangeStyle}>{`${coinData.price_change_24h.toFixed(2)} (${coinData.price_change_percentage_24h.toFixed(2)}%)`}</h5>
               <button className='fs-5 text-blue' onClick={() => watchlist(coinData)}><i className={`star-icon ${iconClass}`}></i></button>
-              {!mobileOnly && <button className="text-white bg-blue buy-button" onClick={() => setDisplayOrder('open')}>Buy</button>}
+              {!mobileOnly && <button className="text-white fs-3 bg-blue buy-button" onClick={() => setDisplayOrder('open')}>Buy</button>}
             </div>
           </div>
 
