@@ -195,7 +195,7 @@ export default function Stockpage() {
             <PriceChart className='coin-page-chart' id={id} range={selectedRange} large={true}/>
           </div>
         </div>
-        {mobileOnly && <button className="text-white bg-blue buy-button" onClick={() => setDisplayOrder('open')}>Buy</button>}
+        {mobileOnly && <button className="text-white fs-3 bg-blue buy-button" onClick={() => setDisplayOrder('open')}>Buy</button>}
       </div>
       <div className="overflow-wrapper">
         {buyField}
