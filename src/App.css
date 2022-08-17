@@ -129,8 +129,10 @@ body{
 }
 
 .coin-page-header{
+  margin-top: 3rem;
   align-items:center;
-  line-height: 1;
+  line-height: 0;
+
 }
 
 .coin-page-chart{
@@ -316,6 +318,9 @@ button {
   background: none;
   cursor: pointer;
 }
+.pointer{
+  cursor: pointer;
+}
 
 a{
     text-decoration: none;
@@ -398,8 +403,8 @@ a{
     height: 30px;
   }
   .large-img{
-    width: 30px;
-    height: 30px;
+    width: 80px;
+    height: 80px;
   }
 
   .portfolio-page{

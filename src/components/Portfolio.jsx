@@ -34,7 +34,7 @@ export default function Portfolio(){
                 </td>
                 <td className="large-only">${asset.coinData.current_price}</td>
                 <td className="large-only">{allocation}%</td>
-                <td className="text-white bg-blue order-button" onClick={() => {setSellAsset(asset);setDisplayOrder('open'); setSellAmount(asset.amount) }}>Sell</td>
+                <td className="text-white bg-blue order-button pointer" onClick={() => {setSellAsset(asset);setDisplayOrder('open'); setSellAmount(asset.amount) }}>Sell</td>
             </tr>
         )
     })

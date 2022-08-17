@@ -163,10 +163,10 @@ export default function Stockpage() {
       <div className="card bg-white coin-page">
         <div className='flex gap-1 coin-page-header'>
           <img className='large-img' src={coinData.image} alt="" />
-          <div className=''>
+          <div className='align-baseline'>
             <h1 className='name fs-1'>{coinData.name}</h1>
-            <div className="flex gap-1">
-              <div className="flex align-baseline ">
+            <div className="flex align-baseline gap-2">
+              <div className="flex align-baseline">
                 <h2 className='fs-2'>{coinData.current_price}</h2>
                 <h4 className='text-grey fs-5'>USD</h4>
               </div>
