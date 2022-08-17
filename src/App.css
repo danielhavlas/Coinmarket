@@ -393,6 +393,11 @@ a{
     width: 70%;
   }
 
+  .small-img{
+    width: 30px;
+    height: 30px;
+  }
+
   .portfolio-page{
     min-width: 50rem;
   }

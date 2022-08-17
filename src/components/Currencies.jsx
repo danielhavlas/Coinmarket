@@ -1,4 +1,4 @@
-import React,{useState, useEffect, useContext} from "react";
+import React,{useState, useEffect, useContext, Suspense} from "react";
 import {useNavigate} from 'react-router-dom'
 
 import { WatchlistContext } from '../context/WatchlistContext'
@@ -48,7 +48,9 @@ export default function Currencies(){
                         <p className="fs-5 text-grey uppercase">{coin.symbol}</p>
                     </div>
                 </td>
-                <td>{index < 10 ? <PriceChart id={coin.id} range={0} large={false} green={green} /> : '-'}</td>
+                <Suspense>
+                    <td>{index < 10 ? <PriceChart id={coin.id} range={0} large={false} green={green} /> : '-'}</td>
+                </Suspense>
                 <td className="text-left">
                     <div>
                         <p>${coin.current_price}</p>
