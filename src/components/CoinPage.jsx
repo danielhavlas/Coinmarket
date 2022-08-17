@@ -22,6 +22,7 @@ export default function Stockpage() {
   const [displayOrder, setDisplayOrder] = useState('closed')
   const [tradeStatus, setTradeStatus] = useState('')
   const {mobileOnly} = useMobileOnly()
+  const [buyMessage, setBuyMessage] = useState('')
 
   
   useEffect(() => {
@@ -38,6 +39,7 @@ export default function Stockpage() {
     }
     
     getCoinData()
+    setBuyMessage('')
   },[id])
   const ranges = ['1d','3d','1w','1m','6m','1y','max']
   const rangeButtons = ranges.map((range,index) => {
@@ -105,10 +107,14 @@ export default function Stockpage() {
         setTimeout(() => {
           setTradeStatus('')
         }, 2000);
+        setBuyMessage('')
       }
       else{
-        alert('brokey')
+        setBuyMessage('Order exceeds your balance')
       }
+    }
+    else{
+      setBuyMessage('Minumun order is $10')
     }
   }
   
@@ -148,7 +154,7 @@ export default function Stockpage() {
             </div>}
         <button className='order bg-blue text-white fs-3' onClick={buy}>Buy</button>
       </div>
-
+          <p className='text-red'>{buyMessage}</p>
     </div>
   )
 

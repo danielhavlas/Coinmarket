@@ -26,6 +26,7 @@ body{
 .text-blue{color: var(--blue);}
 .text-white{color:var(--white);}
 .text-grey{color:var(--grey);}
+.text-red{color:var(--red);}
 
 .bg-black{background-color:var(--black);}
 .bg-blue{background-color: var(--blue);}
@@ -388,12 +389,15 @@ a{
   }
 
   .coin-page{
-    
     padding: 0 2em 3em;
     width: 70%;
   }
 
   .small-img{
+    width: 30px;
+    height: 30px;
+  }
+  .large-img{
     width: 30px;
     height: 30px;
   }
@@ -499,6 +503,7 @@ a{
   
   .select{
     width: 15vw;
+    z-index: 4;
   }
 
   .buy-button{

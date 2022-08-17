@@ -36,6 +36,7 @@ export default function Searchbar(props){
             ...provided,
             backgroundColor: 'hsl(255 255% 255%)',
             border:'none',
+            
         }),
         input: (provided) =>({
             ...provided,
@@ -54,11 +55,11 @@ export default function Searchbar(props){
         menu: (provided) =>({
             ...provided,
             backgroundColor: mobileOnly? '#2C2C34' : 'white',
-            height:mobileOnly?'1000px':'300px'
+            height:mobileOnly?'1000px':'300px',
         }),
         menuList: (provided) =>({
             ...provided,
-            height:'100%'
+            height:'100%',
         }),
         indicatorsContainer: (provided) =>({
             ...provided,
