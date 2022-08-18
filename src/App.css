@@ -412,7 +412,7 @@ a{
   }
   
   .portfolio-page table{
-      width: 100%;
+    width: 100%;
   }
 
   .order-container{
@@ -425,6 +425,7 @@ a{
     z-index:3;
     transition: transform 250ms cubic-bezier(.5, 0, .5, 1);
   }
+
   .order{
     width: 100%;
   }
@@ -434,7 +435,6 @@ a{
     margin-inline: auto;
   }
 
-
   .home-grid{
     display: flex;
     flex-direction: row-reverse;
@@ -442,28 +442,35 @@ a{
     gap: 8em;
     align-items: flex-start;
   }
+
   td{
     margin-right: 2em;
   }
+
   th.large-only{
     display: table-cell;
   }
+
   td.large-only{
     display: table-cell;
   }
+
   .large-only{
     display: initial;
   }
+
   .header{
     height: 12vh;
     color: var(--white);
     padding-inline: 2em;
     
   }
+
   .nav{
     color: var(--white);
     margin-left: 4em;
   }
+
   .nav > a{
     position: relative;
   }
@@ -518,38 +525,38 @@ a{
 
   .balance{
     max-width: max-content;
-}
+  }
 
-.chart-container {
-  max-width: 100%;
-}
+  .chart-container {
+    max-width: 100%;
+  }
 
-.tabs { 
-  margin-top: 1.5em;
-  display: flex;
-  gap: 12px;
-}
+  .tabs { 
+    margin-top: 1.5em;
+    display: flex;
+    gap: 12px;
+  }
 
-.tab {
-  height: 30px;
-}
-  
-.order-popup{
-  z-index: 10;
-  position: absolute;
-  display: flex;
-  top: 0;
-  bottom:0;
-  left: 0;
-  right: 0;
-  margin: auto;
-  width: 30em;
-  height: 20em;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  transition: transform 250ms cubic-bezier(.5, 0, .5, 1);
-}
+  .tab {
+    height: 30px;
+  }
+    
+  .order-popup{
+    z-index: 10;
+    position: absolute;
+    display: flex;
+    top: 0;
+    bottom:0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 30em;
+    height: 20em;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: transform 250ms cubic-bezier(.5, 0, .5, 1);
+  }
 }
 
 
