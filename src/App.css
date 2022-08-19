@@ -559,10 +559,8 @@ a{
   }
 }
 
-
-
 @media(max-width:24rem){
-  .portfolio-page table{
+  .portfolio-page table{ 
     width: auto;
   }
 }
