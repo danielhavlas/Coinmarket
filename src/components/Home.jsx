@@ -19,9 +19,8 @@ export default function Home(){
                 <div className="flex align-center gap-1">
                     <img className='small-img' src={asset.coinData.image}/>
                     <div>
-                    <h3>{asset.coinData.name}</h3>
-                    <p className='uppercase'>{asset.coinData.symbol}</p>
-
+                        <h3>{asset.coinData.name}</h3>
+                        <p className='uppercase'>{asset.coinData.symbol}</p>
                     </div>
                 </div>
             </div>
