@@ -19,7 +19,6 @@ function PriceChart (props){
                 const filter = props.large? props.range === 6 ? 20 : props.range === 3 ? 15 : props.range === 1? 2 : 4 : 10
                 const prices = data.prices.filter((_, index) => index % filter === 0)
                 setChartData(prices)
-                console.log('fetched',props.large);
             } catch (error) {
                 console.log(error);
             }
