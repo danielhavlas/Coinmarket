@@ -42,14 +42,11 @@ function PriceChart (props){
             ref={chartRef}
             className="chart"
             data={{
-                
                 labels: chartData.map((price)=> price[0]) ,
                 datasets: [{
                     data: chartData.map((price)=>price[1]),
                 },
                 ],
-                
-            
             }}
             options={{
                 maintainAspectRatio: false,
