@@ -44,7 +44,6 @@ function PriceChart (props){
             data={{
                 
                 labels: chartData.map((price)=> price[0]) ,
-    
                 datasets: [{
                     data: chartData.map((price)=>price[1]),
                 },
