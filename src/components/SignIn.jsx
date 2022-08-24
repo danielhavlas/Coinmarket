@@ -5,7 +5,7 @@ export default function SignIn(){
 
     const getGoggleUser = async () => {
         const {user} = await signInWithGooglePopup()
-        createUserDocumentFromAuth(user)
+        const userDocRef = await createUserDocumentFromAuth(user)
     }
     return(
         <div>
