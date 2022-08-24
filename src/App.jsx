@@ -11,6 +11,7 @@ import MobileFooter from './components/MobileFooter'
 import Searchbar from './components/Searchbar';
 
 import {useMobileOnly} from './hooks/useMobileOnly'
+import SignIn from './components/SignIn';
 
 
 
@@ -36,6 +37,7 @@ function App() {
         <Route path='/currencies' element={<Currencies/>} />
         <Route path='/portfolio' element={<Portfolio/>}/>
         <Route path='/currencies/:id' element={<CoinPage/>} />
+        <Route path='/sign-in' element={<SignIn/>} />
       </Routes>
       {mobileOnly && <MobileFooter openSearch={setSearchDisplay} className='mobile-only' />}
     </div>
