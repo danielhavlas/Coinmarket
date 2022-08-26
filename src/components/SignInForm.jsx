@@ -1,9 +1,7 @@
-import { useContext, useState } from "react";
-import { UserContext } from "../context/UserContext";
+import {useState } from "react";
 import { createUserDocumentFromAuth, signInWithGoogleRedirect, signInAuthUserWithEmailAndPassword } from "../utils/firebase.utils";
 
 import FormInput from "./FormInput";
-
 
 
 const defaultFormFields = {
@@ -15,7 +13,6 @@ export default function SignInForm(){
     const [formFields,setFormFields] = useState(defaultFormFields)
     const {email,password} = formFields
 
-    const {setCurrentUser} = useContext(UserContext)
 
     const resetForm = () => {
         setFormFields(defaultFormFields)
@@ -34,7 +31,6 @@ export default function SignInForm(){
         e.preventDefault()
         try{
             const {user} = await signInAuthUserWithEmailAndPassword(email,password)
-            setCurrentUser(user)
             resetForm()
         }catch(error){
             switch(error.code){
