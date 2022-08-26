@@ -10,7 +10,7 @@ export default function Header(){
                 <Link to='/portfolio'>ASSETS</Link>
                 <Link to='/currencies'>CURRENCIES</Link>
                 <Searchbar/>
-                <Link to='/sign-in'>SIGN IN</Link>
+                <Link to='/auth'>SIGN IN</Link>
             </div>
         </div>
     )
