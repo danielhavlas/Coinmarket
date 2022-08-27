@@ -21,7 +21,6 @@ googleProvider.setCustomParameters({
 
 export const auth = getAuth()
 export const signInWithGooglePopup = () => signInWithPopup(auth,googleProvider)
-export const signInWithGoogleRedirect = () => signInWithRedirect(auth,googleProvider)
 
 
 export const db = getFirestore()
@@ -58,5 +57,8 @@ export const signInAuthUserWithEmailAndPassword = async (email, password) => {
 
 export const signOutUser = () => signOut(auth)
 
-export const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth,callback)
+export const onAuthStateChangedListener = (callback) => {
+  if(!callback) return;
+  onAuthStateChanged(auth,callback)
+}
 

@@ -1,5 +1,5 @@
 import {useState } from "react";
-import { createUserDocumentFromAuth, signInWithGoogleRedirect, signInAuthUserWithEmailAndPassword } from "../utils/firebase.utils";
+import { createUserDocumentFromAuth, signInWithGooglePopup, signInAuthUserWithEmailAndPassword } from "../utils/firebase.utils";
 
 import FormInput from "./FormInput";
 
@@ -19,8 +19,8 @@ export default function SignInForm(){
     }
 
     const signInWithGoogle = async () => {
-        const {user} = await signInWithGoogleRedirect()
-        await createUserDocumentFromAuth(user)
+        const {user} = await signInWithGooglePopup()
+        createUserDocumentFromAuth(user)
     }
  
     const handleChange = (e) => {
