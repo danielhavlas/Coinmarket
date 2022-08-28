@@ -1,33 +1,60 @@
-import React,{useEffect, useState} from 'react'
+import { type } from '@testing-library/user-event/dist/type'
+import React,{useEffect, useReducer, useState} from 'react'
 const PortfolioContext = React.createContext()
 
+
+const portfolioReducer = (state, action) => {
+    const {type, payload} = action
+
+    switch(type){
+        case 'SET_PORTFOLIO':
+            return{
+                ...state,
+                ...payload
+            }
+        default:
+            throw new Error(`Unhandled type ${type} in userReducer`)
+    }
+}
+
+const INITIAL_STATE = {
+    portfolioArray: [],
+    usdBalance: 100000,
+    totalBalance: 100000
+}
+
+
 function PortfolioContextProvider(props){
-    const [portfolioArray, setPortfolioArray] = useState([])
-    const [totalBalance, setTotalBalance] = useState()
-    const [usdBalance, setUsdBalance] = useState(100000)
+
+    const [{portfolioArray,usdBalance,totalBalance}, disbatch] = useReducer(portfolioReducer,INITIAL_STATE)
+
+    const updatePortfolio = (newPortfolio,newUsdBalance) => {
+        const updateTotalBalance = () => {
+            const portfolioValue = portfolioArray.map(v => parseInt(v.value)).reduce((t,v) => t + v, 0)
+            return portfolioValue + usdBalance
+        }
+
+        disbatch({type: 'SET_PORTFOLIO', payload: {portfolioArray: newPortfolio, usdBalance:newUsdBalance, totalBalance: updateTotalBalance()}})
+
+    }
 
     useEffect(()=> {
 
-        const portArrStorage = JSON.parse(localStorage.getItem('portfolio'))
-        setPortfolioArray(prevPortfolioArray => portArrStorage === null? prevPortfolioArray : portArrStorage)
-        const usdBalanceStorage = localStorage.getItem('usdBalance')
-        setUsdBalance(prevUsdBalance => usdBalanceStorage === null? prevUsdBalance : Number(usdBalanceStorage))
-        const totalBalanceStorage = localStorage.getItem('totalBalance')
-        setTotalBalance(prevTotalBalance => totalBalanceStorage === null? prevTotalBalance : Number(totalBalanceStorage))
         async function updatePrices(){
-            portArrStorage.forEach(asset => {
+            portfolioArray.forEach(asset => {
                 fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${asset.id}&order=market_cap_desc&per_page=100&page=1&sparkline=false`)
                 .then(res => res.json())
                 .then(data => {
-                    setPortfolioArray(prevPortfolioArray => {
-                        return prevPortfolioArray.map(v => {
+                    const newPortfolio = () => {
+                        return portfolioArray.map(v => {
                             if(v.id === asset.id){
                                 return {...v,coinData: data [0], value: data[0].current_price * v.amount}
                             }else {
                                 return {...v}
                             }
                         })
-                    })
+                    }
+                    updatePortfolio(newPortfolio,usdBalance)
                 } )
             })
             
@@ -36,28 +63,13 @@ function PortfolioContextProvider(props){
           updatePrices()
     },[])
 
-    useEffect(() => {
-        localStorage.setItem('portfolio', JSON.stringify(portfolioArray))
-        const portfolioValue = portfolioArray.map(v => parseInt(v.value)).reduce((t,v) => t + v, 0)
-        setTotalBalance(portfolioValue + parseInt(usdBalance))
-    },[portfolioArray])
-
-    useEffect(() => {
-        localStorage.setItem('usdBalance', usdBalance)
-    },[usdBalance])
-
-    
-    useEffect(() => {
-        localStorage.setItem('totalBalance', totalBalance)
-    },[totalBalance])
-
     function order(action,id,coinData,amount, price){
         if(action==='buy'){
-            const idArray = portfolioArray.map(v => v.id)
-            setPortfolioArray(prevPortfolioArray => {
+            const newPortfolio = () => {
+                const idArray = portfolioArray.map(v => v.id)
                 if(idArray.includes(id)){
                     return(
-                        prevPortfolioArray.map(asset => {
+                        portfolioArray.map(asset => {
                             if(asset.id === id){
                                 return {id,coinData,amount: asset.amount + amount, value: asset.value + price}
                             }else{
@@ -66,16 +78,18 @@ function PortfolioContextProvider(props){
                         })
                     )
                 }else{
-                    return [...prevPortfolioArray, {id,coinData, amount, value: price}]
+                    return [...portfolioArray, {id,coinData, amount, value: price}]
                 }
-            })
-            setUsdBalance(prevBalance => prevBalance - price)
+            }
+                
+            const newUsdBalance = usdBalance - price
+            updatePortfolio(newPortfolio(),newUsdBalance)
             
         }
         else if(action === 'sell'){
-            setPortfolioArray(prevPortfolioArray => {
+            const newPortfolio = () => {
                 return(
-                    prevPortfolioArray.map(asset => {
+                    portfolioArray.map(asset => {
                         if(asset.id === id){
                             return {...asset,amount: asset.amount - amount, value: (asset.amount - amount)*asset.coinData.current_price}
                         }else{
@@ -84,10 +98,12 @@ function PortfolioContextProvider(props){
                     }).filter(v => v.amount > 0)
                 )
                 
-            })
-            setUsdBalance(prevBalance => prevBalance + price)
+            }
+            const newUsdBalance = usdBalance + price
+            updatePortfolio(newPortfolio(),newUsdBalance)
         }
     }
+
 
     return(
         <PortfolioContext.Provider value={{portfolioArray,order,usdBalance, totalBalance}}>

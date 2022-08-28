@@ -8,7 +8,7 @@ export default function Home(){
 
     const {portfolioArray, usdBalance, totalBalance} =  useContext(PortfolioContext)
     const {watchlistArray} =  useContext(WatchlistContext)
-    
+    console.log(portfolioArray);
 
     
     
@@ -49,7 +49,7 @@ export default function Home(){
     return(
         <div className="container">
             <div className="home">
-                <h2 className='balance'>Balance: ${totalBalance}</h2>
+                <h2 className='balance'>Balance: ${totalBalance.toFixed(2)}</h2>
                 <div className="home-grid">
                     <div className="watchlist-card card bg-white">
                         <h2>Watchlist</h2>
