@@ -104,7 +104,6 @@ function PortfolioContextProvider(props){
         }
     }
 
-
     return(
         <PortfolioContext.Provider value={{portfolioArray,order,usdBalance, totalBalance}}>
             {props.children}
