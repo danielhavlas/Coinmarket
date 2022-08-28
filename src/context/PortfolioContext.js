@@ -1,4 +1,3 @@
-import { type } from '@testing-library/user-event/dist/type'
 import React,{useEffect, useReducer, useState} from 'react'
 const PortfolioContext = React.createContext()
 
@@ -35,7 +34,6 @@ function PortfolioContextProvider(props){
         }
 
         disbatch({type: 'SET_PORTFOLIO', payload: {portfolioArray: newPortfolio, usdBalance:newUsdBalance, totalBalance: updateTotalBalance()}})
-
     }
 
     useEffect(()=> {
@@ -57,7 +55,6 @@ function PortfolioContextProvider(props){
                     updatePortfolio(newPortfolio,usdBalance)
                 } )
             })
-            
           }
           
           updatePrices()
