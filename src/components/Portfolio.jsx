@@ -3,13 +3,18 @@ import { PortfolioContext } from "../context/PortfolioContext"
 import { useMobileOnly } from "../hooks/useMobileOnly";
 import OrderPopup from './OrderPopup';
 
+import { useSelector, useDispatch } from "react-redux";
+import { selectorPortfolio } from '../store/portfolio/portfolio.selector';  
+import { order } from "../store/portfolio/portfolio.action";
 
 
 export default function Portfolio(){
 
     const {mobileOnly} = useMobileOnly()
 
-    const {portfolioArray, usdBalance, totalBalance, order} = useContext(PortfolioContext)
+    const {portfolioArray, usdBalance, totalBalance} = useSelector(selectorPortfolio)
+    const dispatch = useDispatch()
+
     const [displayOrder, setDisplayOrder] = useState('closed')
     const [sellAmount, setSellAmount] = useState()
     const [sellAsset, setSellAsset] = useState()
@@ -40,7 +45,7 @@ export default function Portfolio(){
     })
 
     function sell(){
-        order('sell',sellAsset.id,sellAsset.coinData ,sellAmount , sellAsset.coinData.current_price * sellAmount)
+        dispatch(order('sell',sellAsset.id,sellAsset.coinData ,sellAmount , sellAsset.coinData.current_price * sellAmount, portfolioArray, usdBalance))
         setDisplayOrder('closed')
         setTradeStatus('finished')
         setTimeout(() => {

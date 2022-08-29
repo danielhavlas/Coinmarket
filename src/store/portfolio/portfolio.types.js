@@ -1,0 +1,3 @@
+export const PORTFOLIO_ACTION_TYPES = {
+    SET_PORTFOLIO: 'SET_PORTFOLIO'
+}

@@ -1,18 +1,17 @@
 import { useRef, useContext, useEffect } from 'react'
-import { PortfolioContext } from '../context/PortfolioContext'
-import { WatchlistContext } from '../context/WatchlistContext'
 import { Link } from 'react-router-dom'
 import PriceChart from './PriceChart'
+import { useSelector } from "react-redux";
+import { selectorPortfolio } from '../store/portfolio/portfolio.selector';
+import { selectorWatchlist } from '../store/watchlist/watchlist.selector';
 
 export default function Home(){
 
-    const {portfolioArray, usdBalance, totalBalance} =  useContext(PortfolioContext)
-    const {watchlistArray} =  useContext(WatchlistContext)
-    console.log(portfolioArray);
+    const portfolio = useSelector(selectorPortfolio)
 
+    const {watchlistArray} =  useSelector(selectorWatchlist)
     
-    
-    const assets = portfolioArray.map((asset,index) => {
+    const assets = portfolio.portfolioArray.map((asset,index) => {
         return(
         <div key={index} className='flex space-between'>
             <div>
@@ -49,7 +48,7 @@ export default function Home(){
     return(
         <div className="container">
             <div className="home">
-                <h2 className='balance'>Balance: ${totalBalance.toFixed(2)}</h2>
+                <h2 className='balance'>Balance: ${portfolio.totalBalance.toFixed(2)}</h2>
                 <div className="home-grid">
                     <div className="watchlist-card card bg-white">
                         <h2>Watchlist</h2>
@@ -60,7 +59,7 @@ export default function Home(){
                         <h2>Portfolio</h2>
                         <div className="flex space-between text-blue">
                             <h3>USD</h3>
-                            <h3>${usdBalance.toFixed(2)}</h3>
+                            <h3>${portfolio.usdBalance.toFixed(2)}</h3>
                         </div>
                         {assets}
                     </div>

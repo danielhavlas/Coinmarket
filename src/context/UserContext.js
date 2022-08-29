@@ -34,15 +34,7 @@ export const UserContextProvider = ({children}) => {
     disbatch({type: USER_ACTION_TYPE.SET_CURRENT_USER, payload: user})
   }
 
-  useEffect(()=>{
-    const unsubscribe = onAuthStateChangedListener((user)=>{
-      console.log(user);
-      setCurrentUser(user)
-    })  
-
-    return unsubscribe
-
-  },[])
+  
   return (
       <UserContext.Provider value={{currentUser,setCurrentUser}}>
           {children}

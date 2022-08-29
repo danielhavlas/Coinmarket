@@ -1,6 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route} from 'react-router-dom';
+import { useDispatch, useSelector } from "react-redux";
+
 import './App.css';
+
+import { onAuthStateChangedListener, createUserDocumentFromAuth } from "./utils/firebase.utils";
 
 import Home from './components/Home'
 import CoinPage from './components/CoinPage';
@@ -10,6 +14,10 @@ import Portfolio from './components/Portfolio'
 import MobileFooter from './components/MobileFooter'
 import Searchbar from './components/Searchbar';
 
+import { setCurrentUser } from "./store/user/user.action";
+import { updatePortfolio } from "./store/portfolio/portfolio.action";
+import { selectorPortfolio } from "./store/portfolio/portfolio.selector";
+
 import {useMobileOnly} from './hooks/useMobileOnly'
 import Authentication from './components/Authentication';
 
@@ -18,6 +26,40 @@ import Authentication from './components/Authentication';
 
 function App() {
   // localStorage.clear()
+  const dispatch = useDispatch()
+  const portfolio = useSelector(selectorPortfolio)
+
+  useEffect(()=>{
+    
+    // portfolio.portfolioArray.forEach(asset => {
+    //   fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${asset.id}&order=market_cap_desc&per_page=100&page=1&sparkline=false`)
+    //   .then(res => res.json())
+    //   .then(data => {
+    //     const newPortfolio = () => {
+    //       return portfolio.portfolioArray.map(v => {
+    //           if(v.id === asset.id){
+    //               return {...v,coinData: data [0], value: data[0].current_price * v.amount}
+    //           }else {
+    //               return {...v}
+    //           }
+    //       })
+    //     }
+    //       dispatch(updatePortfolio(newPortfolio,portfolio.usdBalance))
+    //     })
+    // })
+
+    const unsubscribe = onAuthStateChangedListener((user)=>{
+      if(user){
+        createUserDocumentFromAuth(user)
+      }
+      dispatch(setCurrentUser(user))
+    })  
+
+    return unsubscribe 
+
+  },[])
+
+
   const [searchDisplay, setSearchDisplay] = useState('closed')
   const {mobileOnly} = useMobileOnly()
   const search = (

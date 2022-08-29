@@ -1,15 +1,18 @@
 import React,{useState, useEffect, useContext, Suspense} from "react";
 import {useNavigate} from 'react-router-dom'
-
-import { WatchlistContext } from '../context/WatchlistContext'
+import { watchlist, isWatchlist } from "../store/watchlist/watchlist.action";
+import { selectorWatchlist } from '../store/watchlist/watchlist.selector';
 import { useMobileOnly } from "../hooks/useMobileOnly";
-
+import { useSelector,useDispatch } from "react-redux";
 import PriceChart from "./PriceChart";
 
 
 export default function Currencies(){
+
+    const {watchlistArray} =  useSelector(selectorWatchlist)
+    const dispatch = useDispatch()
+
     const [coinsData, setCoinsData] = useState(localStorage.getItem('coinsData')? JSON.parse(localStorage.getItem('coinsData')) : [])
-    const { watchlist, isWatchlist} = useContext(WatchlistContext)
     const {mobileOnly} = useMobileOnly()
     const lastFetch = Number(localStorage.getItem('lastFetch'))
     if(!lastFetch){
@@ -31,7 +34,7 @@ export default function Currencies(){
     const navigate = useNavigate()
 
     const currencies = coinsData?.map((coin,index) =>{ 
-        const iconClass = isWatchlist(coin)? "ri-star-fill" :"ri-star-line"
+        const iconClass = isWatchlist(coin,watchlistArray)? "ri-star-fill" :"ri-star-line"
         const priceChangeStyle = {
             color: coin.price_change_24h >= 0? 'rgb(0, 231, 0)' : 'red'
         }
@@ -39,7 +42,7 @@ export default function Currencies(){
         const green = coin.price_change_24h >= 0
         return(
             <tr key={index} className='fs-5 pointer' onClick={()=>  navigate(`/currencies/${coin.id}`)}  >
-                {!mobileOnly &&  <td className=" fs-1" onClick={(e)=>{e.stopPropagation(); watchlist(coin)}}><i className={`star-icon ${iconClass}`}></i></td>}
+                {!mobileOnly &&  <td className=" fs-1" onClick={(e)=>{e.stopPropagation(); dispatch(watchlist(coin,watchlistArray))}}><i className={`star-icon ${iconClass}`}></i></td>}
                {!mobileOnly &&  <td className="">{coin.market_cap_rank}</td>}
                 <td className="flex fw-600 gap-0 align-center">
                     <img src={coin.image} className='small-img'/>

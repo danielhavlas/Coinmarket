@@ -2,12 +2,14 @@ import Searchbar from './Searchbar';
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 import { signOutUser } from '../utils/firebase.utils';
-
+import { selectorCurrentUser } from "../store/user/user.selector";
 import {UserContext} from '../context/UserContext'
+import { useSelector } from 'react-redux';
 
 export default function Header(){
 
-    const {currentUser} = useContext(UserContext)
+    const currentUser = useSelector(selectorCurrentUser)
+    console.log(currentUser);
     return(
         <div className="header flex bg-blue space-between align-center">
             <h1 className='uppercase fs-1'>coinmarket</h1>

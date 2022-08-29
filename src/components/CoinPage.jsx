@@ -1,24 +1,27 @@
-import React, { useState, useEffect, useContext} from 'react';
+import React, { useState, useEffect} from 'react';
 import Range from './Range';
 import PriceChart from './PriceChart';
 import {useParams} from 'react-router-dom'
-import { PortfolioContext } from '../context/PortfolioContext'
-import { WatchlistContext } from '../context/WatchlistContext'
 import OrderPopup from './OrderPopup';
 import { useMobileOnly } from '../hooks/useMobileOnly';
-
-
+import { watchlist, isWatchlist } from "../store/watchlist/watchlist.action";
+import { selectorWatchlist } from '../store/watchlist/watchlist.selector';
+import { order } from "../store/portfolio/portfolio.action";
+import { useSelector, useDispatch } from "react-redux";
+import { selectorPortfolio } from '../store/portfolio/portfolio.selector';
 
 
 export default function Stockpage() {
+
+  const {portfolioArray, usdBalance} = useSelector(selectorPortfolio)
+  const {watchlistArray} = useSelector(selectorWatchlist)
+  const dispatch = useDispatch()
 
   const [selectedRange, setSelectedRange] = useState(0)
   const [selectedTab, setSelectedTab] = useState(1)
   const [coinData, setCoinData] = useState({})
   const [buyAmount, setBuyAmount] = useState(0)
   const {id} = useParams()
-  const {order, usdBalance} = useContext(PortfolioContext)
-  const { watchlist, isWatchlist} = useContext(WatchlistContext)
   const [displayOrder, setDisplayOrder] = useState('closed')
   const [tradeStatus, setTradeStatus] = useState('')
   const {mobileOnly} = useMobileOnly()
@@ -30,7 +33,6 @@ export default function Stockpage() {
       try{
         const res = await fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${id}&order=market_cap_desc&per_page=1&page=1&sparkline=false`)
         const data = await res.json()
-        console.log('fetched coinpage');
         setCoinData(data[0])
       }
       catch(err){
@@ -101,7 +103,7 @@ export default function Stockpage() {
     const minBuyPrice = 10
     if(buyAmount*coinData.current_price > minBuyPrice){
       if(usdBalance >= buyAmount*coinData.current_price){
-        order('buy',id,coinData,buyAmount,buyAmount*coinData.current_price)
+        dispatch(order('buy',id,coinData,buyAmount,buyAmount*coinData.current_price,portfolioArray,usdBalance))
         setDisplayOrder('closed')
         setTradeStatus('finished')
         setTimeout(() => {
@@ -122,7 +124,7 @@ export default function Stockpage() {
   if(coinData.id === undefined){
     return ''
   }
-  const iconClass = isWatchlist(coinData)? "ri-star-fill" :"ri-star-line"
+  const iconClass = isWatchlist(coinData,watchlistArray)? "ri-star-fill" :"ri-star-line"
 
   const buyField = (
     <div className={`order-container order-${displayOrder} card bg-black`}>
@@ -171,7 +173,7 @@ export default function Stockpage() {
                 <h4 className='text-grey fs-5'>USD</h4>
               </div>
               <h5 className='change fs-4' style={priceChangeStyle}>{`${coinData.price_change_24h.toFixed(2)} (${coinData.price_change_percentage_24h.toFixed(2)}%)`}</h5>
-              <button className='fs-5 text-blue' onClick={() => watchlist(coinData)}><i className={`star-icon ${iconClass}`}></i></button>
+              <button className='fs-5 text-blue' onClick={() => dispatch(watchlist(coinData,watchlistArray))}><i className={`star-icon ${iconClass}`}></i></button>
               {!mobileOnly && <button className="text-white fs-3 bg-blue buy-button" onClick={() => setDisplayOrder('open')}>Buy</button>}
             </div>
           </div>
