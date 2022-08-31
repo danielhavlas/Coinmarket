@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import './App.css';
 
-import { onAuthStateChangedListener, createUserDocumentFromAuth } from "./utils/firebase.utils";
+import { onAuthStateChangedListener, createUserDocumentFromAuth, getDocument, updateDocument } from "./utils/firebase.utils";
 
 import Home from './components/Home'
 import CoinPage from './components/CoinPage';
@@ -15,11 +15,12 @@ import MobileFooter from './components/MobileFooter'
 import Searchbar from './components/Searchbar';
 
 import { setCurrentUser } from "./store/user/user.action";
-import { updatePortfolio } from "./store/portfolio/portfolio.action";
+import { fetchPortfolioAsync, updatePortfolio } from "./store/portfolio/portfolio.action";
 import { selectorPortfolio } from "./store/portfolio/portfolio.selector";
 
 import {useMobileOnly} from './hooks/useMobileOnly'
 import Authentication from './components/Authentication';
+
 
 
 
@@ -51,6 +52,7 @@ function App() {
     const unsubscribe = onAuthStateChangedListener((user)=>{
       if(user){
         createUserDocumentFromAuth(user)
+        dispatch(fetchPortfolioAsync(user))
       }
       dispatch(setCurrentUser(user))
     })  

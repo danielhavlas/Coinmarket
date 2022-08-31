@@ -9,12 +9,14 @@ import { selectorWatchlist } from '../store/watchlist/watchlist.selector';
 import { order } from "../store/portfolio/portfolio.action";
 import { useSelector, useDispatch } from "react-redux";
 import { selectorPortfolio } from '../store/portfolio/portfolio.selector';
+import { selectorCurrentUser } from "../store/user/user.selector";
 
 
 export default function Stockpage() {
-
+  
   const {portfolioArray, usdBalance} = useSelector(selectorPortfolio)
   const {watchlistArray} = useSelector(selectorWatchlist)
+  const currentUser = useSelector(selectorCurrentUser)
   const dispatch = useDispatch()
 
   const [selectedRange, setSelectedRange] = useState(0)
@@ -103,7 +105,7 @@ export default function Stockpage() {
     const minBuyPrice = 10
     if(buyAmount*coinData.current_price > minBuyPrice){
       if(usdBalance >= buyAmount*coinData.current_price){
-        dispatch(order('buy',id,coinData,buyAmount,buyAmount*coinData.current_price,portfolioArray,usdBalance))
+        dispatch(order('buy',id,coinData,buyAmount,buyAmount*coinData.current_price,portfolioArray,usdBalance, currentUser))
         setDisplayOrder('closed')
         setTradeStatus('finished')
         setTimeout(() => {

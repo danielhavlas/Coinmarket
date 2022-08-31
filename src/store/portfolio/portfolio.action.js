@@ -1,9 +1,8 @@
 import { createAction } from "../../utils/reducer.utils";
 import { PORTFOLIO_ACTION_TYPES } from "./portfolio.types";
+import { getDocument, updateDocument } from "../../utils/firebase.utils";
 
-export const setPortfolio = (portfolio) => {
-    return createAction(PORTFOLIO_ACTION_TYPES.SET_PORTFOLIO, portfolio)
-}
+
 const updateTotalBalance = (newPortfolio,newUsdBalance) => {
     const portfolioValue = newPortfolio.map(v => parseInt(v.value)).reduce((t,v) => t + v, 0)
     return portfolioValue + newUsdBalance
@@ -14,7 +13,24 @@ export const updatePortfolio = (newPortfolio,newUsdBalance) => {
     return createAction(PORTFOLIO_ACTION_TYPES.SET_PORTFOLIO, portfolio)
 }
 
-export const order = (action,id,coinData,amount, price, portfolioArray, usdBalance) => {
+export const fetchPortfolioAsync = (user) => async( dispatch ) => {
+    dispatch(fetchPortfolioStart)
+    try {
+        const doc = await getDocument(user)
+        dispatch(fetchPortfolioSuccess(doc))
+        console.log(doc);
+    } catch (error) {
+        dispatch(fetchPortfolioFailed)
+    }
+}
+
+export const fetchPortfolioStart = () => createAction(PORTFOLIO_ACTION_TYPES.FETCH_PORTFOLIO_START)
+
+export const fetchPortfolioSuccess = (userDoc) => createAction(PORTFOLIO_ACTION_TYPES.FETCH_PORTFOLIO_SUCCESS, userDoc.portfolio)
+
+export const fetchPortfolioFailed = (error) => createAction(PORTFOLIO_ACTION_TYPES.FETCH_PORTFOLIO_FAILED, error)
+
+export const order = (action,id,coinData,amount, price, portfolioArray, usdBalance, user) => {
     if(action==='buy'){
         const newPortfolio = () => {
             const idArray = portfolioArray.map(v => v.id)
@@ -37,6 +53,7 @@ export const order = (action,id,coinData,amount, price, portfolioArray, usdBalan
         const newUsdBalance = usdBalance - price
         const updatedTotalBalance = updateTotalBalance(newPortfolioArray,newUsdBalance)
         const portfolio = {portfolioArray: newPortfolioArray,usdBalance:newUsdBalance, totalBalance: updatedTotalBalance}
+        updateDocument(user,{portfolio})
         return createAction(PORTFOLIO_ACTION_TYPES.SET_PORTFOLIO, portfolio)
     }
     else if(action === 'sell'){
@@ -56,6 +73,7 @@ export const order = (action,id,coinData,amount, price, portfolioArray, usdBalan
         const newUsdBalance = usdBalance + price
         const updatedTotalBalance = updateTotalBalance(newPortfolioArray,newUsdBalance)
         const portfolio = {portfolioArray: newPortfolioArray,usdBalance:newUsdBalance, totalBalance: updatedTotalBalance}
+        updateDocument(user,{portfolio})
         return createAction(PORTFOLIO_ACTION_TYPES.SET_PORTFOLIO, portfolio)
     }
 }

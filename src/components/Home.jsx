@@ -1,12 +1,17 @@
 import { useRef, useContext, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import PriceChart from './PriceChart'
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchPortfolioAsync } from "../store/portfolio/portfolio.action";
 import { selectorPortfolio } from '../store/portfolio/portfolio.selector';
 import { selectorWatchlist } from '../store/watchlist/watchlist.selector';
+import { selectorCurrentUser } from "../store/user/user.selector";
 
 export default function Home(){
+    const dispatch = useDispatch()
 
+    const currentUser = useSelector(selectorCurrentUser)
+    dispatch(fetchPortfolioAsync(currentUser))
     const portfolio = useSelector(selectorPortfolio)
 
     const {watchlistArray} =  useSelector(selectorWatchlist)
