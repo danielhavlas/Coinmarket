@@ -1,3 +1,7 @@
 import {all , call} from 'redux-saga/effects'
 
-export function* rootSaga(){}
+import { portfolioSaga } from './portfolio/portfolio.saga'
+
+export function* rootSaga(){
+    yield all([call(portfolioSaga)])
+}

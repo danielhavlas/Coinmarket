@@ -13,16 +13,16 @@ export const updatePortfolio = (newPortfolio,newUsdBalance) => {
     return createAction(PORTFOLIO_ACTION_TYPES.SET_PORTFOLIO, portfolio)
 }
 
-export const fetchPortfolioAsync = (user) => async( dispatch ) => {
-    dispatch(fetchPortfolioStart)
-    try {
-        const doc = await getDocument(user)
-        dispatch(fetchPortfolioSuccess(doc))
-        console.log(doc);
-    } catch (error) {
-        dispatch(fetchPortfolioFailed)
-    }
-}
+// export const fetchPortfolioAsync = (user) => async( dispatch ) => {
+//     dispatch(fetchPortfolioStart)
+//     try {
+//         const doc = await getDocument(user)
+//         dispatch(fetchPortfolioSuccess(doc))
+//         console.log(doc);
+//     } catch (error) {
+//         dispatch(fetchPortfolioFailed)
+//     }
+// }
 
 export const fetchPortfolioStart = () => createAction(PORTFOLIO_ACTION_TYPES.FETCH_PORTFOLIO_START)
 
@@ -53,7 +53,7 @@ export const order = (action,id,coinData,amount, price, portfolioArray, usdBalan
         const newUsdBalance = usdBalance - price
         const updatedTotalBalance = updateTotalBalance(newPortfolioArray,newUsdBalance)
         const portfolio = {portfolioArray: newPortfolioArray,usdBalance:newUsdBalance, totalBalance: updatedTotalBalance}
-        updateDocument(user,{portfolio})
+        // updateDocument(user,{portfolio})
         return createAction(PORTFOLIO_ACTION_TYPES.SET_PORTFOLIO, portfolio)
     }
     else if(action === 'sell'){
@@ -73,7 +73,7 @@ export const order = (action,id,coinData,amount, price, portfolioArray, usdBalan
         const newUsdBalance = usdBalance + price
         const updatedTotalBalance = updateTotalBalance(newPortfolioArray,newUsdBalance)
         const portfolio = {portfolioArray: newPortfolioArray,usdBalance:newUsdBalance, totalBalance: updatedTotalBalance}
-        updateDocument(user,{portfolio})
+        // updateDocument(user,{portfolio})
         return createAction(PORTFOLIO_ACTION_TYPES.SET_PORTFOLIO, portfolio)
     }
 }
