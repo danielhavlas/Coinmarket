@@ -5,22 +5,21 @@ import storage from "redux-persist/lib/storage";
 import createSagaMiddleware from "redux-saga";
 import { rootSaga } from "./root-saga";
 import logger from 'redux-logger'
-// const persistConfig = {
-//     key: 'root',
-//     storage,
-//     blackList: ['portfolio','watchlist','user']
-// }
+const persistConfig = {
+    key: 'root',
+    storage,
+    whitelist: ['watchlist']
+}
 
-// const persistedReducer = persistReducer(persistConfig,rootReducer)
+const persistedReducer = persistReducer(persistConfig,rootReducer)
 
 const sagaMiddleware = createSagaMiddleware()
 
 const middlewares = [sagaMiddleware, logger]
 const composedEnhancers = compose(applyMiddleware(...middlewares))
-export const store = createStore(rootReducer, undefined, composedEnhancers)
+
+export const store = createStore(persistedReducer, undefined, composedEnhancers)
+
+export const persistor = persistStore(store)
 
 sagaMiddleware.run(rootSaga)
-
-// export const store = createStore(persistedReducer, undefined, composedEnhancers)
-
-// export const persistor = persistStore(store)
