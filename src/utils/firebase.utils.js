@@ -36,7 +36,6 @@ export const getDocument = async (user) => {
   try{
     const docSnapshot = await getDoc(userDocRef)
     const data = docSnapshot.data()
-    console.log(data);
     return data
   }catch(error){
     console.log(error);

@@ -16,8 +16,10 @@ import Searchbar from './components/Searchbar';
 
 import { setCurrentUser } from "./store/user/user.action";
 import { fetchPortfolioStart, updatePortfolio } from "./store/portfolio/portfolio.action";
+import { updateWatchlist } from './store/watchlist/watchlist.action';
 import { selectorPortfolio } from "./store/portfolio/portfolio.selector";
 import { selectorCurrentUser } from "./store/user/user.selector";
+import { selectorWatchlist } from "./store/watchlist/watchlist.selector";
 
 import {useMobileOnly} from './hooks/useMobileOnly'
 import Authentication from './components/Authentication';
@@ -31,25 +33,28 @@ function App() {
   const dispatch = useDispatch()
   const portfolio = useSelector(selectorPortfolio)
   const currentUser = useSelector(selectorCurrentUser)
+  const {watchlistArray} = useSelector(selectorWatchlist)
 
   useEffect(()=>{
+    if(currentUser){
+      dispatch(fetchPortfolioStart())
+    }
+  },[currentUser])
+  useEffect(()=>{
+    async function updatePrices(){
+      watchlistArray.forEach(v => {
+        fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${v.id}&order=market_cap_desc&per_page=100&page=1&sparkline=false`)
+        .then(res => res.json())
+        .then(data => {
+          const newWatchlistArray = watchlistArray.map(i => {
+            return i.id === v.id? data[0] : i
+          })
+          dispatch(updateWatchlist(newWatchlistArray))
+        })
+    })
+    }
     
-    // portfolio.portfolioArray.forEach(asset => {
-    //   fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${asset.id}&order=market_cap_desc&per_page=100&page=1&sparkline=false`)
-    //   .then(res => res.json())
-    //   .then(data => {
-    //     const newPortfolio = () => {
-    //       return portfolio.portfolioArray.map(v => {
-    //           if(v.id === asset.id){
-    //               return {...v,coinData: data [0], value: data[0].current_price * v.amount}
-    //           }else {
-    //               return {...v}
-    //           }
-    //       })
-    //     }
-    //       dispatch(updatePortfolio(newPortfolio,portfolio.usdBalance))
-    //     })
-    // })
+    updatePrices()
 
     const unsubscribe = onAuthStateChangedListener((user)=>{
       if(user){
@@ -62,11 +67,7 @@ function App() {
     
   },[])
 
-  useEffect(()=>{
-    if(currentUser){
-      dispatch(fetchPortfolioStart())
-    }
-  },[currentUser])
+  
 
 
   const [searchDisplay, setSearchDisplay] = useState('closed')

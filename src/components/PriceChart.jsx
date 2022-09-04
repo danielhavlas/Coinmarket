@@ -101,8 +101,7 @@ function PriceChart (props){
                         formatter: function(value, context) {
                             if (context.dataIndex === context.dataset.data.length - 1)
                             {
-                                const lastPrice = value.toFixed(2)
-                                return lastPrice;
+                                return props.price;
                             }
                             return "";
                         },

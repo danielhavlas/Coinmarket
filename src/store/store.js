@@ -15,7 +15,7 @@ const persistedReducer = persistReducer(persistConfig,rootReducer)
 
 const sagaMiddleware = createSagaMiddleware()
 
-const middlewares = [sagaMiddleware, logger]
+const middlewares = [sagaMiddleware]
 const composedEnhancers = compose(applyMiddleware(...middlewares))
 
 export const store = createStore(persistedReducer, undefined, composedEnhancers)

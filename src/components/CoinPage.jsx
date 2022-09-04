@@ -9,14 +9,12 @@ import { selectorWatchlist } from '../store/watchlist/watchlist.selector';
 import { order } from "../store/portfolio/portfolio.action";
 import { useSelector, useDispatch } from "react-redux";
 import { selectorPortfolio } from '../store/portfolio/portfolio.selector';
-import { selectorCurrentUser } from "../store/user/user.selector";
 
 
 export default function Stockpage() {
   
   const {portfolioArray, usdBalance} = useSelector(selectorPortfolio)
   const {watchlistArray} = useSelector(selectorWatchlist)
-  const currentUser = useSelector(selectorCurrentUser)
   const dispatch = useDispatch()
 
   const [selectedRange, setSelectedRange] = useState(0)
@@ -105,7 +103,7 @@ export default function Stockpage() {
     const minBuyPrice = 10
     if(buyAmount*coinData.current_price > minBuyPrice){
       if(usdBalance >= buyAmount*coinData.current_price){
-        dispatch(order('buy',id,coinData,buyAmount,buyAmount*coinData.current_price,portfolioArray,usdBalance, currentUser))
+        dispatch(order('buy',id,coinData,buyAmount,buyAmount*coinData.current_price,portfolioArray,usdBalance))
         setDisplayOrder('closed')
         setTradeStatus('finished')
         setTimeout(() => {
@@ -202,7 +200,7 @@ export default function Stockpage() {
                 {rangeButtons}
               </div>
             </div>
-            <PriceChart className='coin-page-chart' id={id} range={selectedRange} large={true}/>
+            <PriceChart className='coin-page-chart' id={id} range={selectedRange} large={true} price={coinData.current_price}/>
           </div>
         </div>
         {mobileOnly && <button className="text-white fs-3 bg-blue buy-button" onClick={() => setDisplayOrder('open')}>Buy</button>}
