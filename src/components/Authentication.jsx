@@ -6,8 +6,7 @@ import SignInForm from "./SignInForm";
 export default function Authentication(){
 
     return(
-        <div>
-            <h1>Sign in page</h1>
+        <div className="flex">
             <SignInForm/>
             <SignUpForm/>
         </div>

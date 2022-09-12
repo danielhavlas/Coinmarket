@@ -47,7 +47,7 @@ export default function SignInForm(){
     }
 
     return(
-        <div>
+        <div className="card">
             <h3>Sigh up with email and password</h3>
             <form onSubmit={handleSubmit}>
                 <FormInput label="Email" type="email" name="email" onChange={handleChange} value={email} required/>
