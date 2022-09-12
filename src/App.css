@@ -370,6 +370,17 @@ a{
   color: var(--white);
   font-size: 2rem;
 }
+
+.google-auth{
+  border-radius: 15px;
+  padding: 0.5rem 1.5rem;
+}
+
+.google-icon{
+  width: 1.5rem;
+}
+
+
 @media (min-width:45rem) {
 
   :root{
@@ -556,6 +567,13 @@ a{
     align-items: center;
     justify-content: center;
     transition: transform 250ms cubic-bezier(.5, 0, .5, 1);
+  }
+
+  .auth{
+    margin-top: 5rem;
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
   }
 }
 
