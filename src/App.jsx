@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Routes, Route, Redirect} from 'react-router-dom';
+import { Routes, Route, useNavigate} from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 
 import './App.css';
@@ -29,10 +29,11 @@ import Authentication from './components/Authentication';
 
 
 function App() {
-  // localStorage.clear()
   const dispatch = useDispatch()
   const currentUser = useSelector(selectorCurrentUser)
   const {watchlistArray} = useSelector(selectorWatchlist)
+
+  const navigate = useNavigate()
 
   useEffect(()=>{
     if(currentUser){
@@ -50,7 +51,7 @@ function App() {
           })
           dispatch(updateWatchlist(newWatchlistArray))
         })
-    })
+      })
     }
     
     updatePrices()
@@ -59,15 +60,17 @@ function App() {
       if(user){
         createUserDocumentFromAuth(user)
         dispatch(setCurrentUser(user))
+        navigate('')
       }
     })  
+    
+    if(!currentUser){
+      navigate('auth')
+    }
 
     return unsubscribe 
     
   },[])
-
-  
-
 
   const [searchDisplay, setSearchDisplay] = useState('closed')
   const {mobileOnly} = useMobileOnly()
@@ -81,7 +84,7 @@ function App() {
 )
   return (
     <div className="App">
-      {!mobileOnly && currentUser && <Header className='large-only' />}
+      {!mobileOnly && <Header className='large-only' />}
       {mobileOnly && search}
       <Routes>
         <Route path='/' element={<Home />}/>
@@ -89,9 +92,8 @@ function App() {
         <Route path='/portfolio' element={<Portfolio/>}/>
         <Route path='/currencies/:id' element={<CoinPage/>} />
         <Route path='/auth' element={<Authentication/>} />
-        {!currentUser && <Redirect to='auth' />}
       </Routes>
-      {mobileOnly && currentUser && <MobileFooter openSearch={setSearchDisplay} className='mobile-only' />}
+      {mobileOnly && <MobileFooter openSearch={setSearchDisplay} className='mobile-only' />}
     </div>
   );
 }
