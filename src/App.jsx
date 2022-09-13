@@ -13,11 +13,12 @@ import Currencies from './components/Currencies';
 import Portfolio from './components/Portfolio'
 import MobileFooter from './components/MobileFooter'
 import Searchbar from './components/Searchbar';
+import Landing from './components/Landing'
+
 
 import { setCurrentUser } from "./store/user/user.action";
-import { fetchPortfolioStart, updatePortfolio } from "./store/portfolio/portfolio.action";
+import { fetchPortfolioStart } from "./store/portfolio/portfolio.action";
 import { updateWatchlist } from './store/watchlist/watchlist.action';
-import { selectorPortfolio } from "./store/portfolio/portfolio.selector";
 import { selectorCurrentUser } from "./store/user/user.selector";
 import { selectorWatchlist } from "./store/watchlist/watchlist.selector";
 
@@ -64,7 +65,6 @@ function App() {
       }
     })  
     
-
     return unsubscribe 
     
   },[])
@@ -84,7 +84,8 @@ function App() {
       {!mobileOnly && <Header className='large-only' />}
       {mobileOnly && search}
       <Routes>
-        <Route path='/' element={<Home />}/>
+        <Route path='/' element={<Landing/>} />
+        <Route path='/home' element={<Home />}/>
         <Route path='/currencies' element={<Currencies/>} />
         <Route path='/portfolio' element={<Portfolio/>}/>
         <Route path='/currencies/:id' element={<CoinPage/>} />

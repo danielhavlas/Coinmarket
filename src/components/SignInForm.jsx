@@ -1,8 +1,7 @@
 import {useState } from "react";
-import { createUserDocumentFromAuth, signInWithGooglePopup, signInAuthUserWithEmailAndPassword } from "../utils/firebase.utils";
+import { signInAuthUserWithEmailAndPassword } from "../utils/firebase.utils";
 
 import FormInput from "./FormInput";
-
 
 const defaultFormFields = {
     email:'',
@@ -24,7 +23,7 @@ export default function SignInForm(){
     const handleSubmit = async (e) => { 
         e.preventDefault()
         try{
-            const {user} = await signInAuthUserWithEmailAndPassword(email,password)
+            const {user} = await signInAuthUserWithEmailAndPassword(email, password)
             resetForm()
         }catch(error){
             switch(error.code){
