@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Routes, Route, useNavigate} from 'react-router-dom';
+import { Routes, Route, useNavigate, useLocation} from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 
 import './App.css';
@@ -35,6 +35,7 @@ function App() {
   const {watchlistArray} = useSelector(selectorWatchlist)
 
   const navigate = useNavigate()
+  const location = useLocation()
 
   useEffect(()=>{
     if(currentUser){
@@ -81,7 +82,7 @@ function App() {
 )
   return (
     <div className="App">
-      {!mobileOnly && <Header className='large-only' />}
+      {!mobileOnly && location.pathname !== '/' && <Header className='large-only' />}
       {mobileOnly && search}
       <Routes>
         <Route path='/' element={<Landing/>} />
@@ -91,7 +92,7 @@ function App() {
         <Route path='/currencies/:id' element={<CoinPage/>} />
         <Route path='/auth' element={<Authentication/>} />
       </Routes>
-      {mobileOnly && <MobileFooter openSearch={setSearchDisplay} className='mobile-only' />}
+      {mobileOnly && location.pathname !== '/' && <MobileFooter openSearch={setSearchDisplay} className='mobile-only' />}
     </div>
   );
 }
