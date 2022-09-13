@@ -49,17 +49,17 @@ export default function SignInForm(){
 
     return(
         <div>   
-            <div className="card bg-white">
-                <h3>Sigh up with email and password</h3>
+            <div className="card bg-white auth--card">
+                <h3 className="text-blue">Sign in</h3>
                 <form onSubmit={handleSubmit}>
                     <FormInput label="Email" type="email" name="email" onChange={handleChange} value={email} required/>
                     <FormInput label="Password" type="password" name="password" onChange={handleChange} value={password} required/>
-                    <button type="submit">Sign In</button>
+                    <button type="submit" className="sign-in-button fs-4">Sign In</button>
                 </form>
             </div>
             <button className="google-auth bg-white flex align-center gap-1 fs-5" type="button" onClick={signInWithGoogle}>
                 <img className="google-icon" src={google_icon} alt="" />
-                <p>Google Sign In</p>
+                <p className="fs-4">Google Sign In</p>
             </button>
         </div>
     )

@@ -12,7 +12,7 @@ body{
   --black: #2C2C34;
   --grey: #a1a1a1;
   --white: #FFFFFF;
-  --green: #C3FF42;
+  --green: #adff2f;
   --blue: #4B40EE;
   --red: #E71D36;
 
@@ -374,12 +374,101 @@ a{
 }
 
 .google-auth{
-  border-radius: 15px;
+  border-radius: 3rem;
   padding: 0.5rem 1.5rem;
 }
 
 .google-icon{
   width: 1.5rem;
+}
+
+.auth--card{
+  padding: 3rem;
+}
+
+
+/* 
+
+auth form
+
+*/
+
+.label {
+  color:var(--grey);
+  font-size: 1.2rem;
+  position: absolute;
+  pointer-events: none;
+  left: 0;
+  transform-origin: 0%;
+  transition: transform 400ms;
+}
+
+.field:focus-within .label,
+.input:not(:placeholder-shown) + .label {
+  transform: scale(0.8) translateY(-1.5rem);
+  opacity: 1;
+}
+
+.input {
+  outline: none;
+  border: none;
+  overflow: hidden;
+  margin: 0;
+  width: 100%;
+  padding: 0.25rem 0;
+  background: none;
+  color: var(--black);
+  font-size: 1.2em;
+  font-weight: bold;
+  transition: border 500ms;
+}
+
+/* .input:valid{
+  color: var(--green);
+}
+
+.input:invalid{
+  color: var(--red);
+} */
+
+.field {
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  margin: 2rem auto 1rem;
+  transition: 500ms;
+  border-bottom: 1px solid var(--grey);
+}
+
+.field::after {
+  content: "";
+  position: relative;
+  display: block;
+  height: 4px;
+  width: 100%;
+  background: var(--blue);
+  transform: scaleX(0);
+  transform-origin: 0%;
+  opacity: 0;
+  transition: all 500ms ease;
+  top: 2px;
+}
+
+
+.field:focus-within {
+  border-color: transparent;
+}
+
+.field:focus-within::after {
+  transform: scaleX(1);
+  opacity: 1;
+}
+
+.sign-in-button {
+  border-radius: 3rem;
+  background-color: var(--blue);
+  padding: 0.5em 1em;
+  color: var(--white);
 }
 
 @media (min-width:45rem) {

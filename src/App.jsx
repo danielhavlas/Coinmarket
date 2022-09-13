@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Routes, Route} from 'react-router-dom';
+import { Routes, Route, Redirect} from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 
 import './App.css';
@@ -31,7 +31,6 @@ import Authentication from './components/Authentication';
 function App() {
   // localStorage.clear()
   const dispatch = useDispatch()
-  const portfolio = useSelector(selectorPortfolio)
   const currentUser = useSelector(selectorCurrentUser)
   const {watchlistArray} = useSelector(selectorWatchlist)
 
@@ -67,8 +66,6 @@ function App() {
     
   },[])
 
-  
-
 
   const [searchDisplay, setSearchDisplay] = useState('closed')
   const {mobileOnly} = useMobileOnly()
@@ -82,7 +79,7 @@ function App() {
 )
   return (
     <div className="App">
-      {!mobileOnly && <Header className='large-only' />}
+      {!mobileOnly && currentUser && <Header className='large-only' />}
       {mobileOnly && search}
       <Routes>
         <Route path='/' element={<Home />}/>
@@ -91,7 +88,7 @@ function App() {
         <Route path='/currencies/:id' element={<CoinPage/>} />
         <Route path='/auth' element={<Authentication/>} />
       </Routes>
-      {mobileOnly && <MobileFooter openSearch={setSearchDisplay} className='mobile-only' />}
+      {mobileOnly && currentUser && <MobileFooter openSearch={setSearchDisplay} className='mobile-only' />}
     </div>
   );
 }

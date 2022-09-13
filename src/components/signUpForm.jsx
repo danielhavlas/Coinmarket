@@ -42,14 +42,14 @@ export default function SignUpForm(){
     }
 
     return(
-        <div className="card bg-white">
-            <h3>Sigh up with email and password</h3>
+        <div className="card bg-white auth--card">
+            <h3 className="text-blue">Sign up</h3>
             <form onSubmit={handleSubmit}>
                 <FormInput label="Display Name" type="text" name="displayName" onChange={handleChange} value={displayName} required/>
                 <FormInput label="Email" type="email" name="email" onChange={handleChange} value={email} required/>
                 <FormInput label="Password" type="password" name="password" onChange={handleChange} value={password} required/>
                 <FormInput label="Confirm Password" type="password" name="confirmPassword" onChange={handleChange} value={confirmPassword} required/>
-                <button type="submit">Sign Up</button>
+                <button type="submit" className="sign-in-button fs-4">Sign Up</button>
             </form>
         </div>
     )
