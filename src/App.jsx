@@ -66,6 +66,8 @@ function App() {
     
   },[])
 
+  
+
 
   const [searchDisplay, setSearchDisplay] = useState('closed')
   const {mobileOnly} = useMobileOnly()
@@ -87,6 +89,7 @@ function App() {
         <Route path='/portfolio' element={<Portfolio/>}/>
         <Route path='/currencies/:id' element={<CoinPage/>} />
         <Route path='/auth' element={<Authentication/>} />
+        {!currentUser && <Redirect to='auth' />}
       </Routes>
       {mobileOnly && currentUser && <MobileFooter openSearch={setSearchDisplay} className='mobile-only' />}
     </div>
