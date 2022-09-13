@@ -62,7 +62,7 @@ function App() {
       if(user){
         createUserDocumentFromAuth(user)
         dispatch(setCurrentUser(user))
-        navigate('')
+        navigate('/home')
       }
     })  
     
