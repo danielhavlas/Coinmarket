@@ -1,6 +1,5 @@
 import {useState } from "react";
 import { createUserDocumentFromAuth, signInWithGooglePopup, signInAuthUserWithEmailAndPassword } from "../utils/firebase.utils";
-import google_icon from '../assets/google-logo.png'
 
 import FormInput from "./FormInput";
 
@@ -14,16 +13,10 @@ export default function SignInForm(){
     const [formFields,setFormFields] = useState(defaultFormFields)
     const {email,password} = formFields
 
-
     const resetForm = () => {
         setFormFields(defaultFormFields)
     }
 
-    const signInWithGoogle = async () => {
-        const {user} = await signInWithGooglePopup()
-        createUserDocumentFromAuth(user)
-    }
- 
     const handleChange = (e) => {
         const {name, value} = e.target
         setFormFields({...formFields,[name]: value})
@@ -57,10 +50,7 @@ export default function SignInForm(){
                     <button type="submit" className="sign-in-button fs-4">Sign In</button>
                 </form>
             </div>
-            <button className="google-auth bg-white flex align-center gap-1 fs-5" type="button" onClick={signInWithGoogle}>
-                <img className="google-icon" src={google_icon} alt="" />
-                <p className="fs-4">Google Sign In</p>
-            </button>
+            
         </div>
     )
 }

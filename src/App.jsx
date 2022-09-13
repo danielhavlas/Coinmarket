@@ -64,9 +64,6 @@ function App() {
       }
     })  
     
-    if(!currentUser){
-      navigate('auth')
-    }
 
     return unsubscribe 
     

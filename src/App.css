@@ -56,6 +56,11 @@ body{
   min-height: 100vh;
 }
 
+.center{
+  display: flex;
+  justify-content: center;
+}
+
 
 .grid{
   display: grid;
@@ -296,8 +301,6 @@ body{
   transform: scale(0);
 }
 
-
-
 .icon-container{
   margin-block:0;
   margin-inline: auto;
@@ -374,6 +377,7 @@ a{
 }
 
 .google-auth{
+  justify-self: center;
   border-radius: 3rem;
   padding: 0.5rem 1.5rem;
 }
@@ -383,7 +387,7 @@ a{
 }
 
 .auth--card{
-  padding: 3rem;
+  padding: 1rem 3rem;
 }
 
 
@@ -660,10 +664,9 @@ auth form
   }
 
   .auth{
-    margin-top: 5rem;
-    display: flex;
-    justify-content: center;
-    gap: 4rem;
+    margin-top: 3rem;
+    width: 30rem;
+    margin-left: 10rem;
   }
 }
 

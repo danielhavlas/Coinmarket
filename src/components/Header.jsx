@@ -15,7 +15,7 @@ export default function Header(){
                 <Link to='/portfolio'>ASSETS</Link>
                 <Link to='/currencies'>CURRENCIES</Link>
                 <Searchbar/>
-                {currentUser ?<i onClick={signOutUser} className="ri-user-line text-white fs-2 pointer"></i> :<Link to='/auth'>SIGN IN</Link>}
+                {currentUser ? <div> <Link to='/auth'><i onClick={signOutUser} className="ri-user-line text-white fs-2 pointer"></i></Link></div> :<Link to='/auth'>SIGN IN</Link>}
             </div>
         </div>
     )
