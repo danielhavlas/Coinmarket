@@ -1,5 +1,5 @@
 import React, { useState, useEffect} from 'react';
-import Range from './Range';
+import Range from './Range.tsx';
 import PriceChart from './PriceChart';
 import {useParams} from 'react-router-dom'
 import OrderPopup from './OrderPopup';

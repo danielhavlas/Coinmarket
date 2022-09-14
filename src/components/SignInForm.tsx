@@ -1,7 +1,7 @@
-import {useState } from "react";
+import React, {useState } from "react";
 import { signInAuthUserWithEmailAndPassword } from "../utils/firebase.utils";
 
-import FormInput from "./FormInput";
+import FormInput from "./FormInput.tsx";
 
 const defaultFormFields = {
     email:'',
@@ -16,14 +16,14 @@ export default function SignInForm(){
         setFormFields(defaultFormFields)
     }
 
-    const handleChange = (e) => {
+    const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
         const {name, value} = e.target
         setFormFields({...formFields,[name]: value})
     }
-    const handleSubmit = async (e) => { 
+    const handleSubmit = async (e:React.FormEvent<HTMLFormElement>) => { 
         e.preventDefault()
         try{
-            const {user} = await signInAuthUserWithEmailAndPassword(email, password)
+            await signInAuthUserWithEmailAndPassword(email, password)
             resetForm()
         }catch(error){
             switch(error.code){

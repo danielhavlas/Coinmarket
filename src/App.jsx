@@ -23,7 +23,7 @@ import { selectorCurrentUser } from "./store/user/user.selector";
 import { selectorWatchlist } from "./store/watchlist/watchlist.selector";
 
 import {useMobileOnly} from './hooks/useMobileOnly'
-import Authentication from './components/Authentication';
+import Authentication from './components/Authentication.tsx';
 
 
 

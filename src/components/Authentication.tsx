@@ -1,6 +1,7 @@
+import React from "react";
 import {signInWithGooglePopup, createUserDocumentFromAuth, signInGuest} from '../utils/firebase.utils'
-import SignUpForm from "./SignUpForm";
-import SignInForm from "./SignInForm";
+import SignUpForm from "./SignUpForm.tsx";
+import SignInForm from "./SignInForm.tsx";
 import google_icon from '../assets/google-logo.png'
 import { useState } from 'react';
 
@@ -19,8 +20,8 @@ export default function Authentication(){
         <div className="auth">
             {signIn && <SignInForm />}
             {!signIn && <SignUpForm />}
-            {signIn && <p onClick={() => setSignIn(false)} className="center fs-4 text-grey">or Create An Account</p>}
-            {!signIn && <p onClick={() => setSignIn(true)} className="center fs-4 text-grey">or Sign In</p>}
+            {signIn && <p onClick={() => setSignIn(false)} className="center pointer fs-4 text-grey">or Create An Account</p>}
+            {!signIn && <p onClick={() => setSignIn(true)} className="center pointer fs-4 text-grey">or Sign In</p>}
             <div className="gap-2 center">
                 <button className="google-auth bg-white flex align-center gap-1 fs-5" type="button" onClick={signInWithGoogle}>
                     <img className="google-icon" src={google_icon} alt="" />

@@ -1,7 +1,7 @@
-import { useState } from "react"
+import React, { useState } from "react"
 import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from "../utils/firebase.utils";
 
-import FormInput from "./FormInput";
+import FormInput from "./FormInput.tsx";
  
 const defaultFormFields = {
     displayName:'',
@@ -18,18 +18,18 @@ export default function SignUpForm(){
         setFormFields(defaultFormFields)
     }
  
-    const handleChange = (e) => {
+    const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
         const {name, value} = e.target
         setFormFields({...formFields,[name]: value})
     }
-    const handleSubmit = async (e) => { 
+    const handleSubmit = async (e:React.FormEvent<HTMLFormElement>) => { 
         e.preventDefault()
         if(password != confirmPassword){
             alert('Passwords do not match')
             return
         }
         try{
-            const {user} = await createAuthUserWithEmailAndPassword(email,password)
+            const {user}:any = await createAuthUserWithEmailAndPassword(email,password)
             await createUserDocumentFromAuth(user,{displayName})
             resetForm()
         }catch(error){

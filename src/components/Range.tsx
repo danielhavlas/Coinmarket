@@ -1,6 +1,13 @@
 import React from "react";
 
-function Range ({selected, range, index, selectRange}){
+interface IRangeProps {
+    selected: number,
+    range: string,
+    index: number,
+    selectRange: (index: number) => void
+}
+
+function Range ({selected, range, index, selectRange}: IRangeProps){
 
     const style = {
         backgroundColor: selected===index? "#4B40EE" : "",
