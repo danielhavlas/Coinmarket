@@ -1,5 +1,5 @@
 import React,{useEffect, useState, useRef} from "react"
-import Chart from 'chart.js/auto'
+import Chart, {ChartData, ChartOptions} from 'chart.js/auto'
 import {Line} from "react-chartjs-2"
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 Chart.register(ChartDataLabels);
@@ -8,13 +8,14 @@ interface IPriceChartProps {
     id: number,
     range: number,
     large: boolean,
-    price: number
+    price: number,
+    green: boolean
 }
 
 function PriceChart (props:IPriceChartProps){
     const rangeInDays = ['1','3','7','30','180','365','max']
     const [chartData, setChartData] = useState([])
-    const chartRef = useRef<HTMLCanvasElement>(null)
+    const chartRef = useRef<ForwardedRef<Chart<TType, TData, TLabel>>>(null)
     const [gradient, setGradient] = useState<CanvasGradient>()
 
     useEffect(()=>{
@@ -35,10 +36,10 @@ function PriceChart (props:IPriceChartProps){
     useEffect(()=>{
         if(chartRef.current){
             const canvas = chartRef.current
-            const ctx = canvas.getContext('2d')
-            const gradient = ctx!.createLinearGradient(0, 0, 0, 350);
+            const ctx = canvas.ctx
+            const gradient = ctx.createLinearGradient(0, 0, 0, 350);
             gradient.addColorStop(0, '#E8E7FF');
-            gradient.addColorStop(0.5, 'rgba(255,255,255,1)');
+            gradient.addColorStop(0.85, 'rgba(255,255,255,1)');
             setGradient(gradient)
         }
     },[])
@@ -46,7 +47,7 @@ function PriceChart (props:IPriceChartProps){
     return(
         <>
         {props.large? <div className="chart-container">
-            <Line 
+            <Line
             ref={chartRef}
             className="chart"
             data={{
@@ -67,9 +68,6 @@ function PriceChart (props:IPriceChartProps){
                         borderColor: '#4b40ee',
                         backgroundColor: gradient,
                         fill: true,
-                        pointRadius:0,
-                        hitPointRadius:0,
-                        hoverRadius:0,
                     }
                 },
                 layout:{
@@ -149,7 +147,7 @@ function PriceChart (props:IPriceChartProps){
                 
             }}
             plugins={[ChartDataLabels]}
-            />
+            /> 
         </div> : <div className="small-chart">  <Line 
             ref={chartRef}
             
@@ -173,9 +171,6 @@ function PriceChart (props:IPriceChartProps){
                     line:{
                         borderWidth:2,
                         borderColor: props.green? 'rgb(0, 231, 0)' : 'red',
-                        pointRadius:0,
-                        hitPointRadius:0,
-                        hoverRadius:0,
                     }
                 },
                 
@@ -196,7 +191,6 @@ function PriceChart (props:IPriceChartProps){
                 },
                 scales: {
                     
-                    
                     x: {
                         grid: {
                             display: false,
@@ -212,7 +206,6 @@ function PriceChart (props:IPriceChartProps){
                       grid: {
                         display: false,
                         drawBorder: false,
-
                       },
                       ticks:{
                         display: false,

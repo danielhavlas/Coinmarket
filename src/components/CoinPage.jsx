@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from 'react';
 import Range from './Range.tsx';
-import PriceChart from './PriceChart';
+import PriceChart from './PriceChart.tsx';
 import {useParams} from 'react-router-dom'
 import OrderPopup from './OrderPopup';
 import { useMobileOnly } from '../hooks/useMobileOnly';

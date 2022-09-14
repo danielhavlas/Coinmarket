@@ -4,7 +4,7 @@ import { watchlist, isWatchlist } from "../store/watchlist/watchlist.action";
 import { selectorWatchlist } from '../store/watchlist/watchlist.selector';
 import { useMobileOnly } from "../hooks/useMobileOnly";
 import { useSelector,useDispatch } from "react-redux";
-import PriceChart from "./PriceChart";
+import PriceChart from "./PriceChart.tsx";
 
 
 export default function Currencies(){

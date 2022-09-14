@@ -48,7 +48,7 @@ export default function Portfolio(){
         setTradeStatus('finished')
         setTimeout(() => {
             setTradeStatus('')
-          }, 2000);
+        }, 2000);
     }
 
 
@@ -120,7 +120,7 @@ export default function Portfolio(){
     return(
         <div className='container'>
             <div className="portfolio-page">
-                <h2>Total balance: ${totalBalance}</h2>
+                <h2>Total balance: ${totalBalance.toFixed(2)}</h2>
                 <div className={` flex ${mobileOnly? '':'gap-2'} `}>
                     <table className="card table bg-white">
                         <thead>

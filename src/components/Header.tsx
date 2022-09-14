@@ -1,3 +1,4 @@
+import React from 'react';
 import Searchbar from './Searchbar';
 import { Link } from 'react-router-dom';
 import { signOutUser } from '../utils/firebase.utils';

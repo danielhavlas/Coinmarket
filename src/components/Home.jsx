@@ -1,7 +1,7 @@
 import { useRef, useContext, useEffect } from 'react'
 
 import { Link } from 'react-router-dom'
-import PriceChart from './PriceChart'
+import PriceChart from './PriceChart.tsx'
 import { useSelector, useDispatch } from "react-redux";
 import { selectorPortfolio } from '../store/portfolio/portfolio.selector';
 import { selectorWatchlist } from '../store/watchlist/watchlist.selector';
