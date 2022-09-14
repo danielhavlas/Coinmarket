@@ -1,5 +1,5 @@
 import React from 'react';
-import Searchbar from './Searchbar';
+import Searchbar from './Searchbar.tsx';
 import { Link } from 'react-router-dom';
 import { signOutUser } from '../utils/firebase.utils';
 import { selectorCurrentUser } from "../store/user/user.selector";

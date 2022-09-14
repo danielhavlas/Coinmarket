@@ -8,11 +8,11 @@ import { onAuthStateChangedListener, createUserDocumentFromAuth, getDocument, up
 
 import Home from './components/Home'
 import CoinPage from './components/CoinPage';
-import Header from './components/Header'
+import Header from './components/Header.tsx'
 import Currencies from './components/Currencies';
 import Portfolio from './components/Portfolio'
 import MobileFooter from './components/MobileFooter'
-import Searchbar from './components/Searchbar';
+import Searchbar from './components/Searchbar.tsx';
 import Landing from './components/Landing'
 
 
@@ -24,10 +24,6 @@ import { selectorWatchlist } from "./store/watchlist/watchlist.selector";
 
 import {useMobileOnly} from './hooks/useMobileOnly'
 import Authentication from './components/Authentication.tsx';
-
-
-
-
 
 function App() {
   const dispatch = useDispatch()

@@ -1,34 +1,52 @@
+import React, { useState, useEffect } from 'react'
 import Select from 'react-select'
-import { useState, useEffect } from 'react'
 import {useNavigate, Link} from 'react-router-dom'
 import { useMobileOnly } from '../hooks/useMobileOnly'
+import { fetchData } from "../utils/fetchData.utils.ts";
 
-export default function Searchbar(props){
+interface IOptions {
+  value: number,
+  label: JSX.Element
+}
 
-    const [options, setOptions] = useState([])
-    const [inputValue, setInputValue] = useState('')
-    const [value, setValue] = useState()
-    const [searchData,setSearchData] = useState([])
+interface ISearchBarProps {
+  closeSearch: (param: string) => void
+}
+
+interface ICoinData {
+  id: number,
+  image: string,
+  name: string
+}
+
+export default function Searchbar({closeSearch}:ISearchBarProps){
+
+    const [options, setOptions] = useState<IOptions[]>([])
+    const [value, setValue] = useState<IOptions | null>()
+    const [searchData,setSearchData] = useState<ICoinData[]>([])
     const {mobileOnly} = useMobileOnly()
+    const [key,setKey] = useState('')
     const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1&sparkline=false`
   
     const navigate = useNavigate()
 
     useEffect(()=>{
-      fetch(url)
-      .then(res => res.json())
-      .then(data => {
+      const getData = async () => {
+        const data = await fetchData<ICoinData[]>(url)
         setSearchData(data)
-      })
+      }
+      getData()
     },[])
 
-    function handleChange(o){
+    function handleChange(o) {
       setValue(o)
     }
     
     function search(){
-      navigate(`/coins/${value.value}`)
-      setValue(null)
+      if (value){
+        navigate(`/coins/${value.value}`)
+        setValue(null)
+      }
     }
 
     const searchStyles = {
@@ -60,21 +78,15 @@ export default function Searchbar(props){
         menuList: (provided) =>({
             ...provided,
             height:'100%',
-        }),
-        indicatorsContainer: (provided) =>({
-            ...provided,
-            display:'none'
         })
-    
       }
 
 
-    function search(input){
-        setInputValue(input)
-        const options = searchData.map(coin => {
+    function searchInput(){
+        const options: IOptions[] = searchData.map(coin => {
             return{
                 value: coin.id,
-                label: <Link to={`/currencies/${coin.id}`} onClick={() => props.closeSearch('closed')} className={`option align-center ${mobileOnly? 'bg-black text-white' : 'bg-white text-black'} flex gap-1`}>
+                label: <Link to={`/currencies/${coin.id}`} onClick={() => closeSearch('closed')} className={`option align-center ${mobileOnly? 'bg-black text-white' : 'bg-white text-black'} flex gap-1`}>
                         <img className='small-img' src={coin.image}/>
                         <p>{coin.name}</p>
                        </Link> ,
@@ -82,7 +94,6 @@ export default function Searchbar(props){
         })
         setOptions(options)
     }
-    const [key,setKey] = useState()
     
 
     useEffect(()=>{
@@ -97,7 +108,7 @@ export default function Searchbar(props){
     return(
       <Select 
         onKeyDown={e => setKey(e.code)} 
-        onInputChange={search} 
+        onInputChange={searchInput} 
         placeholder='Search' 
         onChange={handleChange} 
         onFocus={search}
