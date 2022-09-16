@@ -1,5 +1,5 @@
 import React,{useEffect, useState, useRef} from "react"
-import Chart, {ChartData, ChartOptions} from 'chart.js/auto'
+import Chart from 'chart.js/auto'
 import {Line} from "react-chartjs-2"
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 Chart.register(ChartDataLabels);
@@ -15,7 +15,7 @@ interface IPriceChartProps {
 function PriceChart (props:IPriceChartProps){
     const rangeInDays = ['1','3','7','30','180','365','max']
     const [chartData, setChartData] = useState([])
-    const chartRef = useRef<ForwardedRef<Chart<TType, TData, TLabel>>>(null)
+    const chartRef = useRef<Chart>(null)
     const [gradient, setGradient] = useState<CanvasGradient>()
 
     useEffect(()=>{

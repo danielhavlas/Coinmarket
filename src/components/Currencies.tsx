@@ -5,6 +5,19 @@ import { selectorWatchlist } from '../store/watchlist/watchlist.selector';
 import { useMobileOnly } from "../hooks/useMobileOnly";
 import { useSelector,useDispatch } from "react-redux";
 import PriceChart from "./PriceChart.tsx";
+import { fetchData } from "../utils/fetchData.utils.ts";
+
+interface ICoinData {
+    price_change_24h: number,
+    image: string,
+    current_price: number,
+    id: number,
+    name: string,
+    symbol: string,
+    market_cap: number,
+    market_cap_rank: number,
+    price_change_percentage_24h: number
+}
 
 
 export default function Currencies(){
@@ -12,23 +25,16 @@ export default function Currencies(){
     const {watchlistArray} =  useSelector(selectorWatchlist)
     const dispatch = useDispatch()
 
-    const [coinsData, setCoinsData] = useState(localStorage.getItem('coinsData')? JSON.parse(localStorage.getItem('coinsData')) : [])
+    const [coinsData, setCoinsData] = useState<ICoinData[]>([])
     const {mobileOnly} = useMobileOnly()
-    const lastFetch = Number(localStorage.getItem('lastFetch'))
-    if(!lastFetch){
-        localStorage.setItem('lastFetch', Date.now()+60000)
-    }
+    const url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false'
+
     useEffect(()=> {
-        if(Date.now() - lastFetch - 60000 > 0){
-            fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false`)
-            .then(res => res.json())
-            .then(data => {
+            const getData = async () => {
+                const data = await fetchData<ICoinData[]>(url)
                 setCoinsData(data)
-                localStorage.setItem('coinsData',JSON.stringify(data))
-                localStorage.setItem('lastFetch', Date.now())
-            })
-            console.log('fetched all currencies');
-        }
+            }
+            getData()
     },[])
 
     const navigate = useNavigate()

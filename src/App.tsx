@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate, useLocation} from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 
@@ -6,14 +6,14 @@ import './App.css';
 
 import { onAuthStateChangedListener, createUserDocumentFromAuth, getDocument, updateDocument } from "./utils/firebase.utils";
 
-import Home from './components/Home'
-import CoinPage from './components/CoinPage';
+import Home from './components/Home.tsx'
+import CoinPage from './components/CoinPage.tsx';
 import Header from './components/Header.tsx'
-import Currencies from './components/Currencies';
-import Portfolio from './components/Portfolio'
-import MobileFooter from './components/MobileFooter'
+import Currencies from './components/Currencies.tsx';
+import Portfolio from './components/Portfolio.tsx'
+import MobileFooter from './components/MobileFooter.tsx'
 import Searchbar from './components/Searchbar.tsx';
-import Landing from './components/Landing'
+import Landing from './components/Landing.tsx'
 
 
 import { setCurrentUser } from "./store/user/user.action";
@@ -22,13 +22,36 @@ import { updateWatchlist } from './store/watchlist/watchlist.action';
 import { selectorCurrentUser } from "./store/user/user.selector";
 import { selectorWatchlist } from "./store/watchlist/watchlist.selector";
 
-import {useMobileOnly} from './hooks/useMobileOnly'
+import {useMobileOnly} from './hooks/useMobileOnly.ts'
 import Authentication from './components/Authentication.tsx';
+
+interface ICoinData {
+  price_change_24h:number,
+  image: string,
+  current_price: number,
+  id: number,
+  name: string,
+  symbol: string
+}
+interface IAsset {
+  coinData: ICoinData,
+  amount: number,
+  value: number,
+}
+
+interface IPortfolio {
+  portfolioArray: IAsset[],
+  usdBalance: number,
+}
+
+interface IWatchlist {
+  watchlistArray: ICoinData[]
+}
 
 function App() {
   const dispatch = useDispatch()
   const currentUser = useSelector(selectorCurrentUser)
-  const {watchlistArray} = useSelector(selectorWatchlist)
+  const {watchlistArray}: IWatchlist = useSelector(selectorWatchlist)
 
   const navigate = useNavigate()
   const location = useLocation()

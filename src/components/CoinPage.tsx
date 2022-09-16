@@ -2,24 +2,48 @@ import React, { useState, useEffect} from 'react';
 import Range from './Range.tsx';
 import PriceChart from './PriceChart.tsx';
 import {useParams} from 'react-router-dom'
-import OrderPopup from './OrderPopup';
+import OrderPopup from './OrderPopup.tsx';
 import { useMobileOnly } from '../hooks/useMobileOnly';
 import { watchlist, isWatchlist } from "../store/watchlist/watchlist.action";
 import { selectorWatchlist } from '../store/watchlist/watchlist.selector';
 import { order } from "../store/portfolio/portfolio.action";
 import { useSelector, useDispatch } from "react-redux";
 import { selectorPortfolio } from '../store/portfolio/portfolio.selector';
+import { fetchData } from '../utils/fetchData.utils.ts'
+
+interface ICoinData {
+  price_change_24h:number,
+  image: string,
+  current_price: number,
+  id: number,
+  name: string,
+  symbol: string
+}
+interface IAsset {
+  coinData: ICoinData,
+  amount: number,
+  value: number,
+}
+
+interface IPortfolio {
+  portfolioArray: IAsset[],
+  usdBalance: number,
+}
+
+interface IWatchlist {
+  watchlistArray: ICoinData[]
+}
 
 
-export default function Stockpage() {
+export default function CoinPage() {
   
-  const {portfolioArray, usdBalance} = useSelector(selectorPortfolio)
-  const {watchlistArray} = useSelector(selectorWatchlist)
+  const {portfolioArray, usdBalance}: IPortfolio = useSelector(selectorPortfolio)
+  const {watchlistArray}: IWatchlist = useSelector(selectorWatchlist)
   const dispatch = useDispatch()
 
   const [selectedRange, setSelectedRange] = useState(0)
   const [selectedTab, setSelectedTab] = useState(1)
-  const [coinData, setCoinData] = useState({})
+  const [coinData, setCoinData] = useState<ICoinData>()
   const [buyAmount, setBuyAmount] = useState(0)
   const {id} = useParams()
   const [displayOrder, setDisplayOrder] = useState('closed')
@@ -29,18 +53,12 @@ export default function Stockpage() {
 
   
   useEffect(() => {
-    async function getCoinData(){
-      try{
-        const res = await fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${id}&order=market_cap_desc&per_page=1&page=1&sparkline=false`)
-        const data = await res.json()
+     const getData = async () => {
+        const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${id}&order=market_cap_desc&per_page=1&page=1&sparkline=false`
+        const data = await fetchData<ICoinData[]>(url)
         setCoinData(data[0])
-      }
-      catch(err){
-        console.log(err)
-      }
     }
-    
-    getCoinData()
+    getData()
     setBuyMessage('')
   },[id])
   const ranges = ['1d','3d','1w','1m','6m','1y','max']
@@ -50,10 +68,10 @@ export default function Stockpage() {
     )
   })
 
-  function selectRange(index){
+  function selectRange(index: number){
     setSelectedRange(index)
   }
-  function selectTab(index){
+  function selectTab(index: number){
     setSelectedTab(index)
   }
 
@@ -68,11 +86,13 @@ export default function Stockpage() {
     )
   })
 
-  const priceChangeStyle = {
-    color: coinData.price_change_24h >= 0? 'rgb(0, 231, 0)' : 'red'
+  const priceChangeStyle = () => {
+    if(coinData){
+      return {color: coinData.price_change_24h >= 0? 'rgb(0, 231, 0)' : 'red'}
+    }
   }
 
-  function changeBuyAmount(action,e,i){
+  function changeBuyAmount(action: string,e?: number, i?:number){
     if(action==='minus' && buyAmount !== 0){
       setBuyAmount(prevBuyAmount => prevBuyAmount - 1 )
     }
@@ -93,13 +113,14 @@ export default function Stockpage() {
           }
       })
     }
-    else if(action==='set' && !isNaN(e)){
+    else if(e !== undefined && action==='set' && !isNaN(e)){
       setBuyAmount(Number(e))
     }
   }
 
   
   function buy(){
+    if(!coinData) return 
     const minBuyPrice = 10
     if(buyAmount*coinData.current_price > minBuyPrice){
       if(usdBalance >= buyAmount*coinData.current_price){
@@ -121,7 +142,7 @@ export default function Stockpage() {
   }
   
   
-  if(coinData.id === undefined){
+  if(!coinData){
     return ''
   }
   const iconClass = isWatchlist(coinData,watchlistArray)? "ri-star-fill" :"ri-star-line"

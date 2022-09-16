@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
+import App from './App.ts';
 import {BrowserRouter,HashRouter} from 'react-router-dom'
 
 import { Provider } from "react-redux";

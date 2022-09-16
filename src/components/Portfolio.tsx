@@ -1,10 +1,19 @@
-import { useState } from "react"
+import React, { useState } from "react"
 import { useMobileOnly } from "../hooks/useMobileOnly";
-import OrderPopup from './OrderPopup';
+import OrderPopup from './OrderPopup.tsx';
 
 import { useSelector, useDispatch } from "react-redux";
 import { selectorPortfolio } from '../store/portfolio/portfolio.selector';  
 import { order } from "../store/portfolio/portfolio.action";
+
+interface ICoinData {
+    current_price: number
+}
+
+interface IAssetData {
+    id: number,
+    coinData: ICoinData,
+}
 
 export default function Portfolio(){
 
@@ -14,11 +23,11 @@ export default function Portfolio(){
     const dispatch = useDispatch()
 
     const [displayOrder, setDisplayOrder] = useState('closed')
-    const [sellAmount, setSellAmount] = useState()
-    const [sellAsset, setSellAsset] = useState()
+    const [sellAmount, setSellAmount] = useState(0)
+    const [sellAsset, setSellAsset] = useState<IAssetData>()
     const [tradeStatus, setTradeStatus] = useState('')
 
-    const assets = portfolioArray.map((asset,index) => {
+    const assets = portfolioArray.map((asset: IAssetData,index: number) => {
         const allocation = ((asset.value/totalBalance) * 100).toFixed(2)
         return(
             <tr key={index} className='fs-4'>

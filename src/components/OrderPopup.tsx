@@ -1,12 +1,20 @@
-import {useEffect, useRef} from 'react'
-import lottie from 'lottie-web'
+import React, {useEffect, useRef} from 'react'
+import lottie, { LottiePlayer } from 'lottie-web'
 import animation from '../assets/check-icon.json'
 
-export default function OrderPopup(props){
-    const iconRef = useRef(null)
+interface IOrderPopupProps {
+    status: string,
+    traded: string,
+    amount: number,
+    currency: string
+    price: number
+}
+
+export default function OrderPopup(props: IOrderPopupProps){
+    const iconRef = useRef<HTMLDivElement>(null)
     const x = props.status === 'finished'? 'open' : 'closed'
     useEffect(() => {
-        if (props.status === 'finished') {
+        if (props.status === 'finished' && iconRef.current) {
            lottie.loadAnimation({
             container: iconRef.current, 
             animationData: animation, 

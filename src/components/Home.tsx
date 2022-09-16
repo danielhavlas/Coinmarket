@@ -1,4 +1,4 @@
-import { useRef, useContext, useEffect } from 'react'
+import React, { useRef, useContext, useEffect } from 'react'
 
 import { Link } from 'react-router-dom'
 import PriceChart from './PriceChart.tsx'
@@ -7,15 +7,40 @@ import { selectorPortfolio } from '../store/portfolio/portfolio.selector';
 import { selectorWatchlist } from '../store/watchlist/watchlist.selector';
 import { selectorCurrentUser } from "../store/user/user.selector";
 
+interface ICoinData {
+    price_change_24h: number,
+    image: string,
+    current_price: number,
+    id: number,
+    name: string,
+    symbol: string
+}
+
+interface IAsset {
+    coinData: ICoinData,
+    amount: number,
+    value: number,
+}
+
+interface IPortfolio {
+    portfolioArray: IAsset[],
+    usdBalance: number,
+    totalBalance: number
+}
+
+interface IWatchlist {
+    watchlistArray: ICoinData[]
+}
+
 
 export default function Home(){
 
     const currentUser = useSelector(selectorCurrentUser)
-    const portfolio = useSelector(selectorPortfolio)
+    const portfolio: IPortfolio = useSelector(selectorPortfolio)
 
-    const {watchlistArray} =  useSelector(selectorWatchlist)
+    const {watchlistArray}: IWatchlist =  useSelector(selectorWatchlist)
     
-    const assets = portfolio.portfolioArray.map((asset,index) => {
+    const assets = portfolio.portfolioArray.map((asset, index) => {
         return(
         <div key={index} className='flex space-between'>
             <div>

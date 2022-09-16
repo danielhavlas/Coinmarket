@@ -17,7 +17,7 @@ interface ICoinData {
   id: number,
   image: string,
   name: string
-}
+} 
 
 export default function Searchbar({closeSearch}:ISearchBarProps){
 
