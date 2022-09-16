@@ -1,1 +1,0 @@
-export const selectorPortfolio = (state) => state.portfolio

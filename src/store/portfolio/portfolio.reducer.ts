@@ -1,25 +1,31 @@
-import { PORTFOLIO_ACTION_TYPES } from "./portfolio.types";
+import { PORTFOLIO_ACTION_TYPES, IAsset } from "./portfolio.types";
+import { PortfolioAction } from "./portfolio.action";
 
-const INITIAL_STATE = {
+export type PortfolioState {
+    portfolioArray: IAsset[],
+    usdBalance: number,
+    totalBalance: number
+}
+
+const INITIAL_STATE: PortfolioState = {
     portfolioArray: [],
     usdBalance: 100000,
     totalBalance: 100000,
 }
 
 
-export const portfolioReducer = (state = INITIAL_STATE, action) => {
-    const {type, payload} = action
+export const portfolioReducer = (state = INITIAL_STATE, action = {} as PortfolioAction) => {
 
-    switch(type){
+    switch(action.type){
         case PORTFOLIO_ACTION_TYPES.SET_PORTFOLIO:
-            return {...state, ...payload}
+            return {...state, ...action.payload}
         case PORTFOLIO_ACTION_TYPES.FETCH_PORTFOLIO_START:
             return {...state
             }
         case PORTFOLIO_ACTION_TYPES.FETCH_PORTFOLIO_SUCCESS:
             return{
                 ...state,
-                ...payload,
+                ...action.payload,
             }
         case PORTFOLIO_ACTION_TYPES.FETCH_PORTFOLIO_FAILED:
             return {...state}

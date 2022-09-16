@@ -1,3 +1,0 @@
-export const WATCHLIST_ACTION_TYPES = {
-    SET_WATCHLIST: 'SET_WATCHLIST'
-}

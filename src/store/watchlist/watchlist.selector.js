@@ -1,1 +1,0 @@
-export const selectorWatchlist = (state) => state.watchlist

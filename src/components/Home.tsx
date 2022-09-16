@@ -17,6 +17,7 @@ interface ICoinData {
 }
 
 interface IAsset {
+    id: number,
     coinData: ICoinData,
     amount: number,
     value: number,
@@ -31,7 +32,6 @@ interface IPortfolio {
 interface IWatchlist {
     watchlistArray: ICoinData[]
 }
-
 
 export default function Home(){
 
