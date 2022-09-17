@@ -1,5 +1,5 @@
 import React from "react";
-import {signInWithGooglePopup, createUserDocumentFromAuth, signInGuest} from '../utils/firebase.utils'
+import {signInWithGooglePopup, createUserDocumentFromAuth, signInGuest} from '../utils/firebase.utils.ts'
 import SignUpForm from "./SignUpForm.tsx";
 import SignInForm from "./SignInForm.tsx";
 import google_icon from '../assets/google-logo.png'

@@ -1,8 +1,8 @@
 import React,{useState, useEffect, useContext, Suspense} from "react";
 import {useNavigate} from 'react-router-dom'
-import { watchlist, isWatchlist } from "../store/watchlist/watchlist.action";
-import { selectorWatchlist } from '../store/watchlist/watchlist.selector';
-import { useMobileOnly } from "../hooks/useMobileOnly";
+import { watchlist, isWatchlist } from "../store/watchlist/watchlist.action.ts";
+import { selectorWatchlist } from '../store/watchlist/watchlist.selector.ts';
+import { useMobileOnly } from "../hooks/useMobileOnly.tsx";
 import { useSelector,useDispatch } from "react-redux";
 import PriceChart from "./PriceChart.tsx";
 import { fetchData } from "../utils/fetchData.utils.ts";
@@ -22,7 +22,7 @@ interface ICoinData {
 
 export default function Currencies(){
 
-    const {watchlistArray} =  useSelector(selectorWatchlist)
+    const watchlistArray =  useSelector(selectorWatchlist)
     const dispatch = useDispatch()
 
     const [coinsData, setCoinsData] = useState<ICoinData[]>([])

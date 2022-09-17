@@ -1,6 +1,7 @@
-import { createAction, ActionTypeWithPayload } from "../../utils/reducer.utils";
-import { USER_ACTION_TYPES } from "./user.types";
+import { User } from "firebase/auth";
+import { createAction, ActionTypeWithPayload, withMatcher } from "../../utils/reducer.utils.ts";
+import { USER_ACTION_TYPES } from "./user.types.ts";
 
-export const setCurrentUser = (user) => {
-    return createAction(USER_ACTION_TYPES.SET_CURRENT_USER, user)
-}
+export type SetCurrentUser = ActionTypeWithPayload<USER_ACTION_TYPES.SET_CURRENT_USER, User>
+
+export const setCurrentUser = withMatcher((user: User): SetCurrentUser => createAction(USER_ACTION_TYPES.SET_CURRENT_USER, user))

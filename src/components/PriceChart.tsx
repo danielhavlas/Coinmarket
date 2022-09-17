@@ -24,7 +24,7 @@ function PriceChart (props:IPriceChartProps){
                 const res = await fetch(`https://api.coingecko.com/api/v3/coins/${props.id}/market_chart?vs_currency=usd&days=${rangeInDays[props.range]}`)
                 const data = await res.json()
                 const filter = props.large? props.range === 6 ? 20 : props.range === 3 ? 15 : props.range === 1? 2 : 4 : 10
-                const prices = data.prices.filter((_, index) => index % filter === 0)
+                const prices = data.prices.filter((_, index: number) => index % filter === 0)
                 setChartData(prices)
             } catch (error) {
                 console.log(error);

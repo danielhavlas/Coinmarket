@@ -1,5 +1,6 @@
-import {WATCHLIST_ACTION_TYPES, ICoinData } from "./watchlist.types";
-import { WatchlistAction } from "./watchlist.action";
+import { ICoinData } from "./watchlist.types.ts";
+import { watchlist, updateWatchlist } from "./watchlist.action.ts";
+import { AnyAction } from "redux";
 
 
 export type WatchlistState = {
@@ -10,15 +11,21 @@ const INITIAL_STATE: WatchlistState = {
     watchlistArray: [],
 }
 
-export const watchlistReducer = (state = INITIAL_STATE, action = {} as WatchlistAction) => {
+export const watchlistReducer = (state = INITIAL_STATE, action = {} as AnyAction): WatchlistState => {
 
-    switch(action.type){
-        case WATCHLIST_ACTION_TYPES.SET_WATCHLIST:
-            return{
-                ...state,
-                watchlistArray: action.payload
-            }
-        default:
-            return state
+    if(watchlist.match(action)){
+        return{
+            ...state,
+            watchlistArray: action.payload
+        }
     }
+
+    if(updateWatchlist.match(action)) {
+        return{
+            ...state,
+            watchlistArray: action.payload
+        }
+    }
+
+    return state
 }

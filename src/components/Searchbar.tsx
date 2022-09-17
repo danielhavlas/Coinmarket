@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Select from 'react-select'
 import {useNavigate, Link} from 'react-router-dom'
-import { useMobileOnly } from '../hooks/useMobileOnly'
+import { useMobileOnly } from '../hooks/useMobileOnly.tsx'
 import { fetchData } from "../utils/fetchData.utils.ts";
 
 interface IOptions {

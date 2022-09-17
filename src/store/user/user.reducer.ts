@@ -1,17 +1,21 @@
-import { USER_ACTION_TYPES } from "./user.types";
+import { setCurrentUser } from "./user.action.ts";
+import { AnyAction } from "redux";
+import { User } from "firebase/auth";
 
-const INITIAL_STATE = {
-    currentUser: null
+
+export type UserState = {
+    readonly currentUser: User | null,
 }
 
-export const userReducer = (state = INITIAL_STATE, action) => {
-const {type, payload} = action
+const INITIAL_STATE: UserState = {
+    currentUser: null,
+}
 
-    switch(type){
-        case USER_ACTION_TYPES.SET_CURRENT_USER:
-            return {...state, currentUser: payload}
-        default:
-            return state
+export const userReducer = (state = INITIAL_STATE, action = {} as AnyAction): UserState => {
+    if(setCurrentUser.match(action)){
+        return {...state, currentUser: action.payload}
     }
+    
+    return state
 
 }

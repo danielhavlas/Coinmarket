@@ -1,8 +1,8 @@
 import React from 'react';
 import Searchbar from './Searchbar.tsx';
 import { Link } from 'react-router-dom';
-import { signOutUser } from '../utils/firebase.utils';
-import { selectorCurrentUser } from "../store/user/user.selector";
+import { signOutUser } from '../utils/firebase.utils.ts';
+import { selectorCurrentUser } from "../store/user/user.selector.ts";
 import { useSelector } from 'react-redux';
 
 export default function Header(){

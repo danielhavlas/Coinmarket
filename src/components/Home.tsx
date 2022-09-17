@@ -3,9 +3,9 @@ import React, { useRef, useContext, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import PriceChart from './PriceChart.tsx'
 import { useSelector, useDispatch } from "react-redux";
-import { selectorPortfolio } from '../store/portfolio/portfolio.selector';
-import { selectorWatchlist } from '../store/watchlist/watchlist.selector';
-import { selectorCurrentUser } from "../store/user/user.selector";
+import { selectorPortfolio } from '../store/portfolio/portfolio.selector.ts';
+import { selectorWatchlist } from '../store/watchlist/watchlist.selector.ts';
+import { selectorCurrentUser } from "../store/user/user.selector.ts";
 
 interface ICoinData {
     price_change_24h: number,
@@ -36,8 +36,9 @@ interface IWatchlist {
 export default function Home(){
 
     const currentUser = useSelector(selectorCurrentUser)
+    
     const portfolio: IPortfolio = useSelector(selectorPortfolio)
-
+    
     const {watchlistArray}: IWatchlist =  useSelector(selectorWatchlist)
     
     const assets = portfolio.portfolioArray.map((asset, index) => {

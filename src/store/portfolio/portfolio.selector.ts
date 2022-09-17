@@ -1,2 +1,3 @@
-import { PortfolioState } from "./portfolio.reducer"
-export const selectorPortfolio = (state): PortfolioState => state.portfolio
+import { RootState } from "../store.ts"
+import { IPortfolio } from "./portfolio.types.ts"
+export const selectorPortfolio = (state: RootState): IPortfolio => state.portfolio

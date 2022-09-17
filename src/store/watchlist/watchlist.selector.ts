@@ -1,3 +1,4 @@
-import { WatchlistState } from "./watchlist.reducer"
+import { RootState } from "../store.ts"
+import { WatchlistState } from "./watchlist.reducer.ts"
 
-export const selectorWatchlist = (state):WatchlistState => state.watchlistArray
+export const selectorWatchlist = (state: RootState):WatchlistState => state.watchlist

@@ -1,5 +1,5 @@
 import React, {useState } from "react";
-import { signInAuthUserWithEmailAndPassword } from "../utils/firebase.utils";
+import { signInAuthUserWithEmailAndPassword } from "../utils/firebase.utils.ts";
 
 import FormInput from "./FormInput.tsx";
 

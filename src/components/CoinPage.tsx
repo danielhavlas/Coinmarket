@@ -3,12 +3,12 @@ import Range from './Range.tsx';
 import PriceChart from './PriceChart.tsx';
 import {useParams} from 'react-router-dom'
 import OrderPopup from './OrderPopup.tsx';
-import { useMobileOnly } from '../hooks/useMobileOnly';
-import { watchlist, isWatchlist } from "../store/watchlist/watchlist.action";
-import { selectorWatchlist } from '../store/watchlist/watchlist.selector';
-import { order } from "../store/portfolio/portfolio.action";
+import { useMobileOnly } from '../hooks/useMobileOnly.tsx';
+import { watchlist, isWatchlist } from "../store/watchlist/watchlist.action.ts";
+import { selectorWatchlist } from '../store/watchlist/watchlist.selector.ts';
+import { order } from "../store/portfolio/portfolio.action.ts";
 import { useSelector, useDispatch } from "react-redux";
-import { selectorPortfolio } from '../store/portfolio/portfolio.selector';
+import { selectorPortfolio } from '../store/portfolio/portfolio.selector.ts';
 import { fetchData } from '../utils/fetchData.utils.ts'
 
 interface ICoinData {
@@ -193,7 +193,7 @@ export default function CoinPage() {
                 <h2 className='fs-2'>{coinData.current_price}</h2>
                 <h4 className='text-grey fs-5'>USD</h4>
               </div>
-              <h5 className='change fs-4' style={priceChangeStyle}>{`${coinData.price_change_24h.toFixed(2)} (${coinData.price_change_percentage_24h.toFixed(2)}%)`}</h5>
+              <h5 className='change fs-4' style={priceChangeStyle()}>{`${coinData.price_change_24h.toFixed(2)} (${coinData.price_change_percentage_24h.toFixed(2)}%)`}</h5>
               <button className='fs-5 text-blue' onClick={() => dispatch(watchlist(coinData,watchlistArray))}><i className={`star-icon ${iconClass}`}></i></button>
               {!mobileOnly && <button className="text-white fs-3 bg-blue buy-button" onClick={() => setDisplayOrder('open')}>Buy</button>}
             </div>

@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 import './App.css';
 
-import { onAuthStateChangedListener, createUserDocumentFromAuth, getDocument, updateDocument } from "./utils/firebase.utils";
+import { onAuthStateChangedListener, createUserDocumentFromAuth, getDocument, updateDocument } from "./utils/firebase.utils.ts";
+import { User } from 'firebase/auth'
 
 import Home from './components/Home.tsx'
 import CoinPage from './components/CoinPage.tsx';
@@ -16,13 +17,13 @@ import Searchbar from './components/Searchbar.tsx';
 import Landing from './components/Landing.tsx'
 
 
-import { setCurrentUser } from "./store/user/user.action";
-import { fetchPortfolioStart } from "./store/portfolio/portfolio.action";
-import { updateWatchlist } from './store/watchlist/watchlist.action';
-import { selectorCurrentUser } from "./store/user/user.selector";
-import { selectorWatchlist } from "./store/watchlist/watchlist.selector";
+import { setCurrentUser } from "./store/user/user.action.ts";
+import { fetchPortfolioStart } from "./store/portfolio/portfolio.action.ts";
+import { updateWatchlist } from './store/watchlist/watchlist.action.ts';
+import { selectorCurrentUser } from "./store/user/user.selector.ts";
+import { selectorWatchlist } from "./store/watchlist/watchlist.selector.ts";
 
-import {useMobileOnly} from './hooks/useMobileOnly.ts'
+import {useMobileOnly} from './hooks/useMobileOnly.tsx'
 import Authentication from './components/Authentication.tsx';
 
 interface ICoinData {
@@ -77,7 +78,7 @@ function App() {
     
     updatePrices()
 
-    const unsubscribe = onAuthStateChangedListener((user)=>{
+    const unsubscribe = onAuthStateChangedListener((user: User)=>{
       if(user){
         createUserDocumentFromAuth(user)
         dispatch(setCurrentUser(user))

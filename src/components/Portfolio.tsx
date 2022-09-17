@@ -1,10 +1,10 @@
 import React, { useState } from "react"
-import { useMobileOnly } from "../hooks/useMobileOnly";
+import { useMobileOnly } from "../hooks/useMobileOnly.tsx";
 import OrderPopup from './OrderPopup.tsx';
 
 import { useSelector, useDispatch } from "react-redux";
-import { selectorPortfolio } from '../store/portfolio/portfolio.selector';  
-import { order } from "../store/portfolio/portfolio.action";
+import { selectorPortfolio } from '../store/portfolio/portfolio.selector.ts';  
+import { order } from "../store/portfolio/portfolio.action.ts";
 
 interface ICoinData {
     current_price: number
