@@ -1,10 +1,10 @@
 import {createStore, compose, applyMiddleware} from 'redux'
-import { rootReducer } from "./root-reducer";
+import createSagaMiddleware from "redux-saga";
 import {persistStore, persistReducer, PersistConfig} from 'redux-persist'
 import storage from "redux-persist/lib/storage";
-import createSagaMiddleware from "redux-saga";
 
-import { rootSaga } from "./root-saga";
+import { rootReducer } from "./root-reducer.ts";
+import { rootSaga } from "./root-saga.ts";
 
 export type RootState = ReturnType<typeof rootReducer>
 
