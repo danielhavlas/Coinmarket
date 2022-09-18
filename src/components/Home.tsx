@@ -39,7 +39,7 @@ export default function Home(){
     
     const portfolio: IPortfolio = useSelector(selectorPortfolio)
     
-    const {watchlistArray}: IWatchlist =  useSelector(selectorWatchlist)
+    const watchlistArray: IWatchlist =  useSelector(selectorWatchlist)
     
     const assets = portfolio.portfolioArray.map((asset, index) => {
         return(

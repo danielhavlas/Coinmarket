@@ -38,7 +38,7 @@ interface IWatchlist {
 export default function CoinPage() {
   
   const {portfolioArray, usdBalance}: IPortfolio = useSelector(selectorPortfolio)
-  const {watchlistArray}: IWatchlist = useSelector(selectorWatchlist)
+  const watchlistArray: IWatchlist = useSelector(selectorWatchlist)
   const dispatch = useDispatch()
 
   const [selectedRange, setSelectedRange] = useState(0)

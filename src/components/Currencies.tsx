@@ -18,11 +18,14 @@ interface ICoinData {
     market_cap_rank: number,
     price_change_percentage_24h: number
 }
+interface IWatchlist {
+    watchlistArray: ICoinData[]
+}
 
 
 export default function Currencies(){
 
-    const watchlistArray =  useSelector(selectorWatchlist)
+    const watchlistArray: IWatchlist  =  useSelector(selectorWatchlist)
     const dispatch = useDispatch()
 
     const [coinsData, setCoinsData] = useState<ICoinData[]>([])
