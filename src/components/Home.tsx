@@ -29,17 +29,13 @@ interface IPortfolio {
     totalBalance: number
 }
 
-interface IWatchlist {
-    watchlistArray: ICoinData[]
-}
-
 export default function Home(){
 
     const currentUser = useSelector(selectorCurrentUser)
     
     const portfolio: IPortfolio = useSelector(selectorPortfolio)
     
-    const watchlistArray: IWatchlist =  useSelector(selectorWatchlist)
+    const watchlistArray: ICoinData[] =  useSelector(selectorWatchlist)
     
     const assets = portfolio.portfolioArray.map((asset, index) => {
         return(
