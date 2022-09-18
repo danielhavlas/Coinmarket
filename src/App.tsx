@@ -4,8 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 
 import './App.css';
 
-import { onAuthStateChangedListener, createUserDocumentFromAuth, getDocument, updateDocument } from "./utils/firebase.utils.ts";
 import { User } from 'firebase/auth'
+import { onAuthStateChangedListener, createUserDocumentFromAuth, getDocument, updateDocument } from "./utils/firebase.utils.ts";
+import { fetchData} from './utils/fetchData.utils.ts'
 
 import Home from './components/Home.tsx'
 import CoinPage from './components/CoinPage.tsx';
@@ -15,6 +16,7 @@ import Portfolio from './components/Portfolio.tsx'
 import MobileFooter from './components/MobileFooter.tsx'
 import Searchbar from './components/Searchbar.tsx';
 import Landing from './components/Landing.tsx'
+import Authentication from './components/Authentication.tsx';
 
 
 import { setCurrentUser } from "./store/user/user.action.ts";
@@ -24,7 +26,6 @@ import { selectorCurrentUser } from "./store/user/user.selector.ts";
 import { selectorWatchlist } from "./store/watchlist/watchlist.selector.ts";
 
 import {useMobileOnly} from './hooks/useMobileOnly.tsx'
-import Authentication from './components/Authentication.tsx';
 
 interface ICoinData {
   price_change_24h:number,
@@ -45,14 +46,11 @@ interface IPortfolio {
   usdBalance: number,
 }
 
-interface IWatchlist {
-  watchlistArray: ICoinData[]
-}
 
 function App() {
   const dispatch = useDispatch()
   const currentUser = useSelector(selectorCurrentUser)
-  const {watchlistArray}: IWatchlist = useSelector(selectorWatchlist)
+  const watchlistArray: ICoinData[] = useSelector(selectorWatchlist)
 
   const navigate = useNavigate()
   const location = useLocation()
@@ -63,17 +61,13 @@ function App() {
     }
   },[currentUser])
   useEffect(()=>{
+    
     async function updatePrices(){
-      watchlistArray.forEach(v => {
-        fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${v.id}&order=market_cap_desc&per_page=100&page=1&sparkline=false`)
-        .then(res => res.json())
-        .then(data => {
-          const newWatchlistArray = watchlistArray.map(i => {
-            return i.id === v.id? data[0] : i
-          })
-          dispatch(updateWatchlist(newWatchlistArray))
-        })
-      })
+      const newWatchlistArray: Promise<IAsset[]> = Promise.all(watchlistArray.map( async asset => {
+        const data = await fetchData<ICoinData[]>(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${asset.id}&order=market_cap_desc&per_page=100&page=1&sparkline=false`)
+        return data[0]
+      }))
+      dispatch(updateWatchlist(await newWatchlistArray))
     }
     
     updatePrices()

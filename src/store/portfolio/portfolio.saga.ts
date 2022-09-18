@@ -10,7 +10,6 @@ import { fetchData } from '../../utils/fetchData.utils.ts'
 export function* fetchPortfolioAsync(){
     const user = yield* select(selectorCurrentUser)
     try {
-        console.log(user);
         const doc = yield* call(getDocument,user)
         yield* put(fetchPortfolioSuccess(doc))
         yield* call(updatePortfolioPrices)
