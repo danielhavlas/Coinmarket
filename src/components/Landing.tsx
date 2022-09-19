@@ -2,25 +2,25 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export default function Landing() {
-    https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579
     return(
-        <div >
+        <>
             <header>
-            <div className="header flex bg-blue space-between align-center">
+            <div className="header text-white flex bg-blue space-between align-center">
                 <h1 className='uppercase fs-1'>coinmarket</h1>
                 <div className='flex gap-1 align-center'>
                     <Link className="fs-4" to="auth">SIGN IN</Link>
-                    <button className=" fs-4 fw-600 bg-white text-blue get-started-button">Get Started</button>
+                    <Link to='auth' className=" fs-4 fw-600 bg-white text-blue get-started-button">Get Started</Link>
                 </div>
             </div>
 
             </header>
-            <div className="container flex align-center space-around" >
-                <div style={{width: '30rem'}}> 
+            <div className="container landing--container" >
+                <div className="land-text"> 
                     <Link to='auth' className="text-blue fs-5"><i className="align-text-vert fs-3 ri-bit-coin-line"></i><span className="align-text-vert">Jump start your crypto portfolio</span><i className="align-text-vert ri-arrow-right-line"></i></Link>
                     <div className="">
                         <h1 className="fs-0">Jump start your crypto portfolio</h1>
                         <p className="fs-3 line-height-1">Coinbase is the easiest place to buy and sell cryptocurrency. Sign up and get started today.</p>
+                        <Link to='auth' className="fs-3 fw-600 bg-blue text-white get-started-button">Get Started</Link>
                     </div>
                 </div>
                 <div className='portfolio-card card bg-white'>
@@ -76,6 +76,6 @@ export default function Landing() {
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     )
 }

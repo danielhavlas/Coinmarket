@@ -120,6 +120,20 @@ body{
   vertical-align: middle;
 }
 
+.header .get-started-button{
+  border-radius: 10px;
+  padding:0.3rem 0.5rem;
+}
+
+.land-text{
+  margin-bottom: 2rem;
+}
+
+.land-text .get-started-button{
+  border-radius: 10px;
+  padding:0.5rem 0.8rem;
+}
+
 .card{
   box-shadow: 5px 10px 8px #d2d2d2;
   border-radius: 8px;
@@ -128,6 +142,10 @@ body{
 }
 .balance{
   max-width: min-content;
+}
+
+.header{
+  padding-inline: 1em;
 }
 
 .small-img{
@@ -191,6 +209,7 @@ body{
 .chart-ranges{
   flex-direction: column-reverse;
 }
+
 
 
 .portfolio-page{
@@ -486,6 +505,14 @@ auth form
   color: var(--white);
 }
 
+.auth{
+  position: absolute;
+  bottom: 14vh;
+  left: 0;
+  right: 0;
+  margin-inline: auto;
+}
+
 @media (min-width:45rem) {
 
   :root{
@@ -501,6 +528,20 @@ auth form
  
   .container{
     min-height:88vh;
+  }
+  
+  .landing--container{
+    max-height:88vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    overflow-y: hidden;
+  }
+
+  .land-text{
+    width: 30rem;
+    margin-bottom: 2rem;
+
   }
 
   .table{
@@ -704,10 +745,7 @@ auth form
     scale: 1;
   }
 
-  .get-started-button{
-    border-radius: 10px;
-    padding:0.8rem 1rem;
-  }
+  
 }
 
 @media(max-width:24rem){
