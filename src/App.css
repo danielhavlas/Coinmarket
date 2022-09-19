@@ -668,6 +668,27 @@ auth form
     width: 30rem;
     margin-left: 10rem;
   }
+
+  .profile-field{
+    position: absolute;
+    top: 10vh;
+    right: 10px;
+    border-radius: 10px;
+    transition: scale 100ms;
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+    justify-content: center;
+    transform-origin: 100%;
+  }
+  
+  .not-display{
+    scale: 0;
+  }
+  
+  .display{
+    scale: 1;
+  }
 }
 
 @media(max-width:24rem){
