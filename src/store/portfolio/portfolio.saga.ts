@@ -33,7 +33,8 @@ export function* onPostPortfolio () {
     yield* takeLatest(PORTFOLIO_ACTION_TYPES.SET_PORTFOLIO,postDocument)
 }
 
-export async function* updatePortfolioPrices() {
+export function* updatePortfolioPrices() {
+    
     const portfolio = yield* select(selectorPortfolio)
     const usdBalance = yield portfolio.usdBalance
     const newPortfolioArray = yield* call(fetchPrices)
@@ -46,7 +47,7 @@ function* fetchPrices() {
         const data = await fetchData<ICoinData[]>(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${asset.id}&order=market_cap_desc&per_page=100&page=1&sparkline=false`)
         return {...asset,coinData: data [0], value: data[0].current_price * asset.amount}
     }))
-    return newPortfolioArray
+    return yield newPortfolioArray
 }
 
 
