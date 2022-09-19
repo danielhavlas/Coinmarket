@@ -24,13 +24,13 @@ export default function Header(){
                 <Link to='/portfolio'>ASSETS</Link>
                 <Link to='/currencies'>CURRENCIES</Link>
                 <Searchbar/>
-                <div tabIndex={0} onFocus={() => setDisplayField('display')} onBlur={() => setDisplayField('not-display')}>
+                {currentUser && (<div tabIndex={0} onFocus={() => setDisplayField('display')} onBlur={() => setDisplayField('not-display')}>
                     <i onClick={() => {}} className="ri-user-line text-white fs-2 pointer"></i>
                     <div className={`profile-field bg-white ${displayField}`}>
                         <p className='text-black fw-600'>{currentUser?.email}</p>
                         <button className='pointer fs-5 text-red fw-600' onClick={signOutUser}>SIGN OUT</button>
                     </div>
-                </div>
+                </div>)}
             </div>
         </div>
     )

@@ -93,7 +93,8 @@ function App() {
         <Searchbar  closeSearch={setSearchDisplay}/>
       </div>
     </div>
-)
+  )
+
   return (
     <div className="App">
       {!mobileOnly && location.pathname !== '/' && <Header className='large-only' />}
