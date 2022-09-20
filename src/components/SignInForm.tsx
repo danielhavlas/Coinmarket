@@ -1,4 +1,6 @@
 import React, {useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import { signInAuthUserWithEmailAndPassword } from "../utils/firebase.utils.ts";
 
 import FormInput from "./FormInput.tsx";
@@ -8,6 +10,8 @@ const defaultFormFields = {
     password:'',
 }
 export default function SignInForm(){ 
+
+    const navigate = useNavigate()
 
     const [formFields,setFormFields] = useState(defaultFormFields)
     const {email,password} = formFields
@@ -24,6 +28,7 @@ export default function SignInForm(){
         e.preventDefault()
         try{
             await signInAuthUserWithEmailAndPassword(email, password)
+            navigate('/home')
             resetForm()
         }catch(error){
             switch(error.code){

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Routes, Route, useNavigate, useLocation} from 'react-router-dom';
+import { Routes, Route, useNavigate, useLocation, Navigate} from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 
 import './App.css';
@@ -48,11 +48,11 @@ interface IPortfolio {
 
 
 function App() {
+  const navigate = useNavigate()
   const dispatch = useDispatch()
   const currentUser = useSelector(selectorCurrentUser)
   const watchlistArray: ICoinData[] = useSelector(selectorWatchlist)
 
-  const navigate = useNavigate()
   const location = useLocation()
 
   useEffect(()=>{
@@ -76,7 +76,6 @@ function App() {
       if(user){
         createUserDocumentFromAuth(user)
         dispatch(setCurrentUser(user))
-        navigate('/home')
       }
     })  
     
@@ -101,11 +100,11 @@ function App() {
       {mobileOnly && search}
       <Routes>
         <Route path='/' element={<Landing/>} />
-        <Route path='/home' element={<Home />}/>
-        <Route path='/currencies' element={<Currencies/>} />
-        <Route path='/portfolio' element={<Portfolio/>}/>
-        <Route path='/currencies/:id' element={<CoinPage/>} />
-        <Route path='/auth' element={<Authentication/>} />
+        <Route path='/home' element={!currentUser? <Navigate to='/auth' replace /> : <Home />}/>
+        <Route path='/currencies' element={!currentUser? <Navigate to='/auth' replace /> : <Currencies/>} />
+        <Route path='/portfolio' element={!currentUser? <Navigate to='/auth' replace /> : <Portfolio/>}/>
+        <Route path='/currencies/:id' element={!currentUser? <Navigate to='/auth' replace /> : <CoinPage/>} />
+        <Route path='/auth' element={currentUser? <Navigate to='/home' replace/> : <Authentication/>} />
       </Routes>
       {mobileOnly && location.pathname !== '/' && <MobileFooter openSearch={setSearchDisplay} className='mobile-only' />}
     </div>

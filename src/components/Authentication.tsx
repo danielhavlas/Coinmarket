@@ -4,16 +4,20 @@ import SignUpForm from "./SignUpForm.tsx";
 import SignInForm from "./SignInForm.tsx";
 import google_icon from '../assets/google-logo.png'
 import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 
 
 
 export default function Authentication(){
+
+    const navigate = useNavigate()
 
     const [signIn, setSignIn] = useState(true)
 
     const signInWithGoogle = async () => {
         const {user} = await signInWithGooglePopup()
         createUserDocumentFromAuth(user)
+        navigate('/home')
     }
 
     return(

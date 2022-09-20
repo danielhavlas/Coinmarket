@@ -352,6 +352,7 @@ button {
   border: none;
   background: none;
   cursor: pointer;
+  padding: 0.5em;
 }
 .pointer{
   cursor: pointer;
