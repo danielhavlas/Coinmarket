@@ -89,7 +89,7 @@ function App() {
     <div className={`search search-${searchDisplay} flex`}>
       <button onClick={()=> setSearchDisplay('closed')}><i className="arrow ri-arrow-left-fill"></i></button>
       <div className="search-bar">
-        <Searchbar  closeSearch={setSearchDisplay}/>
+        <Searchbar closeSearch={setSearchDisplay}/>
       </div>
     </div>
   )
