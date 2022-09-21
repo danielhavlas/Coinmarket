@@ -16,7 +16,7 @@ body{
   --blue: #4B40EE;
   --red: #E71D36;
 
-  --fs-1: 2rem;
+  --fs-1: 1.8rem;
   --fs-2: 1.4rem;
   --fs-3: 1.2rem;
   --fs-4: 0.8rem;
@@ -514,6 +514,28 @@ auth form
   margin-inline: auto;
 }
 
+.profile-field{
+  background-color: var(--black);
+  color: var(--white);
+  position: absolute;
+  top: 10vh;
+  right: 10px;
+  border-radius: 10px;
+  transition: scale 100ms;
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+  justify-content: center;
+  transform-origin: 100%;
+}
+.not-display{
+  scale: 0;
+}
+
+.display{
+  scale: 1;
+}
+
 @media (min-width:45rem) {
 
   :root{
@@ -725,27 +747,7 @@ auth form
     margin-left: 10rem;
   }
 
-  .profile-field{
-    position: absolute;
-    top: 10vh;
-    right: 10px;
-    border-radius: 10px;
-    transition: scale 100ms;
-    display: flex;
-    flex-direction: column;
-    padding: 1em;
-    justify-content: center;
-    transform-origin: 100%;
-  }
   
-  .not-display{
-    scale: 0;
-  }
-  
-  .display{
-    scale: 1;
-  }
-
   
 }
 

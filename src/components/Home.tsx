@@ -1,11 +1,13 @@
-import React, { useRef, useContext, useEffect } from 'react'
+import React from 'react'
 
 import { Link } from 'react-router-dom'
 import PriceChart from './PriceChart.tsx'
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { selectorPortfolio } from '../store/portfolio/portfolio.selector.ts';
 import { selectorWatchlist } from '../store/watchlist/watchlist.selector.ts';
 import { selectorCurrentUser } from "../store/user/user.selector.ts";
+import ProfileIcon from './ProfileIcon.tsx'
+import {useMobileOnly} from '../hooks/useMobileOnly.tsx'
 
 interface ICoinData {
     price_change_24h: number,
@@ -30,6 +32,8 @@ interface IPortfolio {
 }
 
 export default function Home(){
+
+    const {mobileOnly} = useMobileOnly()
 
     const currentUser = useSelector(selectorCurrentUser)
     
@@ -74,7 +78,10 @@ export default function Home(){
     return(
         <div className="container">
             <div className="home">
-                <h2 className='balance'>Balance: ${portfolio.totalBalance.toFixed(2)}</h2>
+                <div className="flex space-between align-center">
+                    <h2 className='balance'>Balance: ${portfolio.totalBalance.toFixed(2)}</h2>
+                    {mobileOnly && <ProfileIcon />}
+                </div>
                 <div className="home-grid">
                     <div className="watchlist-card card bg-white">
                         <h2>Watchlist</h2>

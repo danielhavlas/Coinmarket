@@ -1,14 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import {useMobileOnly} from '../hooks/useMobileOnly.tsx'
 
 export default function Landing() {
+
+    const {mobileOnly} = useMobileOnly()
     return(
         <>
             <header>
             <div className="header text-white flex bg-blue space-between align-center">
                 <h1 className='uppercase fs-1'>coinmarket</h1>
                 <div className='flex gap-1 align-center'>
-                    <Link className="fs-4" to="auth">SIGN IN</Link>
+                    {!mobileOnly && <Link className="fs-4" to="auth">SIGN IN</Link>}
                     <Link to='auth' className=" fs-4 fw-600 bg-white text-blue get-started-button">Get Started</Link>
                 </div>
             </div>
@@ -32,7 +35,7 @@ export default function Landing() {
                     <div className='flex space-between'>
                         <div>
                             <div className="flex align-center gap-1">
-                                <img className='small-img' src='https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579'/>
+                                <img className='small-img' src='https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579' alt=''/>
                                 <div>
                                     <h3>Bitcoin</h3>
                                     <p className='uppercase'>BTC</p>
@@ -47,7 +50,7 @@ export default function Landing() {
                     <div className='flex space-between'>
                         <div>
                             <div className="flex align-center gap-1">
-                                <img className='small-img' src='https://assets.coingecko.com/coins/images/3688/large/hbar.png?1637045634'/>
+                                <img className='small-img' src='https://assets.coingecko.com/coins/images/3688/large/hbar.png?1637045634' alt=''/>
                                 <div>
                                     <h3>Hedera</h3>
                                     <p className='uppercase'>hbar</p>
@@ -62,7 +65,7 @@ export default function Landing() {
                     <div className='flex space-between'>
                         <div>
                             <div className="flex align-center gap-1">
-                                <img className='small-img' src='https://assets.coingecko.com/coins/images/279/large/ethereum.png?1595348880'/>
+                                <img className='small-img' src='https://assets.coingecko.com/coins/images/279/large/ethereum.png?1595348880' alt=''/>
                                 <div>
                                     <h3>Ethereum</h3>
                                     <p className='uppercase'>eth</p>
