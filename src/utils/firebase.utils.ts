@@ -33,9 +33,7 @@ googleProvider.setCustomParameters({
 export const auth = getAuth()
 export const signInWithGooglePopup = () => signInWithPopup(auth,googleProvider)
 
-
 export const db = getFirestore()
-
 
 export const updateDocument = async (user: User, portfolio: IPortfolio ): Promise<void> => {
   const userDocRef = doc(db,'users',user.uid)
